@@ -86,7 +86,7 @@ Phone: ${form.phone}`
     <main>
       <header className="site-header">
         <a className="brand" href="#top" aria-label="COSA home">
-          <img src="/cosawordlogo.png" alt="COSA logo" />
+          <img src="/cosawordlogo.JPEG" alt="COSA logo" />
         </a>
 
         <nav>
