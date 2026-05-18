@@ -43,34 +43,34 @@ a {
   text-decoration: none;
 }
 
+button,
+input,
+textarea {
+  font: inherit;
+}
+
 .site-header {
   width: min(1180px, calc(100% - 40px));
   margin: 0 auto;
-  padding: 26px 0;
+  padding: 24px 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
 .brand {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 14px;
-  font-size: 21px;
-  font-weight: 800;
-  letter-spacing: 0.22em;
+  padding: 8px 12px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 18px 45px rgba(255, 107, 0, 0.16);
 }
 
-.brand-mark {
-  width: 42px;
-  height: 42px;
-  display: grid;
-  place-items: center;
-  border-radius: 14px;
-  color: #050505;
-  background: linear-gradient(135deg, #ffb13d, #ff6a00);
-  box-shadow: 0 18px 45px rgba(255, 107, 0, 0.28);
-  letter-spacing: 0;
+.brand img {
+  display: block;
+  width: 150px;
+  height: auto;
 }
 
 nav {
@@ -128,7 +128,7 @@ nav a:hover {
 .hero h1,
 .section-heading h2,
 .feature-panel h2,
-.contact h2 {
+.contact-copy h2 {
   margin: 0;
   color: #ffffff;
   font-weight: 900;
@@ -156,27 +156,32 @@ nav a:hover {
   flex-wrap: wrap;
 }
 
-.primary-button {
+.primary-button,
+.contact-form button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
+  border: 0;
   border-radius: 999px;
   padding: 16px 24px;
   background: linear-gradient(135deg, #ffb13d, #ff6a00);
   color: #090909;
   font-weight: 900;
   box-shadow: 0 18px 48px rgba(255, 106, 0, 0.25);
+  cursor: pointer;
 }
 
-.primary-button:hover {
+.primary-button:hover,
+.contact-form button:hover {
   transform: translateY(-1px);
 }
 
 .dashboard-card,
 .service-card,
 .feature-panel,
-.side-panel {
+.side-panel,
+.contact-form {
   border: 1px solid rgba(255, 255, 255, 0.11);
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025)),
@@ -291,7 +296,7 @@ nav a:hover {
 
 .section,
 .split-section,
-.contact {
+.contact-section {
   width: min(1180px, calc(100% - 40px));
   margin: 0 auto;
   padding: 85px 0;
@@ -312,7 +317,8 @@ nav a:hover {
 }
 
 .section-heading h2,
-.feature-panel h2 {
+.feature-panel h2,
+.contact-copy h2 {
   font-size: clamp(40px, 5vw, 58px);
 }
 
@@ -326,6 +332,9 @@ nav a:hover {
 .service-card {
   border-radius: 32px;
   padding: 30px;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .service-card:hover {
@@ -353,7 +362,7 @@ nav a:hover {
 .service-card p,
 .side-panel p,
 .muted,
-.contact p {
+.contact-copy p {
   color: #a1a1aa;
   line-height: 1.75;
 }
@@ -403,23 +412,56 @@ nav a:hover {
     rgba(13, 13, 13, 0.9);
 }
 
-.contact {
-  text-align: center;
+.contact-section {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 34px;
+  align-items: start;
   padding-bottom: 110px;
 }
 
-.contact h2 {
-  font-size: clamp(42px, 6vw, 72px);
-}
-
-.contact p {
-  max-width: 700px;
-  margin: 24px auto 0;
+.contact-copy p:not(.label) {
+  max-width: 520px;
+  margin-top: 24px;
   font-size: 18px;
 }
 
-.contact .hero-actions {
-  justify-content: center;
+.contact-form {
+  display: grid;
+  gap: 18px;
+  border-radius: 34px;
+  padding: 30px;
+}
+
+.contact-form label {
+  display: grid;
+  gap: 9px;
+  color: #e4e4e7;
+  font-weight: 800;
+  font-size: 14px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  outline: none;
+  border-radius: 18px;
+  padding: 15px 16px;
+  background: rgba(0, 0, 0, 0.28);
+  color: #ffffff;
+  resize: vertical;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: rgba(255, 139, 31, 0.7);
+  box-shadow: 0 0 0 4px rgba(255, 139, 31, 0.11);
+}
+
+.contact-form button {
+  width: fit-content;
+  margin-top: 6px;
 }
 
 footer {
@@ -441,7 +483,8 @@ footer {
   }
 
   .hero,
-  .split-section {
+  .split-section,
+  .contact-section {
     grid-template-columns: 1fr;
   }
 
@@ -460,6 +503,10 @@ footer {
 }
 
 @media (max-width: 560px) {
+  .brand img {
+    width: 128px;
+  }
+
   .job-grid,
   .snapshot {
     grid-template-columns: 1fr;
@@ -473,7 +520,7 @@ footer {
   .hero,
   .section,
   .split-section,
-  .contact,
+  .contact-section,
   footer {
     width: min(100% - 28px, 1180px);
   }
