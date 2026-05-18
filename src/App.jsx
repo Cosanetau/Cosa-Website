@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   ArrowRight,
   BarChart3,
@@ -50,38 +50,6 @@ const dashboardItems = [
 ];
 
 export default function App() {
-  const [form, setForm] = useState({
-    name: "",
-    project: "",
-    email: "",
-    phone: "",
-  });
-
-  function handleChange(event) {
-    setForm((current) => ({
-      ...current,
-      [event.target.name]: event.target.value,
-    }));
-  }
-
-  function handleSubmit(event) {
-    event.preventDefault();
-
-    const subject = encodeURIComponent("New COSA website enquiry");
-
-    const body = encodeURIComponent(
-      `Name: ${form.name}
-
-What they are looking to have made:
-${form.project}
-
-Email: ${form.email}
-Phone: ${form.phone}`
-    );
-
-    window.location.href = `mailto:hello@cosa.net.au?subject=${subject}&body=${body}`;
-  }
-
   return (
     <main>
       <header className="site-header">
@@ -265,48 +233,29 @@ Phone: ${form.phone}`
           </p>
         </div>
 
-        <form className="contact-form" onSubmit={handleSubmit}>
+        <form
+          className="contact-form"
+          action="https://formspree.io/f/mojbqzpn"
+          method="POST"
+        >
           <label>
             Name
-            <input
-              name="name"
-              type="text"
-              value={form.name}
-              onChange={handleChange}
-              required
-            />
+            <input name="name" type="text" required />
           </label>
 
           <label>
             What are you looking to have made?
-            <textarea
-              name="project"
-              rows="5"
-              value={form.project}
-              onChange={handleChange}
-              required
-            />
+            <textarea name="project" rows="5" required />
           </label>
 
           <label>
             Email address
-            <input
-              name="email"
-              type="email"
-              value={form.email}
-              onChange={handleChange}
-              required
-            />
+            <input name="email" type="email" required />
           </label>
 
           <label>
             Phone number
-            <input
-              name="phone"
-              type="tel"
-              value={form.phone}
-              onChange={handleChange}
-            />
+            <input name="phone" type="tel" />
           </label>
 
           <button type="submit">
