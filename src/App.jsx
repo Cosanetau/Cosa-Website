@@ -68,8 +68,15 @@ export default function App() {
     event.preventDefault();
 
     const subject = encodeURIComponent("New COSA website enquiry");
+
     const body = encodeURIComponent(
-      `Name: ${form.name}\n\nWhat they are looking to have made:\n${form.project}\n\nEmail: ${form.email}\nPhone: ${form.phone}`
+      `Name: ${form.name}
+
+What they are looking to have made:
+${form.project}
+
+Email: ${form.email}
+Phone: ${form.phone}`
     );
 
     window.location.href = `mailto:hello@cosa.net.au?subject=${subject}&body=${body}`;
@@ -79,7 +86,7 @@ export default function App() {
     <main>
       <header className="site-header">
         <a className="brand" href="#top" aria-label="COSA home">
-          <img src="/cosa-logo.jpg" alt="COSA logo" />
+          <img src="/cosa-logo.jpg.JPEG" alt="COSA logo" />
         </a>
 
         <nav>
@@ -100,7 +107,7 @@ export default function App() {
             Custom operating software for Australian businesses
           </div>
 
-          <h1>Premium software built around your business.</h1>
+          <h1>Premium software built around your business</h1>
 
           <p>
             COSA designs and builds custom internal software for businesses that
@@ -192,6 +199,7 @@ export default function App() {
       <section id="features" className="split-section">
         <div className="feature-panel">
           <p className="label">Included</p>
+
           <h2>Built properly from day one.</h2>
 
           <p className="muted">
@@ -212,7 +220,9 @@ export default function App() {
         <div className="side-panels">
           <div className="side-panel highlight">
             <Globe2 size={30} />
+
             <h3>Access anywhere.</h3>
+
             <p>
               Your business systems can be used from the office, on-site, at
               home or on the move with secure access for your team.
@@ -221,7 +231,9 @@ export default function App() {
 
           <div className="side-panel">
             <Lock size={30} />
+
             <h3>Secure by default.</h3>
+
             <p>
               Staff accounts, role access, password resets and managed login
               control are built into the platform from the start.
@@ -230,7 +242,9 @@ export default function App() {
 
           <div className="side-panel">
             <Sparkles size={30} />
+
             <h3>Made to feel premium.</h3>
+
             <p>
               Your software should look sharp, feel simple and make your
               business feel more organised every time your team opens it.
@@ -304,9 +318,9 @@ export default function App() {
 
       <footer>
         <p>© 2026 COSA. Custom operating software for Australian businesses.</p>
+
         <p>Built in Australia.</p>
       </footer>
     </main>
   );
 }
-
