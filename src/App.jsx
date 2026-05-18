@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   ArrowRight,
   BarChart3,
@@ -7,48 +7,80 @@ import {
   Globe2,
   Lock,
   Shield,
-  Wrench,
+  Sparkles,
+  Workflow,
 } from "lucide-react";
 import "./index.css";
 
 const services = [
   {
-    icon: Wrench,
-    title: "Workshop Software",
+    icon: Cpu,
+    title: "Custom Business Software",
     description:
-      "Live job boards, technician tracking, vehicle status, parts workflows and custom tools built around your real process.",
+      "Purpose-built systems for businesses that have outgrown spreadsheets, whiteboards and generic apps.",
   },
   {
-    icon: Cpu,
-    title: "Business Automation",
+    icon: Workflow,
+    title: "Workflow Systems",
     description:
-      "Replace spreadsheets, whiteboards and repeated admin with clean software your team can use from any device.",
+      "Internal tools that help your team manage jobs, tasks, approvals, stock, staff activity and day-to-day operations.",
   },
   {
     icon: BarChart3,
-    title: "Reports & Analytics",
+    title: "Reporting & Automation",
     description:
-      "Track jobs, revenue, follow-ups, delays and team activity without digging through paperwork.",
+      "Clean dashboards, useful reports and automated admin processes built around what your business actually needs.",
   },
 ];
 
 const features = [
-  "Cloud hosted and accessible anywhere",
+  "Hosted, maintained and managed by COSA",
   "Secure staff logins and password management",
-  "Designed for phones, tablets, PCs and workshop TVs",
+  "Designed for phones, tablets, PCs and display screens",
   "Custom workflows for your exact business",
-  "Up to 15 starting user accounts",
-  "Ongoing updates and support",
+  "Scalable user accounts for growing teams",
+  "Ongoing updates, support and improvements",
+];
+
+const dashboardItems = [
+  ["Operations", "Active", "32 tasks", "Live"],
+  ["Approvals", "Waiting", "7 requests", "Review"],
+  ["Follow-Ups", "Due Today", "14 leads", "Action"],
+  ["Reporting", "Updated", "$18.4k tracked", "Today"],
 ];
 
 export default function App() {
+  const [form, setForm] = useState({
+    name: "",
+    project: "",
+    email: "",
+    phone: "",
+  });
+
+  function handleChange(event) {
+    setForm((current) => ({
+      ...current,
+      [event.target.name]: event.target.value,
+    }));
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    const subject = encodeURIComponent("New COSA website enquiry");
+    const body = encodeURIComponent(
+      `Name: ${form.name}\n\nWhat they are looking to have made:\n${form.project}\n\nEmail: ${form.email}\nPhone: ${form.phone}`
+    );
+
+    window.location.href = `mailto:hello@cosa.net.au?subject=${subject}&body=${body}`;
+  }
+
   return (
     <main>
       <header className="site-header">
-        <div className="brand">
-          <div className="brand-mark">C</div>
-          <span>COSA</span>
-        </div>
+        <a className="brand" href="#top" aria-label="COSA home">
+          <img src="/cosa-logo.jpg" alt="COSA logo" />
+        </a>
 
         <nav>
           <a href="#services">Services</a>
@@ -56,12 +88,12 @@ export default function App() {
           <a href="#contact">Contact</a>
         </nav>
 
-        <a className="header-button" href="mailto:hello@cosa.net.au">
+        <a className="header-button" href="#contact">
           Start a project
         </a>
       </header>
 
-      <section className="hero">
+      <section id="top" className="hero">
         <div className="hero-content">
           <div className="eyebrow">
             <Shield size={17} />
@@ -71,13 +103,13 @@ export default function App() {
           <h1>Premium software built around your business.</h1>
 
           <p>
-            COSA designs and builds custom internal software for workshops,
-            service businesses and growing teams that need cleaner systems than
-            spreadsheets, whiteboards and generic apps.
+            COSA designs and builds custom internal software for businesses that
+            need cleaner systems, better visibility and tools that actually fit
+            how their team works.
           </p>
 
           <div className="hero-actions">
-            <a className="primary-button" href="mailto:hello@cosa.net.au">
+            <a className="primary-button" href="#contact">
               Build my system
               <ArrowRight size={18} />
             </a>
@@ -91,26 +123,22 @@ export default function App() {
         <div className="dashboard-card">
           <div className="dashboard-top">
             <div>
-              <p>Live Operations</p>
-              <h2>Workshop Command</h2>
+              <p>Business Operations</p>
+              <h2>Command Centre</h2>
             </div>
 
             <span>Online</span>
           </div>
 
           <div className="job-grid">
-            {[
-              ["Bay 1", "BMW X5", "In Progress", "2h 15m"],
-              ["Bay 2", "Toyota Hilux", "Waiting Parts", "1d"],
-              ["Bay 3", "Mazda 3", "Ready", "Now"],
-              ["Front", "Ford Ranger", "Customer Approval", "Urgent"],
-            ].map(([bay, vehicle, status, time]) => (
-              <div className="job-card" key={bay}>
+            {dashboardItems.map(([area, status, detail, tag]) => (
+              <div className="job-card" key={area}>
                 <div>
-                  <strong>{bay}</strong>
-                  <small>{time}</small>
+                  <strong>{area}</strong>
+                  <small>{tag}</small>
                 </div>
-                <p>{vehicle}</p>
+
+                <p>{detail}</p>
                 <span>{status}</span>
               </div>
             ))}
@@ -120,18 +148,18 @@ export default function App() {
             <p>Today’s snapshot</p>
 
             <div>
-              <strong>18</strong>
-              <span>Active jobs</span>
+              <strong>48</strong>
+              <span>Active items</span>
+            </div>
+
+            <div>
+              <strong>12</strong>
+              <span>Completed</span>
             </div>
 
             <div>
               <strong>6</strong>
-              <span>Ready</span>
-            </div>
-
-            <div>
-              <strong>4</strong>
-              <span>Delayed</span>
+              <span>Needs review</span>
             </div>
           </div>
         </div>
@@ -140,7 +168,7 @@ export default function App() {
       <section id="services" className="section">
         <div className="section-heading">
           <p>What we build</p>
-          <h2>Systems that fit the way your team already works.</h2>
+          <h2>Systems that fit the way your business already works.</h2>
         </div>
 
         <div className="service-grid">
@@ -165,9 +193,10 @@ export default function App() {
         <div className="feature-panel">
           <p className="label">Included</p>
           <h2>Built properly from day one.</h2>
+
           <p className="muted">
-            COSA is built for businesses that want software that feels simple
-            for staff but powerful for management.
+            COSA builds practical internal software that is simple for staff to
+            use and powerful enough for management to rely on.
           </p>
 
           <div className="feature-list">
@@ -185,8 +214,8 @@ export default function App() {
             <Globe2 size={30} />
             <h3>Access anywhere.</h3>
             <p>
-              Office PC, workshop TV, tablet, phone or home laptop. Your team
-              can access the system securely wherever they need it.
+              Your business systems can be used from the office, on-site, at
+              home or on the move with secure access for your team.
             </p>
           </div>
 
@@ -194,29 +223,83 @@ export default function App() {
             <Lock size={30} />
             <h3>Secure by default.</h3>
             <p>
-              User accounts, role access, password resets and managed login
+              Staff accounts, role access, password resets and managed login
               control are built into the platform from the start.
+            </p>
+          </div>
+
+          <div className="side-panel">
+            <Sparkles size={30} />
+            <h3>Made to feel premium.</h3>
+            <p>
+              Your software should look sharp, feel simple and make your
+              business feel more organised every time your team opens it.
             </p>
           </div>
         </div>
       </section>
 
-      <section id="contact" className="contact">
-        <h2>Ready to build your operating system?</h2>
-        <p>
-          Tell us what your business is currently doing manually and we’ll help
-          turn it into clean custom software.
-        </p>
+      <section id="contact" className="contact-section">
+        <div className="contact-copy">
+          <p className="label">Start a project</p>
 
-        <div className="hero-actions">
-          <a className="primary-button" href="mailto:hello@cosa.net.au">
-            hello@cosa.net.au
-          </a>
+          <h2>Tell us what you want built.</h2>
 
-          <a className="secondary-button" href="https://cosa.net.au">
-            cosa.net.au
-          </a>
+          <p>
+            Send through the basic idea and COSA will help turn it into a clean
+            internal system for your business.
+          </p>
         </div>
+
+        <form className="contact-form" onSubmit={handleSubmit}>
+          <label>
+            Name
+            <input
+              name="name"
+              type="text"
+              value={form.name}
+              onChange={handleChange}
+              required
+            />
+          </label>
+
+          <label>
+            What are you looking to have made?
+            <textarea
+              name="project"
+              rows="5"
+              value={form.project}
+              onChange={handleChange}
+              required
+            />
+          </label>
+
+          <label>
+            Email address
+            <input
+              name="email"
+              type="email"
+              value={form.email}
+              onChange={handleChange}
+              required
+            />
+          </label>
+
+          <label>
+            Phone number
+            <input
+              name="phone"
+              type="tel"
+              value={form.phone}
+              onChange={handleChange}
+            />
+          </label>
+
+          <button type="submit">
+            Send enquiry
+            <ArrowRight size={18} />
+          </button>
+        </form>
       </section>
 
       <footer>
