@@ -176,6 +176,7 @@ export default function App() {
       <section id="about" className="section">
         <div className="section-heading">
           <p>About Us</p>
+
           <h2>
             COSA helps businesses replace messy systems with clean operations.
           </h2>
