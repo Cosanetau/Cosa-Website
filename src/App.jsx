@@ -4,15 +4,20 @@ import {
   BarChart3,
   Check,
   Cpu,
+  Display,
   Globe2,
+  HardDrive,
+  Laptop,
   Lock,
+  MonitorSmartphone,
   Shield,
   Sparkles,
+  TabletSmartphone,
   Workflow,
 } from "lucide-react";
 import "./index.css";
 
-const services = [
+const softwareServices = [
   {
     icon: Cpu,
     title: "Custom Business Software",
@@ -23,13 +28,40 @@ const services = [
     icon: Workflow,
     title: "Workflow Systems",
     description:
-      "Internal tools that help your team manage jobs, tasks, approvals, stock, staff activity and day-to-day operations.",
+      "Tools for jobs, tasks, approvals, stock, staff activity, follow-ups and day-to-day operations.",
   },
   {
     icon: BarChart3,
-    title: "Reporting & Automation",
+    title: "Reporting & Dashboards",
     description:
-      "Clean dashboards, useful reports and automated admin processes built around what your business actually needs.",
+      "Clean dashboards and useful reporting so management can see what is happening across the business.",
+  },
+];
+
+const hardwareServices = [
+  {
+    icon: Laptop,
+    title: "Business Workstations",
+    description:
+      "Custom powerful PCs built around your company needs, from admin systems to CAD, media and high-performance workstations.",
+  },
+  {
+    icon: Display,
+    title: "Displays & Job Boards",
+    description:
+      "TVs and display setups for live job boards, production dashboards, team status screens and front-of-house displays.",
+  },
+  {
+    icon: TabletSmartphone,
+    title: "Tablets & Mobile Devices",
+    description:
+      "Tablet setups for technicians, warehouse teams, field staff and mobile job management.",
+  },
+  {
+    icon: MonitorSmartphone,
+    title: "Device Setup",
+    description:
+      "We can help set up the devices your team needs so your software and hardware work together properly.",
   },
 ];
 
@@ -58,8 +90,9 @@ export default function App() {
         </a>
 
         <nav>
-          <a href="#services">Services</a>
-          <a href="#features">Features</a>
+          <a href="#about">About Us</a>
+          <a href="#software">Software</a>
+          <a href="#hardware">Hardware</a>
           <a href="#contact">Contact</a>
         </nav>
 
@@ -72,15 +105,15 @@ export default function App() {
         <div className="hero-content">
           <div className="eyebrow">
             <Shield size={17} />
-            Custom operating software for Australian businesses
+            Business operating systems for Australian companies
           </div>
 
-          <h1>Premium software built around your business</h1>
+          <h1>Premium software and hardware built around your business</h1>
 
           <p>
-            COSA designs and builds custom internal software for businesses that
-            need cleaner systems, better visibility and tools that actually fit
-            how their team works.
+            COSA builds custom business systems that combine software, devices,
+            displays and managed support so your team can work cleaner, faster
+            and with better visibility.
           </p>
 
           <div className="hero-actions">
@@ -89,7 +122,7 @@ export default function App() {
               <ArrowRight size={18} />
             </a>
 
-            <a className="secondary-button" href="#services">
+            <a className="secondary-button" href="#software">
               View services
             </a>
           </div>
@@ -140,14 +173,75 @@ export default function App() {
         </div>
       </section>
 
-      <section id="services" className="section">
+      <section id="about" className="section">
         <div className="section-heading">
-          <p>What we build</p>
-          <h2>Systems that fit the way your business already works.</h2>
+          <p>About Us</p>
+          <h2>COSA helps businesses replace messy systems with clean operations.</h2>
+        </div>
+
+        <div className="about-grid">
+          <article className="about-card">
+            <Sparkles size={30} />
+            <h3>Built around your business</h3>
+            <p>
+              We do not force your team into generic software. We build around
+              the way your business already works, then make it cleaner and more
+              organised.
+            </p>
+          </article>
+
+          <article className="about-card">
+            <Globe2 size={30} />
+            <h3>Managed by COSA</h3>
+            <p>
+              Your system is hosted, maintained and supported by COSA so your
+              team can focus on running the business instead of managing the tech.
+            </p>
+          </article>
+
+          <article className="about-card">
+            <Lock size={30} />
+            <h3>Made to scale</h3>
+            <p>
+              From small teams to growing operations, COSA systems are designed
+              with secure accounts, clear access and room to expand.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="software" className="section">
+        <div className="section-heading">
+          <p>Software</p>
+          <h2>Custom systems that make your business easier to run.</h2>
         </div>
 
         <div className="service-grid">
-          {services.map((service) => {
+          {softwareServices.map((service) => {
+            const Icon = service.icon;
+
+            return (
+              <article className="service-card" key={service.title}>
+                <div className="icon-box">
+                  <Icon size={25} />
+                </div>
+
+                <h3>{service.title}</h3>
+                <p>{service.description}</p>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+
+      <section id="hardware" className="section">
+        <div className="section-heading">
+          <p>Hardware</p>
+          <h2>The right devices to support the system behind your business.</h2>
+        </div>
+
+        <div className="hardware-grid">
+          {hardwareServices.map((service) => {
             const Icon = service.icon;
 
             return (
@@ -171,7 +265,7 @@ export default function App() {
           <h2>Built properly from day one.</h2>
 
           <p className="muted">
-            COSA builds practical internal software that is simple for staff to
+            COSA builds practical internal systems that are simple for staff to
             use and powerful enough for management to rely on.
           </p>
 
@@ -187,13 +281,13 @@ export default function App() {
 
         <div className="side-panels">
           <div className="side-panel highlight">
-            <Globe2 size={30} />
+            <HardDrive size={30} />
 
-            <h3>Access anywhere.</h3>
+            <h3>Managed systems.</h3>
 
             <p>
-              Your business systems can be used from the office, on-site, at
-              home or on the move with secure access for your team.
+              COSA hosts, maintains and supports your platform so your business
+              gets a clean system without needing to manage the technical side.
             </p>
           </div>
 
@@ -214,8 +308,8 @@ export default function App() {
             <h3>Made to feel premium.</h3>
 
             <p>
-              Your software should look sharp, feel simple and make your
-              business feel more organised every time your team opens it.
+              Your systems should look sharp, feel simple and make your business
+              feel more organised every time your team opens them.
             </p>
           </div>
         </div>
@@ -229,7 +323,7 @@ export default function App() {
 
           <p>
             Send through the basic idea and COSA will help turn it into a clean
-            internal system for your business.
+            software, hardware or full business system.
           </p>
         </div>
 
@@ -266,8 +360,7 @@ export default function App() {
       </section>
 
       <footer>
-        <p>© 2026 COSA. Custom operating software for Australian businesses.</p>
-
+        <p>© 2026 COSA. Business operating systems for Australian companies.</p>
         <p>Built in Australia.</p>
       </footer>
     </main>
