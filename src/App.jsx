@@ -177,9 +177,7 @@ export default function App() {
         <div className="section-heading">
           <p>About Us</p>
 
-          <h2>
-            COSA helps businesses replace messy systems with clean operations.
-          </h2>
+          <h2>Modern systems for modern businesses.</h2>
         </div>
 
         <div className="about-grid">
@@ -224,7 +222,7 @@ export default function App() {
         <div className="section-heading">
           <p>Software</p>
 
-          <h2>Custom systems that make your business easier to run.</h2>
+          <h2>Software built around your workflow.</h2>
         </div>
 
         <div className="service-grid">
@@ -250,9 +248,7 @@ export default function App() {
         <div className="section-heading">
           <p>Hardware</p>
 
-          <h2>
-            The right devices to support the system behind your business.
-          </h2>
+          <h2>Hardware that works with your operation.</h2>
         </div>
 
         <div className="hardware-grid">
@@ -278,7 +274,7 @@ export default function App() {
         <div className="feature-panel">
           <p className="label">Included</p>
 
-          <h2>Built properly from day one.</h2>
+          <h2>Built to scale.</h2>
 
           <p className="muted">
             COSA builds practical internal systems that are simple for staff to
@@ -335,7 +331,7 @@ export default function App() {
         <div className="contact-copy">
           <p className="label">Start a project</p>
 
-          <h2>Tell us what you want built.</h2>
+          <h2>Start your system.</h2>
 
           <p>
             Send through the basic idea and COSA will help turn it into a clean
