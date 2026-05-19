@@ -4,11 +4,11 @@ import {
   BarChart3,
   Check,
   Cpu,
-  Display,
   Globe2,
   HardDrive,
   Laptop,
   Lock,
+  Monitor,
   MonitorSmartphone,
   Shield,
   Sparkles,
@@ -46,7 +46,7 @@ const hardwareServices = [
       "Custom powerful PCs built around your company needs, from admin systems to CAD, media and high-performance workstations.",
   },
   {
-    icon: Display,
+    icon: Monitor,
     title: "Displays & Job Boards",
     description:
       "TVs and display setups for live job boards, production dashboards, team status screens and front-of-house displays.",
@@ -176,13 +176,17 @@ export default function App() {
       <section id="about" className="section">
         <div className="section-heading">
           <p>About Us</p>
-          <h2>COSA helps businesses replace messy systems with clean operations.</h2>
+          <h2>
+            COSA helps businesses replace messy systems with clean operations.
+          </h2>
         </div>
 
         <div className="about-grid">
           <article className="about-card">
             <Sparkles size={30} />
+
             <h3>Built around your business</h3>
+
             <p>
               We do not force your team into generic software. We build around
               the way your business already works, then make it cleaner and more
@@ -192,16 +196,21 @@ export default function App() {
 
           <article className="about-card">
             <Globe2 size={30} />
+
             <h3>Managed by COSA</h3>
+
             <p>
               Your system is hosted, maintained and supported by COSA so your
-              team can focus on running the business instead of managing the tech.
+              team can focus on running the business instead of managing the
+              tech.
             </p>
           </article>
 
           <article className="about-card">
             <Lock size={30} />
+
             <h3>Made to scale</h3>
+
             <p>
               From small teams to growing operations, COSA systems are designed
               with secure accounts, clear access and room to expand.
@@ -213,6 +222,7 @@ export default function App() {
       <section id="software" className="section">
         <div className="section-heading">
           <p>Software</p>
+
           <h2>Custom systems that make your business easier to run.</h2>
         </div>
 
@@ -227,6 +237,7 @@ export default function App() {
                 </div>
 
                 <h3>{service.title}</h3>
+
                 <p>{service.description}</p>
               </article>
             );
@@ -237,7 +248,10 @@ export default function App() {
       <section id="hardware" className="section">
         <div className="section-heading">
           <p>Hardware</p>
-          <h2>The right devices to support the system behind your business.</h2>
+
+          <h2>
+            The right devices to support the system behind your business.
+          </h2>
         </div>
 
         <div className="hardware-grid">
@@ -251,6 +265,7 @@ export default function App() {
                 </div>
 
                 <h3>{service.title}</h3>
+
                 <p>{service.description}</p>
               </article>
             );
@@ -308,8 +323,8 @@ export default function App() {
             <h3>Made to feel premium.</h3>
 
             <p>
-              Your systems should look sharp, feel simple and make your business
-              feel more organised every time your team opens them.
+              Your systems should look sharp, feel simple and make your
+              business feel more organised every time your team opens them.
             </p>
           </div>
         </div>
@@ -361,6 +376,7 @@ export default function App() {
 
       <footer>
         <p>© 2026 COSA. Business operating systems for Australian companies.</p>
+
         <p>Built in Australia.</p>
       </footer>
     </main>
