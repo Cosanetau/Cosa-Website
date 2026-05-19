@@ -182,7 +182,11 @@ nav a:hover {
 .contact-form {
   border: 1px solid rgba(255, 255, 255, 0.11);
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025)),
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.07),
+      rgba(255, 255, 255, 0.025)
+    ),
     rgba(13, 13, 13, 0.86);
   box-shadow: 0 28px 80px rgba(0, 0, 0, 0.45);
   backdrop-filter: blur(16px);
@@ -266,7 +270,12 @@ nav a:hover {
   gap: 16px;
   border-radius: 24px;
   border: 1px solid rgba(255, 142, 30, 0.16);
-  background: linear-gradient(135deg, rgba(255, 111, 0, 0.18), rgba(255, 255, 255, 0.03));
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 111, 0, 0.18),
+      rgba(255, 255, 255, 0.03)
+    );
 }
 
 .snapshot p {
@@ -343,12 +352,6 @@ nav a:hover {
   padding: 30px;
 }
 
-.service-card:hover,
-.about-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(255, 139, 31, 0.34);
-}
-
 .about-card svg {
   color: #ff8a1f;
   margin-bottom: 24px;
@@ -422,7 +425,11 @@ nav a:hover {
 
 .highlight {
   background:
-    linear-gradient(135deg, rgba(255, 111, 0, 0.2), rgba(255, 255, 255, 0.035)),
+    linear-gradient(
+      135deg,
+      rgba(255, 111, 0, 0.2),
+      rgba(255, 255, 255, 0.035)
+    ),
     rgba(13, 13, 13, 0.9);
 }
 
@@ -467,12 +474,6 @@ nav a:hover {
   resize: vertical;
 }
 
-.contact-form input:focus,
-.contact-form textarea:focus {
-  border-color: rgba(255, 139, 31, 0.7);
-  box-shadow: 0 0 0 4px rgba(255, 139, 31, 0.11);
-}
-
 .contact-form button {
   width: fit-content;
   margin-top: 6px;
@@ -493,10 +494,6 @@ footer {
 @media (max-width: 1050px) {
   .hardware-grid {
     grid-template-columns: repeat(2, 1fr);
-  }
-
-  nav {
-    gap: 18px;
   }
 }
 
@@ -540,10 +537,6 @@ footer {
     width: calc(100% - 28px);
   }
 
-  .brand {
-    padding: 8px 12px;
-  }
-
   .brand img {
     width: 130px;
   }
@@ -558,7 +551,6 @@ footer {
 
   .hero-content > p {
     font-size: 16px;
-    line-height: 1.7;
   }
 
   .hero-actions {
@@ -570,15 +562,6 @@ footer {
   .secondary-button,
   .contact-form button {
     width: 100%;
-  }
-
-  .dashboard-card,
-  .service-card,
-  .about-card,
-  .feature-panel,
-  .side-panel,
-  .contact-form {
-    border-radius: 26px;
   }
 
   .job-grid,
@@ -596,7 +579,6 @@ footer {
   .feature-panel h2,
   .contact-copy h2 {
     font-size: 40px;
-    line-height: 1;
   }
 
   .service-card,
@@ -605,9 +587,5 @@ footer {
   .side-panel,
   .contact-form {
     padding: 24px;
-  }
-
-  footer {
-    padding-bottom: 60px;
   }
 }
