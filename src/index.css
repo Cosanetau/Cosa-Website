@@ -87,6 +87,10 @@ nav {
   font-size: 14px;
 }
 
+nav a {
+  transition: color 0.25s ease;
+}
+
 nav a:hover {
   color: #ffffff;
 }
@@ -100,6 +104,17 @@ nav a:hover {
   padding: 13px 20px;
   font-weight: 700;
   font-size: 14px;
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.header-button:hover,
+.secondary-button:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 139, 31, 0.35);
+  background: rgba(255, 255, 255, 0.09);
 }
 
 .hero {
@@ -172,6 +187,18 @@ nav a:hover {
   font-weight: 900;
   box-shadow: 0 18px 48px rgba(255, 106, 0, 0.25);
   cursor: pointer;
+  transition:
+    transform 0.25s ease,
+    opacity 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.primary-button:hover,
+.contact-form button:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 28px 60px rgba(255, 106, 0, 0.3),
+    0 0 30px rgba(255, 111, 0, 0.15);
 }
 
 .dashboard-card,
@@ -179,7 +206,8 @@ nav a:hover {
 .about-card,
 .feature-panel,
 .side-panel,
-.contact-form {
+.contact-form,
+.job-card {
   border: 1px solid rgba(255, 255, 255, 0.11);
   background:
     linear-gradient(
@@ -190,6 +218,30 @@ nav a:hover {
     rgba(13, 13, 13, 0.86);
   box-shadow: 0 28px 80px rgba(0, 0, 0, 0.45);
   backdrop-filter: blur(16px);
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.service-card:hover,
+.about-card:hover,
+.side-panel:hover,
+.feature-panel:hover,
+.job-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 139, 31, 0.35);
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.09),
+      rgba(255, 255, 255, 0.03)
+    ),
+    rgba(13, 13, 13, 0.92);
+  box-shadow:
+    0 32px 90px rgba(0, 0, 0, 0.5),
+    0 0 24px rgba(255, 111, 0, 0.08);
 }
 
 .dashboard-card {
@@ -233,8 +285,6 @@ nav a:hover {
 .job-card {
   border-radius: 22px;
   padding: 17px;
-  background: rgba(255, 255, 255, 0.045);
-  border: 1px solid rgba(255, 255, 255, 0.09);
 }
 
 .job-card div {
