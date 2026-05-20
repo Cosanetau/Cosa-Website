@@ -55,9 +55,18 @@ img {
   display: block;
 }
 
-.site-header {
+.site-header,
+.hero,
+.page-hero,
+.section,
+.split-section,
+.contact-section,
+footer {
   width: min(1180px, calc(100% - 40px));
   margin: 0 auto;
+}
+
+.site-header {
   padding: 24px 0;
   display: flex;
   align-items: center;
@@ -118,14 +127,33 @@ nav a:hover {
 }
 
 .hero {
-  width: min(1180px, calc(100% - 40px));
-  margin: 0 auto;
   min-height: 720px;
   display: grid;
   grid-template-columns: 1.05fr 0.95fr;
   gap: 54px;
   align-items: center;
   padding: 70px 0 110px;
+}
+
+.page-hero {
+  padding: 95px 0 50px;
+  max-width: 1180px;
+}
+
+.page-hero h1 {
+  max-width: 860px;
+  margin: 0;
+  font-size: clamp(56px, 8vw, 96px);
+  line-height: 0.95;
+  letter-spacing: -0.07em;
+}
+
+.page-hero p {
+  max-width: 720px;
+  margin: 28px 0 0;
+  color: #a1a1aa;
+  font-size: 20px;
+  line-height: 1.75;
 }
 
 .eyebrow {
@@ -354,8 +382,6 @@ nav a:hover {
 .section,
 .split-section,
 .contact-section {
-  width: min(1180px, calc(100% - 40px));
-  margin: 0 auto;
   padding: 85px 0;
 }
 
@@ -530,8 +556,6 @@ nav a:hover {
 }
 
 footer {
-  width: min(1180px, calc(100% - 40px));
-  margin: 0 auto;
   padding: 34px 0;
   display: flex;
   justify-content: space-between;
@@ -580,6 +604,7 @@ footer {
 @media (max-width: 640px) {
   .site-header,
   .hero,
+  .page-hero,
   .section,
   .split-section,
   .contact-section,
@@ -595,11 +620,17 @@ footer {
     padding: 30px 0 80px;
   }
 
-  .hero h1 {
+  .page-hero {
+    padding: 50px 0 20px;
+  }
+
+  .hero h1,
+  .page-hero h1 {
     font-size: 48px;
   }
 
-  .hero-content > p {
+  .hero-content > p,
+  .page-hero p {
     font-size: 16px;
   }
 
