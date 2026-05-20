@@ -8,8 +8,11 @@ import {
   HardDrive,
   Laptop,
   Lock,
+  Mail,
+  MapPin,
   Monitor,
   MonitorSmartphone,
+  Phone,
   Shield,
   Sparkles,
   TabletSmartphone,
@@ -92,9 +95,10 @@ function Header() {
         <a href="/">About Us</a>
         <a href="/software">Software</a>
         <a href="/hardware">Hardware</a>
+        <a href="/contact">Contact Us</a>
       </nav>
 
-      <a className="header-button" href="#contact">
+      <a className="header-button" href="/contact">
         Start a project
       </a>
     </header>
@@ -168,7 +172,7 @@ function HomePage() {
           </p>
 
           <div className="hero-actions">
-            <a className="primary-button" href="#contact">
+            <a className="primary-button" href="/contact">
               Build my system
               <ArrowRight size={18} />
             </a>
@@ -307,6 +311,51 @@ function HardwarePage() {
   );
 }
 
+function ContactPage() {
+  return (
+    <>
+      <section className="page-hero">
+        <div className="eyebrow">
+          <Mail size={17} />
+          Contact Us
+        </div>
+
+        <h1>Let’s build something for your business.</h1>
+
+        <p>
+          Tell us what is slowing your team down, what systems you currently
+          use, and what you want COSA to build.
+        </p>
+      </section>
+
+      <section className="section">
+        <div className="about-grid">
+          <article className="about-card">
+            <Mail size={30} />
+            <h3>Email</h3>
+            <p>caleb@cosa.net.au</p>
+          </article>
+
+          <article className="about-card">
+            <Phone size={30} />
+            <h3>Enquiries</h3>
+            <p>Send through your idea and COSA will get back to you.</p>
+          </article>
+
+          <article className="about-card">
+            <MapPin size={30} />
+            <h3>Australia Wide</h3>
+            <p>
+              COSA works with Australian businesses that need better systems,
+              software and hardware.
+            </p>
+          </article>
+        </div>
+      </section>
+    </>
+  );
+}
+
 function FeatureSection() {
   return (
     <section className="split-section">
@@ -434,6 +483,10 @@ function getPage() {
 
   if (path === "/hardware") {
     return <HardwarePage />;
+  }
+
+  if (path === "/contact") {
+    return <ContactPage />;
   }
 
   return <HomePage />;
