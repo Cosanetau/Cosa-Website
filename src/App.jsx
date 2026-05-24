@@ -26,7 +26,7 @@ const navLinks = [
 ];
 
 const heroStats = [
-  { value: "10+", label: "core tools" },
+  { value: "100+", label: "features" },
   { value: "2", label: "main controllers" },
   { value: "5%", label: "off when paying yearly" },
 ];
