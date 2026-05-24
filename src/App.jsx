@@ -28,6 +28,28 @@ const coreFeatures = [
   "Two main controllers",
 ];
 
+const plans = [
+  {
+    name: "Starter",
+    users: "Up to 10 users",
+    price: "$99/month",
+    subject: "COSA Core 10 User Plan",
+  },
+  {
+    name: "Growth",
+    users: "Up to 20 users",
+    price: "$175/month",
+    subject: "COSA Core 20 User Plan",
+    featured: true,
+  },
+  {
+    name: "Scale",
+    users: "Up to 30 users",
+    price: "$249/month",
+    subject: "COSA Core 30 User Plan",
+  },
+];
+
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -51,8 +73,8 @@ function Header() {
         ))}
       </nav>
 
-      <a className="header-button" href="/core">
-        View COSA Core
+      <a className="header-button" href="/core#plans">
+        Review Plans
       </a>
 
       <button
@@ -72,8 +94,8 @@ function Header() {
             </a>
           ))}
 
-          <a className="mobile-cta" href="/core">
-            View COSA Core
+          <a className="mobile-cta" href="/core#plans">
+            Review Plans
           </a>
         </div>
       )}
@@ -84,7 +106,7 @@ function Header() {
 function HomePage() {
   return (
     <>
-      <section className="hero clean-hero">
+      <section className="hero split-hero">
         <div className="hero-content">
           <div className="eyebrow">
             <Shield size={17} />
@@ -110,9 +132,11 @@ function HomePage() {
             </a>
           </div>
         </div>
-      </section>
 
-      <AboutVideo />
+        <div className="hero-video-frame">
+          <video src="/about-video.mp4" controls playsInline />
+        </div>
+      </section>
 
       <section className="section">
         <div className="section-heading">
@@ -155,73 +179,66 @@ function HomePage() {
   );
 }
 
-function AboutVideo() {
-  return (
-    <section className="about-video-section">
-      <div className="about-video-header">
-        <p>Proudly Perth Built & Operated</p>
-
-        <h2>
-          COSA Core is designed around real workshop workflows, modern systems
-          and simple software that staff can actually use.
-        </h2>
-      </div>
-
-      <div className="about-video-frame">
-        <video src="/about-video.mp4" controls playsInline />
-      </div>
-
-      <p className="video-note">
-        Add your horizontal video later as public/about-video.mp4.
-      </p>
-    </section>
-  );
-}
-
 function CorePage() {
   return (
     <>
-      <section className="page-hero">
-        <div className="eyebrow">
-          <Wrench size={17} />
-          COSA Core
+      <section className="hero split-hero core-page-hero">
+        <div className="hero-content">
+          <div className="eyebrow">
+            <Wrench size={17} />
+            COSA Core
+          </div>
+
+          <h1>Workshop software for bookings, jobs, invoices and customers.</h1>
+
+          <p>
+            COSA Core gives workshops a clean way to manage daily operations,
+            customer history, account customers, reminders and reporting.
+          </p>
+
+          <div className="hero-actions">
+            <a className="primary-button" href="#plans">
+              Review Plans
+              <ArrowRight size={18} />
+            </a>
+
+            <a className="secondary-button" href="/contact">
+              Contact Us
+            </a>
+          </div>
         </div>
 
-        <h1>Workshop software for bookings, jobs, invoices and customers.</h1>
-
-        <p>
-          COSA Core gives workshops a clean way to manage daily operations,
-          customer history, account customers, reminders and reporting.
-        </p>
+        <div className="core-preview-frame">
+          <img src="/cosa-core-preview.png" alt="COSA Core preview" />
+        </div>
       </section>
 
-      <section className="section">
-        <div className="pricing-grid">
-          <article className="pricing-card">
-            <p className="label">Starter</p>
-            <h3>Up to 10 users</h3>
-            <strong>$99/month</strong>
-            <p>
-              Ideal for small workshops that need bookings, jobs, customers,
-              invoices and reminders in one simple system.
-            </p>
-            <a href="mailto:caleb@cosa.net.au?subject=COSA Core 10 User Plan">
-              Start 10 user plan
-            </a>
-          </article>
+      <section id="plans" className="section">
+        <div className="section-heading">
+          <p>COSA Core Plans</p>
+          <h2>Same software features. Different user limits.</h2>
+        </div>
 
-          <article className="pricing-card featured">
-            <p className="label">Growth</p>
-            <h3>Up to 20 users</h3>
-            <strong>$150/month</strong>
-            <p>
-              Built for growing workshops that need more staff accounts and room
-              to manage larger daily workflows.
-            </p>
-            <a href="mailto:caleb@cosa.net.au?subject=COSA Core 20 User Plan">
-              Start 20 user plan
-            </a>
-          </article>
+        <div className="pricing-grid">
+          {plans.map((plan) => (
+            <article
+              key={plan.name}
+              className={`pricing-card ${plan.featured ? "featured" : ""}`}
+            >
+              <p className="label">{plan.name}</p>
+              <h3>{plan.users}</h3>
+              <strong>{plan.price}</strong>
+
+              <p>
+                Includes COSA Core features. We do not limit software features
+                by plan, only the amount of users.
+              </p>
+
+              <a href={`mailto:caleb@cosa.net.au?subject=${plan.subject}`}>
+                Start {plan.users.replace("Up to ", "")} plan
+              </a>
+            </article>
+          ))}
         </div>
 
         <div className="discount-banner">
@@ -252,8 +269,7 @@ function CorePage() {
 
           <p className="muted">
             Each business can have two main controllers. They can manage staff
-            access, disable users and help keep the account accessible if one
-            controller forgets their password.
+            accounts, disable users and keep the account secure and accessible.
           </p>
 
           <div className="feature-list">
@@ -349,6 +365,30 @@ function CorePreview() {
 }
 
 function ContactPage() {
+  const [sent, setSent] = useState(false);
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    const response = await fetch("https://formspree.io/f/mojbqzpn", {
+      method: "POST",
+      body: formData,
+      headers: {
+        Accept: "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      return;
+    }
+
+    form.reset();
+    setSent(true);
+  }
+
   return (
     <>
       <section className="page-hero">
@@ -360,24 +400,61 @@ function ContactPage() {
         <h1>Talk to COSA about Core.</h1>
 
         <p>
-          For COSA Core setup, pricing or early access, email COSA directly.
+          For COSA Core setup, pricing or early access, send through your
+          details and what your workshop needs.
         </p>
-
-        <div className="hero-actions">
-          <a className="primary-button" href="mailto:caleb@cosa.net.au">
-            Email COSA
-            <ArrowRight size={18} />
-          </a>
-        </div>
       </section>
 
       <section className="section">
-        <div className="contact-card">
-          <p className="label">Email</p>
-          <h2>caleb@cosa.net.au</h2>
-          <p>
-            COSA is proudly built and operated in Perth, Western Australia.
-          </p>
+        <div className="contact-layout">
+          <div className="contact-card">
+            <p className="label">Proudly Perth Built</p>
+            <h2>caleb@cosa.net.au</h2>
+            <p>
+              COSA is proudly built and operated in Perth, Western Australia.
+            </p>
+          </div>
+
+          <form className="contact-form" onSubmit={handleSubmit}>
+            {sent ? (
+              <div className="success-message">
+                <h3>Message sent.</h3>
+                <p>COSA will get back to you shortly.</p>
+              </div>
+            ) : (
+              <>
+                <label>
+                  Name
+                  <input name="name" type="text" required />
+                </label>
+
+                <label>
+                  Business name
+                  <input name="business" type="text" required />
+                </label>
+
+                <label>
+                  What are you looking for?
+                  <textarea name="message" rows="5" required />
+                </label>
+
+                <label>
+                  Email address
+                  <input name="email" type="email" required />
+                </label>
+
+                <label>
+                  Phone number
+                  <input name="phone" type="tel" />
+                </label>
+
+                <button type="submit">
+                  Send enquiry
+                  <ArrowRight size={18} />
+                </button>
+              </>
+            )}
+          </form>
         </div>
       </section>
     </>
@@ -410,12 +487,4 @@ function getPage() {
   return <HomePage />;
 }
 
-export default function App() {
-  return (
-    <main>
-      <Header />
-      {getPage()}
-      <Footer />
-    </main>
-  );
-}
+export default function App;
