@@ -321,10 +321,11 @@ p {
 
 .hero-stat strong {
   display: block;
-  margin-bottom: 4px;
-  font-size: 30px;
+  margin-bottom: 8px;
+  font-size: 34px;
   line-height: 1;
   letter-spacing: -0.05em;
+  font-weight: 950;
 }
 
 .hero-stat span {
@@ -565,10 +566,26 @@ p {
 }
 
 .billing-toggle-wrap > p {
+  display: grid;
+  gap: 2px;
   margin: 0;
   color: var(--orange-dark);
   font-size: 15px;
   font-weight: 950;
+  text-align: center;
+}
+
+.billing-toggle-wrap > p strong {
+  font-size: 28px;
+  line-height: 1;
+  font-weight: 950;
+}
+
+.billing-toggle-wrap > p span {
+  color: var(--muted);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
 .billing-toggle {
@@ -746,10 +763,17 @@ p {
   color: rgba(255, 255, 255, 0.72);
 }
 
+.integration-center {
+  display: grid;
+  justify-items: center;
+  gap: 22px;
+  margin-top: 18px;
+  text-align: center;
+}
+
 .integration-status {
   display: inline-grid;
   gap: 6px;
-  margin: 0 0 28px;
   padding: 18px 20px;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 20px;
