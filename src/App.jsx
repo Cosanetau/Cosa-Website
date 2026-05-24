@@ -336,7 +336,7 @@ function CorePage() {
       <section className="section">
         <div className="section-heading centered">
           <p className="section-kicker">Features</p>
-          <h2>Everything needed to run the workshop day cleaner.</h2>
+          <h2>Everything needed to run the day cleaner.</h2>
           <span>
             COSA Core keeps the same software features across every plan. The
             only difference is the amount of users.
