@@ -9,6 +9,7 @@ import {
   Mail,
   Menu,
   MessageSquareText,
+  PlugZap,
   Shield,
   Users,
   Wrench,
@@ -19,6 +20,8 @@ import "./index.css";
 const navLinks = [
   { label: "About Us", href: "/" },
   { label: "COSA Core", href: "/core" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "Integrations", href: "/integrations" },
   { label: "Contact Us", href: "/contact" },
 ];
 
@@ -58,6 +61,11 @@ const coreFeatures = [
     text: "Track jobs, job status, notes and work that needs attention from one clean system.",
   },
   {
+    icon: FileText,
+    title: "Digital job cards",
+    text: "Create clean digital job cards with easy formatting and simple printing for workshop use.",
+  },
+  {
     icon: Users,
     title: "Customer details",
     text: "Store customer information, contact details and useful workshop notes in one place.",
@@ -92,6 +100,8 @@ const coreFeatures = [
 const featurePills = [
   "Bookings calendar",
   "Workshop job management",
+  "Digital job cards",
+  "Easy formatting and printing",
   "Customer details",
   "Customer and vehicle history",
   "Quotes and invoices",
@@ -107,22 +117,22 @@ const featurePills = [
 const plans = [
   {
     name: "Starter",
-    users: "10 users",
-    price: "$99/month",
-    subject: "COSA Core 10 User Plan",
+    users: "5 users",
+    monthlyPrice: 99,
+    subject: "COSA Core 5 User Plan",
   },
   {
     name: "Growth",
-    users: "20 users",
-    price: "$175/month",
-    subject: "COSA Core 20 User Plan",
+    users: "10 users",
+    monthlyPrice: 149,
+    subject: "COSA Core 10 User Plan",
     featured: true,
   },
   {
     name: "Scale",
-    users: "30 users",
-    price: "$249/month",
-    subject: "COSA Core 30 User Plan",
+    users: "20 users",
+    monthlyPrice: 249,
+    subject: "COSA Core 20 User Plan",
   },
 ];
 
@@ -299,8 +309,8 @@ function CorePage() {
           </p>
 
           <div className="hero-actions">
-            <a className="primary-button" href="#plans">
-              Review Plans
+            <a className="primary-button" href="/pricing">
+              Review Pricing
               <ArrowRight size={18} />
             </a>
 
@@ -341,15 +351,60 @@ function CorePage() {
         </div>
       </section>
 
-      <section id="plans" className="section">
-        <div className="section-heading centered">
-          <p className="section-kicker">Plans</p>
-          <h2>Same software features. Different user limits.</h2>
-          <span>
-            Pick the user limit that suits the size of your workshop team.
-          </span>
-        </div>
+      <ControllerSection />
+    </>
+  );
+}
 
+function PricingPage() {
+  const [billingCycle, setBillingCycle] = useState("monthly");
+  const isYearly = billingCycle === "yearly";
+
+  function getDisplayedPrice(monthlyPrice) {
+    if (!isYearly) {
+      return `$${monthlyPrice}/month`;
+    }
+
+    const yearlyPrice = Math.round(monthlyPrice * 12 * 0.95);
+    return `$${yearlyPrice}/year`;
+  }
+
+  return (
+    <>
+      <section className="pricing-hero">
+        <p className="eyebrow">
+          <FileText size={17} />
+          Pricing
+        </p>
+
+        <h1>Simple COSA Core pricing.</h1>
+
+        <p>
+          All COSA Core plans include the same software features. You only pick
+          the amount of users your business needs.
+        </p>
+
+        <div className="billing-toggle" aria-label="Billing cycle">
+          <button
+            type="button"
+            className={!isYearly ? "active" : ""}
+            onClick={() => setBillingCycle("monthly")}
+          >
+            Monthly
+          </button>
+
+          <button
+            type="button"
+            className={isYearly ? "active" : ""}
+            onClick={() => setBillingCycle("yearly")}
+          >
+            Yearly
+            <span>Save 5%</span>
+          </button>
+        </div>
+      </section>
+
+      <section className="section pricing-section">
         <div className="pricing-grid">
           {plans.map((plan) => (
             <article
@@ -359,7 +414,11 @@ function CorePage() {
               <div>
                 <p className="plan-name">{plan.name}</p>
                 <h3>{plan.users}</h3>
-                <strong>{plan.price}</strong>
+
+                <strong>{getDisplayedPrice(plan.monthlyPrice)}</strong>
+
+                <p className="gst-note">All prices include GST.</p>
+
                 <p>
                   Includes all COSA Core features. Plans are based on user
                   limits only.
@@ -374,40 +433,86 @@ function CorePage() {
           ))}
         </div>
 
-        <div className="discount-banner">
-          Pay yearly upfront and receive 5% off your COSA Core subscription.
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="controller-panel">
+        <div className="custom-plan-card">
           <div>
-            <p className="section-kicker">Account Control</p>
-            <h2>Two main controllers for safer account access.</h2>
+            <p className="section-kicker">Need more users?</p>
+            <h2>Reach out to COSA for custom software opportunities.</h2>
             <p>
-              Each company can have two main controller accounts. Controllers
-              can manage staff accounts, disable users and help keep accounts
-              secure and accessible.
+              If your workshop needs more users, extra workflow planning or a
+              custom setup, COSA can discuss a plan that fits the business.
             </p>
           </div>
 
-          <div className="controller-list">
-            {[
-              "Two main controller accounts",
-              "Controllers manage staff accounts",
-              "Controllers can disable users",
-              "Staff accounts included",
-              "Accounts stay secure and accessible",
-            ].map((item) => (
-              <div key={item}>
-                <Check size={18} />
-                <span>{item}</span>
-              </div>
-            ))}
-          </div>
+          <a className="primary-button" href="/contact">
+            Contact Us
+            <ArrowRight size={18} />
+          </a>
         </div>
       </section>
     </>
+  );
+}
+
+function IntegrationsPage() {
+  return (
+    <section className="integrations-page">
+      <div className="integrations-panel">
+        <p className="eyebrow">
+          <PlugZap size={17} />
+          Integrations
+        </p>
+
+        <h1>Integrations are in progress.</h1>
+
+        <p>
+          COSA Core integrations are currently being planned and built. The
+          first integration release target is 1 July 2026.
+        </p>
+
+        <div className="integration-status">
+          <span>Work in progress</span>
+          <strong>Target: 1 July 2026</strong>
+        </div>
+
+        <a className="primary-button" href="/contact">
+          Ask about integrations
+          <ArrowRight size={18} />
+        </a>
+      </div>
+    </section>
+  );
+}
+
+function ControllerSection() {
+  return (
+    <section className="section">
+      <div className="controller-panel">
+        <div>
+          <p className="section-kicker">Account Control</p>
+          <h2>Two main controllers for safer account access.</h2>
+          <p>
+            Each company can have two main controller accounts. Controllers can
+            manage staff accounts, disable users and help keep accounts secure
+            and accessible.
+          </p>
+        </div>
+
+        <div className="controller-list">
+          {[
+            "Two main controller accounts",
+            "Controllers manage staff accounts",
+            "Controllers can disable users",
+            "Staff accounts included",
+            "Accounts stay secure and accessible",
+          ].map((item) => (
+            <div key={item}>
+              <Check size={18} />
+              <span>{item}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -463,79 +568,77 @@ function ContactPage() {
   }
 
   return (
-    <>
-      <section className="contact-page">
-        <div className="contact-panel">
-          <p className="eyebrow">
-            <Mail size={17} />
-            Contact Us
-          </p>
+    <section className="contact-page">
+      <div className="contact-panel">
+        <p className="eyebrow">
+          <Mail size={17} />
+          Contact Us
+        </p>
 
-          <h1>Modern workshop software proudly built and operated in Perth.</h1>
+        <h1>Modern workshop software proudly built and operated in Perth.</h1>
 
-          <p>
-            COSA Core is designed around real workshop workflows, modern systems
-            and simple software that staff can actually use.
-          </p>
+        <p>
+          COSA Core is designed around real workshop workflows, modern systems
+          and simple software that staff can actually use.
+        </p>
 
-          <div className="contact-mini-grid">
-            {["Bookings", "Customers", "Reporting"].map((item) => (
-              <div key={item} className="contact-mini-card">
-                <Check size={18} />
-                <span>{item}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <form className="contact-form" onSubmit={handleSubmit}>
-          {sent ? (
-            <div className="success-message">
-              <Check size={34} />
-              <h2>Message sent.</h2>
-              <p>COSA will get back to you shortly.</p>
+        <div className="contact-mini-grid">
+          {["Bookings", "Customers", "Reporting"].map((item) => (
+            <div key={item} className="contact-mini-card">
+              <Check size={18} />
+              <span>{item}</span>
             </div>
-          ) : (
-            <>
-              <div className="form-heading">
-                <p className="section-kicker">Enquiry Form</p>
-                <h2>Tell us what you need.</h2>
-              </div>
+          ))}
+        </div>
+      </div>
 
-              <label>
-                Name
-                <input name="name" type="text" required />
-              </label>
+      <form className="contact-form" onSubmit={handleSubmit}>
+        {sent ? (
+          <div className="success-message">
+            <Check size={34} />
+            <h2>Message sent.</h2>
+            <p>COSA will get back to you shortly.</p>
+          </div>
+        ) : (
+          <>
+            <div className="form-heading">
+              <p className="section-kicker">Enquiry Form</p>
+              <h2>Tell us what you need.</h2>
+            </div>
 
-              <label>
-                Business name
-                <input name="business" type="text" required />
-              </label>
+            <label>
+              Name
+              <input name="name" type="text" required />
+            </label>
 
-              <label>
-                What are you looking for?
-                <textarea name="message" rows="5" required />
-              </label>
+            <label>
+              Business name
+              <input name="business" type="text" required />
+            </label>
 
-              <label>
-                Email address
-                <input name="email" type="email" required />
-              </label>
+            <label>
+              What are you looking for?
+              <textarea name="message" rows="5" required />
+            </label>
 
-              <label>
-                Phone number
-                <input name="phone" type="tel" />
-              </label>
+            <label>
+              Email address
+              <input name="email" type="email" required />
+            </label>
 
-              <button type="submit">
-                Send enquiry
-                <ArrowRight size={18} />
-              </button>
-            </>
-          )}
-        </form>
-      </section>
-    </>
+            <label>
+              Phone number
+              <input name="phone" type="tel" />
+            </label>
+
+            <button type="submit">
+              Send enquiry
+              <ArrowRight size={18} />
+            </button>
+          </>
+        )}
+      </form>
+    </section>
   );
 }
 
@@ -550,6 +653,8 @@ function Footer() {
       <nav>
         <a href="/">About Us</a>
         <a href="/core">COSA Core</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/integrations">Integrations</a>
         <a href="/contact">Contact Us</a>
         <a href="mailto:caleb@cosa.net.au">caleb@cosa.net.au</a>
       </nav>
@@ -562,6 +667,14 @@ function getPage() {
 
   if (path === "/core") {
     return <CorePage />;
+  }
+
+  if (path === "/pricing") {
+    return <PricingPage />;
+  }
+
+  if (path === "/integrations") {
+    return <IntegrationsPage />;
   }
 
   if (path === "/contact") {
