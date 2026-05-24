@@ -28,7 +28,7 @@ const navLinks = [
 const heroStats = [
   { value: "10+", label: "core tools" },
   { value: "2", label: "main controllers" },
-  { value: "5%", label: "yearly discount" },
+  { value: "5% off", label: "yearly upfront" },
 ];
 
 const aboutCards = [
@@ -112,6 +112,8 @@ const featurePills = [
   "SMS reminders",
   "Staff accounts",
   "Two main controllers",
+  "Account customer tracking",
+  "Workshop reporting tools",
 ];
 
 const plans = [
@@ -321,7 +323,7 @@ function CorePage() {
         </div>
 
         <div className="preview-card">
-          <img src="/cosa-core-preview.png" alt="COSA Core software preview" />
+          <video src="/cosa-core-preview.mp4" controls playsInline />
         </div>
       </section>
 
@@ -357,16 +359,15 @@ function CorePage() {
 }
 
 function PricingPage() {
-  const [billingCycle, setBillingCycle] = useState("monthly");
+  const [billingCycle, setBillingCycle] = useState("yearly");
   const isYearly = billingCycle === "yearly";
 
-  function getDisplayedPrice(monthlyPrice) {
-    if (!isYearly) {
-      return `$${monthlyPrice}/month`;
-    }
+  function getYearlyPrice(monthlyPrice) {
+    return Math.round(monthlyPrice * 12 * 0.95);
+  }
 
-    const yearlyPrice = Math.round(monthlyPrice * 12 * 0.95);
-    return `$${yearlyPrice}/year`;
+  function getDiscountedMonthlyPrice(monthlyPrice) {
+    return (monthlyPrice * 0.95).toFixed(2);
   }
 
   return (
@@ -384,53 +385,78 @@ function PricingPage() {
           the amount of users your business needs.
         </p>
 
-        <div className="billing-toggle" aria-label="Billing cycle">
-          <button
-            type="button"
-            className={!isYearly ? "active" : ""}
-            onClick={() => setBillingCycle("monthly")}
-          >
-            Monthly
-          </button>
+        <div className="billing-toggle-wrap">
+          <div className="billing-toggle" aria-label="Billing cycle">
+            <button
+              type="button"
+              className={!isYearly ? "active" : ""}
+              onClick={() => setBillingCycle("monthly")}
+            >
+              Monthly
+            </button>
 
-          <button
-            type="button"
-            className={isYearly ? "active" : ""}
-            onClick={() => setBillingCycle("yearly")}
-          >
-            Yearly
-            <span>Save 5%</span>
-          </button>
+            <button
+              type="button"
+              className={isYearly ? "active" : ""}
+              onClick={() => setBillingCycle("yearly")}
+            >
+              Yearly
+            </button>
+          </div>
+
+          <p>5% off on all packages when paying yearly upfront.</p>
         </div>
       </section>
 
       <section className="section pricing-section">
         <div className="pricing-grid">
-          {plans.map((plan) => (
-            <article
-              key={plan.name}
-              className={`pricing-card ${plan.featured ? "featured" : ""}`}
-            >
-              <div>
-                <p className="plan-name">{plan.name}</p>
-                <h3>{plan.users}</h3>
+          {plans.map((plan) => {
+            const yearlyPrice = getYearlyPrice(plan.monthlyPrice);
+            const discountedMonthlyPrice = getDiscountedMonthlyPrice(
+              plan.monthlyPrice,
+            );
 
-                <strong>{getDisplayedPrice(plan.monthlyPrice)}</strong>
+            return (
+              <article
+                key={plan.name}
+                className={`pricing-card ${plan.featured ? "featured" : ""}`}
+              >
+                <div>
+                  <p className="plan-name">{plan.name}</p>
+                  <h3>{plan.users}</h3>
 
-                <p className="gst-note">All prices include GST.</p>
+                  {isYearly ? (
+                    <>
+                      <strong>${discountedMonthlyPrice}/month</strong>
+                      <p className="gst-note">
+                        5% off when paying yearly upfront. All prices include
+                        GST.
+                      </p>
+                      <p className="yearly-note">
+                        ${yearlyPrice}/year paid upfront to receive the yearly
+                        discount.
+                      </p>
+                    </>
+                  ) : (
+                    <>
+                      <strong>${plan.monthlyPrice}/month</strong>
+                      <p className="gst-note">All prices include GST.</p>
+                    </>
+                  )}
 
-                <p>
-                  Includes all COSA Core features. Plans are based on user
-                  limits only.
-                </p>
-              </div>
+                  <p>
+                    Includes all COSA Core features. Plans are based on user
+                    limits only.
+                  </p>
+                </div>
 
-              <a href={`mailto:caleb@cosa.net.au?subject=${plan.subject}`}>
-                Start {plan.users} plan
-                <ChevronRight size={18} />
-              </a>
-            </article>
-          ))}
+                <a href={`mailto:caleb@cosa.net.au?subject=${plan.subject}`}>
+                  Start {plan.users} plan
+                  <ChevronRight size={18} />
+                </a>
+              </article>
+            );
+          })}
         </div>
 
         <div className="custom-plan-card">
