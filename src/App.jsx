@@ -178,7 +178,7 @@ function HomePage() {
         <div className="hero-content">
           <div className="eyebrow">
             <Shield size={17} />
-            Software. Hardware. Workflow.
+            Built around the way your business works.
           </div>
 
           <h1>
