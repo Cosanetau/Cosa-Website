@@ -27,7 +27,7 @@ const navLinks = [
 
 const heroStats = [
   { value: "100+", label: "features" },
-  { value: "2", label: "main controllers" },
+  { value: "Perth", label: "owned & operated" },
   { value: "5%", label: "off when paying yearly" },
 ];
 
