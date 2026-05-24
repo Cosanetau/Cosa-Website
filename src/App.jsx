@@ -382,7 +382,7 @@ function PricingPage() {
           Pricing
         </p>
 
-        <h1>Simple COSA Core pricing.</h1>
+        <h1>COSA Core pricing.</h1>
 
         <p>
           All COSA Core plans include the same software features. You only pick
