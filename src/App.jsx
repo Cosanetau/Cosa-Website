@@ -28,7 +28,7 @@ const navLinks = [
 const heroStats = [
   { value: "10+", label: "core tools" },
   { value: "2", label: "main controllers" },
-  { value: "5% off", label: "yearly upfront" },
+  { value: "5%", label: "off when paying yearly" },
 ];
 
 const aboutCards = [
@@ -140,6 +140,10 @@ const plans = [
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const isCorePage = window.location.pathname === "/core";
+  const headerCta = isCorePage
+    ? { label: "Contact Us", href: "/contact" }
+    : { label: "COSA Core", href: "/core" };
 
   function closeMenu() {
     setMenuOpen(false);
@@ -159,8 +163,8 @@ function Header() {
         ))}
       </nav>
 
-      <a className="header-button" href="/contact">
-        Contact Us
+      <a className="header-button" href={headerCta.href}>
+        {headerCta.label}
         <ArrowRight size={16} />
       </a>
 
@@ -182,8 +186,8 @@ function Header() {
             </a>
           ))}
 
-          <a className="mobile-cta" href="/contact" onClick={closeMenu}>
-            Contact Us
+          <a className="mobile-cta" href={headerCta.href} onClick={closeMenu}>
+            {headerCta.label}
             <ArrowRight size={16} />
           </a>
         </nav>
@@ -404,7 +408,10 @@ function PricingPage() {
             </button>
           </div>
 
-          <p>5% off on all packages when paying yearly upfront.</p>
+          <p>
+            <strong>5%</strong>
+            <span>off when paying yearly</span>
+          </p>
         </div>
       </section>
 
@@ -428,10 +435,7 @@ function PricingPage() {
                   {isYearly ? (
                     <>
                       <strong>${discountedMonthlyPrice}/month</strong>
-                      <p className="gst-note">
-                        5% off when paying yearly upfront. All prices include
-                        GST.
-                      </p>
+                      <p className="gst-note">All prices include GST.</p>
                       <p className="yearly-note">
                         ${yearlyPrice}/year paid upfront to receive the yearly
                         discount.
@@ -495,15 +499,17 @@ function IntegrationsPage() {
           first integration release target is 1 July 2026.
         </p>
 
-        <div className="integration-status">
-          <span>Work in progress</span>
-          <strong>Target: 1 July 2026</strong>
-        </div>
+        <div className="integration-center">
+          <div className="integration-status">
+            <span>Work in progress</span>
+            <strong>Target: 1 July 2026</strong>
+          </div>
 
-        <a className="primary-button" href="/contact">
-          Ask about integrations
-          <ArrowRight size={18} />
-        </a>
+          <a className="primary-button" href="/contact">
+            Ask about integrations
+            <ArrowRight size={18} />
+          </a>
+        </div>
       </div>
     </section>
   );
