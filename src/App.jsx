@@ -4,8 +4,11 @@ import {
   BarChart3,
   CalendarDays,
   Check,
+  ChevronRight,
+  FileText,
   Mail,
   Menu,
+  MessageSquareText,
   Shield,
   Users,
   Wrench,
@@ -13,7 +16,80 @@ import {
 } from "lucide-react";
 import "./index.css";
 
+const navLinks = [
+  { label: "About Us", href: "/" },
+  { label: "COSA Core", href: "/core" },
+  { label: "Contact Us", href: "/contact" },
+];
+
+const heroStats = [
+  { value: "10+", label: "core tools" },
+  { value: "2", label: "main controllers" },
+  { value: "5%", label: "yearly discount" },
+];
+
+const aboutCards = [
+  {
+    icon: Wrench,
+    title: "Built around real workshops",
+    text: "COSA Core is designed for the daily flow of bookings, jobs, customers, invoices and account customers.",
+  },
+  {
+    icon: Users,
+    title: "Easy for staff to use",
+    text: "Clean screens, simple actions and practical tools that do not need a software expert to understand.",
+  },
+  {
+    icon: Shield,
+    title: "Proudly Perth operated",
+    text: "Built and operated locally for workshops that want better systems without corporate bloat.",
+  },
+];
+
 const coreFeatures = [
+  {
+    icon: CalendarDays,
+    title: "Bookings calendar",
+    text: "Keep bookings organised with clear daily visibility across workshop activity.",
+  },
+  {
+    icon: Wrench,
+    title: "Workshop job management",
+    text: "Track jobs, job status, notes and work that needs attention from one clean system.",
+  },
+  {
+    icon: Users,
+    title: "Customer details",
+    text: "Store customer information, contact details and useful workshop notes in one place.",
+  },
+  {
+    icon: FileText,
+    title: "Customer and vehicle history",
+    text: "Quickly view previous work, vehicle records, invoices and customer history.",
+  },
+  {
+    icon: FileText,
+    title: "Quotes and invoices",
+    text: "Create quotes and invoices with a workflow built around real workshop needs.",
+  },
+  {
+    icon: Shield,
+    title: "30-day account customers",
+    text: "Manage account customers, payment terms and overdue tracking with better visibility.",
+  },
+  {
+    icon: BarChart3,
+    title: "Reporting",
+    text: "See useful workshop information across jobs, invoices, reminders and account customers.",
+  },
+  {
+    icon: MessageSquareText,
+    title: "SMS reminders",
+    text: "Keep customers informed with reminders that support smoother workshop communication.",
+  },
+];
+
+const featurePills = [
   "Bookings calendar",
   "Workshop job management",
   "Customer details",
@@ -31,20 +107,20 @@ const coreFeatures = [
 const plans = [
   {
     name: "Starter",
-    users: "Up to 10 users",
+    users: "10 users",
     price: "$99/month",
     subject: "COSA Core 10 User Plan",
   },
   {
     name: "Growth",
-    users: "Up to 20 users",
+    users: "20 users",
     price: "$175/month",
     subject: "COSA Core 20 User Plan",
     featured: true,
   },
   {
     name: "Scale",
-    users: "Up to 30 users",
+    users: "30 users",
     price: "$249/month",
     subject: "COSA Core 30 User Plan",
   },
@@ -53,11 +129,9 @@ const plans = [
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const navLinks = [
-    { label: "About Us", href: "/" },
-    { label: "COSA Core", href: "/core" },
-    { label: "Contact Us", href: "/contact" },
-  ];
+  function closeMenu() {
+    setMenuOpen(false);
+  }
 
   return (
     <header className="site-header">
@@ -65,7 +139,7 @@ function Header() {
         <img src="/cosawordlogo.png" alt="COSA logo" />
       </a>
 
-      <nav className="desktop-nav">
+      <nav className="desktop-nav" aria-label="Main navigation">
         {navLinks.map((link) => (
           <a key={link.href} href={link.href}>
             {link.label}
@@ -73,8 +147,9 @@ function Header() {
         ))}
       </nav>
 
-      <a className="header-button" href="/core#plans">
-        Review Plans
+      <a className="header-button" href="/contact">
+        Contact Us
+        <ArrowRight size={16} />
       </a>
 
       <button
@@ -82,22 +157,24 @@ function Header() {
         type="button"
         onClick={() => setMenuOpen((current) => !current)}
         aria-label="Toggle menu"
+        aria-expanded={menuOpen}
       >
-        {menuOpen ? <X size={24} /> : <Menu size={24} />}
+        {menuOpen ? <X size={23} /> : <Menu size={23} />}
       </button>
 
       {menuOpen && (
-        <div className="mobile-nav">
+        <nav className="mobile-nav" aria-label="Mobile navigation">
           {navLinks.map((link) => (
-            <a key={link.href} href={link.href}>
+            <a key={link.href} href={link.href} onClick={closeMenu}>
               {link.label}
             </a>
           ))}
 
-          <a className="mobile-cta" href="/core#plans">
-            Review Plans
+          <a className="mobile-cta" href="/contact" onClick={closeMenu}>
+            Contact Us
+            <ArrowRight size={16} />
           </a>
-        </div>
+        </nav>
       )}
     </header>
   );
@@ -106,16 +183,16 @@ function Header() {
 function HomePage() {
   return (
     <>
-      <section className="hero split-hero">
-        <div className="hero-content">
-          <div className="eyebrow">
+      <section className="hero">
+        <div className="hero-copy">
+          <p className="eyebrow">
             <Shield size={17} />
             Proudly Perth Built & Operated
-          </div>
+          </p>
 
           <h1>Modern workshop operating software built for real businesses.</h1>
 
-          <p>
+          <p className="hero-text">
             COSA Core helps workshops manage bookings, jobs, customers,
             invoices, account customers, reporting and reminders in one clean
             system that staff can actually use.
@@ -133,61 +210,86 @@ function HomePage() {
           </div>
         </div>
 
-        <div className="hero-video-frame">
-          <video src="/about-video.mp4" controls playsInline />
+        <div className="hero-media">
+          <div className="video-shell">
+            <video src="/about-video.mp4" controls playsInline />
+          </div>
+
+          <div className="hero-stat-row">
+            {heroStats.map((stat) => (
+              <div key={stat.label} className="hero-stat">
+                <strong>{stat.value}</strong>
+                <span>{stat.label}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
+
+      <AboutSection />
 
       <section className="section">
-        <div className="section-heading">
-          <p>What COSA Does</p>
-          <h2>Simple workshop software without the chaos.</h2>
+        <div className="section-heading centered">
+          <p className="section-kicker">COSA Core</p>
+          <h2>Made for workshops that want less chaos.</h2>
+          <span>
+            Bookings, jobs, invoices, customers, reminders and reporting in one
+            practical operating system.
+          </span>
         </div>
 
-        <div className="about-grid">
-          <article className="about-card">
-            <CalendarDays size={30} />
-            <h3>Bookings</h3>
-            <p>
-              Keep workshop bookings, job dates, customer requests and daily
-              workflow organised in one place.
-            </p>
-          </article>
+        <FeatureGrid />
 
-          <article className="about-card">
-            <Wrench size={30} />
-            <h3>Workshop Management</h3>
-            <p>
-              Track jobs, status, notes, staff activity, customer history and
-              work that needs attention.
-            </p>
-          </article>
-
-          <article className="about-card">
-            <BarChart3 size={30} />
-            <h3>Reporting</h3>
-            <p>
-              See what is happening across invoices, account customers,
-              reminders, jobs and overdue work.
-            </p>
-          </article>
+        <div className="section-cta">
+          <a className="primary-button" href="/core">
+            Explore COSA Core
+            <ArrowRight size={18} />
+          </a>
         </div>
       </section>
-
-      <CorePreview />
     </>
+  );
+}
+
+function AboutSection() {
+  return (
+    <section className="about-section" id="about">
+      <div className="about-copy">
+        <p className="section-kicker">About Us</p>
+        <h2>Software built for the way workshops actually work.</h2>
+        <p>
+          COSA is focused on clean, modern workshop operating software that
+          removes messy admin and gives staff a system they can actually use
+          every day.
+        </p>
+      </div>
+
+      <div className="about-card-grid">
+        {aboutCards.map((card) => {
+          const Icon = card.icon;
+
+          return (
+            <article key={card.title} className="about-card">
+              <Icon size={28} />
+              <h3>{card.title}</h3>
+              <p>{card.text}</p>
+            </article>
+          );
+        })}
+      </div>
+    </section>
   );
 }
 
 function CorePage() {
   return (
     <>
-      <section className="hero split-hero core-page-hero">
-        <div className="hero-content">
-          <div className="eyebrow">
+      <section className="page-intro core-intro">
+        <div>
+          <p className="eyebrow">
             <Wrench size={17} />
             COSA Core
-          </div>
+          </p>
 
           <h1>Workshop software for bookings, jobs, invoices and customers.</h1>
 
@@ -208,15 +310,44 @@ function CorePage() {
           </div>
         </div>
 
-        <div className="core-preview-frame">
-          <img src="/cosa-core-preview.png" alt="COSA Core preview" />
+        <div className="preview-card">
+          <img src="/cosa-core-preview.png" alt="COSA Core software preview" />
+        </div>
+      </section>
+
+      <AboutSection />
+
+      <section className="section">
+        <div className="section-heading centered">
+          <p className="section-kicker">Features</p>
+          <h2>Everything needed to run the workshop day cleaner.</h2>
+          <span>
+            COSA Core keeps the same software features across every plan. The
+            only difference is the amount of users.
+          </span>
+        </div>
+
+        <FeatureGrid />
+      </section>
+
+      <section className="section compact-section">
+        <div className="feature-strip">
+          {featurePills.map((feature) => (
+            <div key={feature} className="feature-pill">
+              <Check size={17} />
+              {feature}
+            </div>
+          ))}
         </div>
       </section>
 
       <section id="plans" className="section">
-        <div className="section-heading">
-          <p>COSA Core Plans</p>
+        <div className="section-heading centered">
+          <p className="section-kicker">Plans</p>
           <h2>Same software features. Different user limits.</h2>
+          <span>
+            Pick the user limit that suits the size of your workshop team.
+          </span>
         </div>
 
         <div className="pricing-grid">
@@ -225,17 +356,19 @@ function CorePage() {
               key={plan.name}
               className={`pricing-card ${plan.featured ? "featured" : ""}`}
             >
-              <p className="label">{plan.name}</p>
-              <h3>{plan.users}</h3>
-              <strong>{plan.price}</strong>
-
-              <p>
-                Includes COSA Core features. We do not limit software features
-                by plan, only the amount of users.
-              </p>
+              <div>
+                <p className="plan-name">{plan.name}</p>
+                <h3>{plan.users}</h3>
+                <strong>{plan.price}</strong>
+                <p>
+                  Includes all COSA Core features. Plans are based on user
+                  limits only.
+                </p>
+              </div>
 
               <a href={`mailto:caleb@cosa.net.au?subject=${plan.subject}`}>
-                Start {plan.users.replace("Up to ", "")} plan
+                Start {plan.users} plan
+                <ChevronRight size={18} />
               </a>
             </article>
           ))}
@@ -246,121 +379,61 @@ function CorePage() {
         </div>
       </section>
 
-      <section className="section tight-section">
-        <div className="section-heading">
-          <p>Core Features</p>
-          <h2>Built for how workshops actually operate.</h2>
-        </div>
+      <section className="section">
+        <div className="controller-panel">
+          <div>
+            <p className="section-kicker">Account Control</p>
+            <h2>Two main controllers for safer account access.</h2>
+            <p>
+              Each company can have two main controller accounts. Controllers
+              can manage staff accounts, disable users and help keep accounts
+              secure and accessible.
+            </p>
+          </div>
 
-        <div className="feature-grid">
-          {coreFeatures.map((feature) => (
-            <div key={feature} className="feature-pill">
-              <Check size={17} />
-              {feature}
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="split-section">
-        <div className="feature-panel">
-          <p className="label">Account Control</p>
-          <h2>Two main controllers for safer account access.</h2>
-
-          <p className="muted">
-            Each business can have two main controllers. They can manage staff
-            accounts, disable users and keep the account secure and accessible.
-          </p>
-
-          <div className="feature-list">
+          <div className="controller-list">
             {[
               "Two main controller accounts",
-              "Staff accounts",
-              "User limits by plan",
-              "Disable staff access",
-              "Password control planned",
-              "Manual billing first, Stripe later",
-            ].map((feature) => (
-              <div key={feature}>
+              "Controllers manage staff accounts",
+              "Controllers can disable users",
+              "Staff accounts included",
+              "Accounts stay secure and accessible",
+            ].map((item) => (
+              <div key={item}>
                 <Check size={18} />
-                <span>{feature}</span>
+                <span>{item}</span>
               </div>
             ))}
           </div>
-        </div>
-
-        <div className="feature-panel dark-panel">
-          <p className="label">Proudly Perth Built</p>
-          <h2>Local software for Australian workshops.</h2>
-
-          <p>
-            COSA Core is built in Perth for workshops that want a cleaner,
-            simpler and more modern way to run the day.
-          </p>
         </div>
       </section>
     </>
   );
 }
 
-function CorePreview() {
+function FeatureGrid() {
   return (
-    <section className="split-section">
-      <div className="feature-panel">
-        <p className="label">COSA Core</p>
+    <div className="feature-grid">
+      {coreFeatures.map((feature) => {
+        const Icon = feature.icon;
 
-        <h2>Made for workshops that want less chaos.</h2>
-
-        <p className="muted">
-          COSA Core is built to help workshops see what is booked, what is in
-          progress, what needs attention and who still needs to pay.
-        </p>
-
-        <div className="feature-list">
-          {[
-            "Bookings and job tracking",
-            "Customer and vehicle history",
-            "Quotes and invoices",
-            "30-day account customers",
-            "Reporting and SMS reminders",
-          ].map((feature) => (
-            <div key={feature}>
-              <Check size={18} />
-              <span>{feature}</span>
+        return (
+          <article key={feature.title} className="feature-card">
+            <div className="feature-icon">
+              <Icon size={24} />
             </div>
-          ))}
-        </div>
-      </div>
 
-      <div className="side-panels">
-        <div className="side-panel highlight">
-          <Wrench size={30} />
-          <h3>Workshop ready.</h3>
-          <p>
-            Built around bookings, jobs, customers, invoices, account customers
-            and reminders.
-          </p>
-        </div>
+            <h3>{feature.title}</h3>
+            <p>{feature.text}</p>
 
-        <div className="side-panel">
-          <Users size={30} />
-          <h3>Staff friendly.</h3>
-          <p>
-            Designed to be simple enough for staff to use without needing to be
-            good with computers.
-          </p>
-        </div>
-
-        <div className="side-panel">
-          <Shield size={30} />
-          <h3>Local and managed.</h3>
-          <p>
-            Proudly Perth built and operated, with the platform hosted and
-            maintained by COSA.
-          </p>
-        </div>
-      </div>
-    </section>
+            <a href="/contact">
+              Contact Us
+              <ChevronRight size={17} />
+            </a>
+          </article>
+        );
+      })}
+    </div>
   );
 }
 
@@ -391,71 +464,76 @@ function ContactPage() {
 
   return (
     <>
-      <section className="page-hero">
-        <div className="eyebrow">
-          <Mail size={17} />
-          Contact Us
-        </div>
+      <section className="contact-page">
+        <div className="contact-panel">
+          <p className="eyebrow">
+            <Mail size={17} />
+            Contact Us
+          </p>
 
-        <h1>Talk to COSA about Core.</h1>
+          <h1>Modern workshop software proudly built and operated in Perth.</h1>
 
-        <p>
-          For COSA Core setup, pricing or early access, send through your
-          details and what your workshop needs.
-        </p>
-      </section>
+          <p>
+            COSA Core is designed around real workshop workflows, modern systems
+            and simple software that staff can actually use.
+          </p>
 
-      <section className="section">
-        <div className="contact-layout">
-          <div className="contact-card">
-            <p className="label">Proudly Perth Built</p>
-            <h2>caleb@cosa.net.au</h2>
-            <p>
-              COSA is proudly built and operated in Perth, Western Australia.
-            </p>
-          </div>
-
-          <form className="contact-form" onSubmit={handleSubmit}>
-            {sent ? (
-              <div className="success-message">
-                <h3>Message sent.</h3>
-                <p>COSA will get back to you shortly.</p>
+          <div className="contact-mini-grid">
+            {["Bookings", "Customers", "Reporting"].map((item) => (
+              <div key={item} className="contact-mini-card">
+                <Check size={18} />
+                <span>{item}</span>
               </div>
-            ) : (
-              <>
-                <label>
-                  Name
-                  <input name="name" type="text" required />
-                </label>
-
-                <label>
-                  Business name
-                  <input name="business" type="text" required />
-                </label>
-
-                <label>
-                  What are you looking for?
-                  <textarea name="message" rows="5" required />
-                </label>
-
-                <label>
-                  Email address
-                  <input name="email" type="email" required />
-                </label>
-
-                <label>
-                  Phone number
-                  <input name="phone" type="tel" />
-                </label>
-
-                <button type="submit">
-                  Send enquiry
-                  <ArrowRight size={18} />
-                </button>
-              </>
-            )}
-          </form>
+            ))}
+          </div>
         </div>
+
+        <form className="contact-form" onSubmit={handleSubmit}>
+          {sent ? (
+            <div className="success-message">
+              <Check size={34} />
+              <h2>Message sent.</h2>
+              <p>COSA will get back to you shortly.</p>
+            </div>
+          ) : (
+            <>
+              <div className="form-heading">
+                <p className="section-kicker">Enquiry Form</p>
+                <h2>Tell us what you need.</h2>
+              </div>
+
+              <label>
+                Name
+                <input name="name" type="text" required />
+              </label>
+
+              <label>
+                Business name
+                <input name="business" type="text" required />
+              </label>
+
+              <label>
+                What are you looking for?
+                <textarea name="message" rows="5" required />
+              </label>
+
+              <label>
+                Email address
+                <input name="email" type="email" required />
+              </label>
+
+              <label>
+                Phone number
+                <input name="phone" type="tel" />
+              </label>
+
+              <button type="submit">
+                Send enquiry
+                <ArrowRight size={18} />
+              </button>
+            </>
+          )}
+        </form>
       </section>
     </>
   );
@@ -464,11 +542,17 @@ function ContactPage() {
 function Footer() {
   return (
     <footer>
-      <p>© 2026 COSA. Proudly Perth Built & Operated.</p>
-      <a href="mailto:caleb@cosa.net.au">
-        <Mail size={16} />
-        caleb@cosa.net.au
-      </a>
+      <div>
+        <img src="/cosawordlogo.png" alt="COSA logo" />
+        <p>© 2026 COSA. Proudly Perth Built & Operated.</p>
+      </div>
+
+      <nav>
+        <a href="/">About Us</a>
+        <a href="/core">COSA Core</a>
+        <a href="/contact">Contact Us</a>
+        <a href="mailto:caleb@cosa.net.au">caleb@cosa.net.au</a>
+      </nav>
     </footer>
   );
 }
