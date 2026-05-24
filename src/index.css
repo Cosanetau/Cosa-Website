@@ -297,6 +297,7 @@ p {
 }
 
 .video-shell video,
+.preview-card video,
 .preview-card img {
   display: block;
   width: 100%;
@@ -517,6 +518,7 @@ p {
     var(--black);
 }
 
+.preview-card video,
 .preview-card img {
   border-radius: 28px;
 }
@@ -556,6 +558,19 @@ p {
   margin-right: auto;
 }
 
+.billing-toggle-wrap {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+}
+
+.billing-toggle-wrap > p {
+  margin: 0;
+  color: var(--orange-dark);
+  font-size: 15px;
+  font-weight: 950;
+}
+
 .billing-toggle {
   display: inline-flex;
   gap: 6px;
@@ -575,7 +590,7 @@ p {
   border-radius: 999px;
   background: transparent;
   color: var(--muted);
-  padding: 0 18px;
+  padding: 0 22px;
   font-weight: 950;
   cursor: pointer;
 }
@@ -583,13 +598,6 @@ p {
 .billing-toggle button.active {
   background: var(--orange);
   color: white;
-}
-
-.billing-toggle span {
-  padding: 4px 8px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.22);
-  font-size: 12px;
 }
 
 .pricing-section {
@@ -606,7 +614,7 @@ p {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 378px;
+  min-height: 420px;
   padding: 28px;
 }
 
@@ -626,10 +634,17 @@ p {
 }
 
 .gst-note {
-  margin-bottom: 16px !important;
+  margin-bottom: 10px !important;
   color: var(--orange-dark) !important;
   font-size: 14px !important;
   font-weight: 950 !important;
+}
+
+.yearly-note {
+  margin-bottom: 16px !important;
+  color: var(--muted) !important;
+  font-size: 14px !important;
+  font-weight: 800 !important;
 }
 
 .pricing-card a {
@@ -1045,6 +1060,14 @@ footer a:hover {
   .section-heading.centered,
   .pricing-hero {
     text-align: left;
+  }
+
+  .billing-toggle-wrap {
+    justify-items: stretch;
+  }
+
+  .billing-toggle-wrap > p {
+    text-align: center;
   }
 
   .about-copy h2,
