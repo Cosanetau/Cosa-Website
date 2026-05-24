@@ -162,14 +162,19 @@ select {
 .hero,
 .section,
 .split-section,
-.page-hero,
-.about-video-section {
+.page-hero {
   padding: clamp(44px, 7vw, 92px) clamp(18px, 5vw, 72px);
 }
 
-.clean-hero {
-  padding-top: clamp(58px, 9vw, 132px);
-  padding-bottom: clamp(38px, 6vw, 76px);
+.split-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 560px);
+  gap: clamp(28px, 5vw, 60px);
+  align-items: center;
+}
+
+.core-page-hero {
+  padding-bottom: clamp(34px, 5vw, 64px);
 }
 
 .hero-content,
@@ -246,12 +251,28 @@ p {
   color: var(--orange-dark);
 }
 
-.about-video-header {
-  max-width: 1000px;
-  margin-bottom: 28px;
+.hero-video-frame,
+.core-preview-frame {
+  overflow: hidden;
+  border: 1px solid var(--soft);
+  border-radius: var(--radius-lg);
+  background: #111111;
+  box-shadow: var(--shadow);
 }
 
-.about-video-header p,
+.hero-video-frame video,
+.core-preview-frame img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.section-heading {
+  max-width: 760px;
+  margin-bottom: 32px;
+}
+
 .section-heading p {
   margin-bottom: 12px;
   color: var(--orange-dark);
@@ -261,7 +282,6 @@ p {
   text-transform: uppercase;
 }
 
-.about-video-header h2,
 .section-heading h2,
 .feature-panel h2,
 .contact-card h2 {
@@ -271,49 +291,32 @@ p {
   letter-spacing: -0.055em;
 }
 
-.about-video-frame {
-  overflow: hidden;
-  border: 1px solid var(--soft);
-  border-radius: var(--radius-lg);
-  background: #111111;
-  box-shadow: var(--shadow);
-}
-
-.about-video-frame video {
-  display: block;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-}
-
-.video-note {
-  margin-top: 12px;
-  color: var(--muted);
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.section-heading {
-  max-width: 760px;
-  margin-bottom: 32px;
-}
-
 .about-grid,
-.pricing-grid {
+.pricing-grid,
+.contact-layout {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
 }
 
+.about-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .pricing-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.contact-layout {
+  grid-template-columns: minmax(0, 0.85fr) minmax(360px, 560px);
+  align-items: start;
 }
 
 .about-card,
 .pricing-card,
 .feature-panel,
 .side-panel,
-.contact-card {
+.contact-card,
+.contact-form {
   border: 1px solid var(--soft);
   border-radius: var(--radius-md);
   background: white;
@@ -322,7 +325,8 @@ p {
 
 .about-card,
 .pricing-card,
-.contact-card {
+.contact-card,
+.contact-form {
   padding: 26px;
 }
 
@@ -332,7 +336,8 @@ p {
 
 .about-card h3,
 .side-panel h3,
-.pricing-card h3 {
+.pricing-card h3,
+.success-message h3 {
   margin: 18px 0 10px;
   font-size: 24px;
   line-height: 1.1;
@@ -343,6 +348,7 @@ p {
 .side-panel p,
 .pricing-card p,
 .contact-card p,
+.success-message p,
 .muted {
   margin-bottom: 0;
   color: var(--muted);
@@ -354,7 +360,7 @@ p {
 .pricing-card strong {
   display: block;
   margin: 16px 0;
-  font-size: 46px;
+  font-size: 42px;
   line-height: 1;
   letter-spacing: -0.06em;
 }
@@ -382,9 +388,9 @@ p {
   border: 1px solid rgba(249, 115, 22, 0.35);
   border-radius: 18px;
   background: white;
-  padding: 20px 22px;
+  padding: 22px 24px;
   color: var(--orange-dark);
-  font-size: 18px;
+  font-size: clamp(18px, 2vw, 24px);
   font-weight: 950;
 }
 
@@ -482,6 +488,67 @@ p {
   padding-top: 20px;
 }
 
+.contact-form {
+  display: grid;
+  gap: 16px;
+}
+
+.contact-form label {
+  display: grid;
+  gap: 8px;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  border: 1px solid var(--soft);
+  border-radius: 16px;
+  background: #f8f8f5;
+  padding: 14px 16px;
+  color: var(--text);
+  outline: none;
+  resize: vertical;
+  transition: 0.18s ease;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--orange);
+  background: white;
+  box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.12);
+}
+
+.contact-form button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 52px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--orange);
+  color: white;
+  font-weight: 950;
+  cursor: pointer;
+}
+
+.contact-form button:hover {
+  background: var(--orange-dark);
+}
+
+.success-message {
+  border-radius: 18px;
+  background: var(--orange-soft);
+  padding: 24px;
+}
+
+.success-message h3 {
+  color: var(--orange-dark);
+}
+
 footer {
   display: flex;
   justify-content: space-between;
@@ -509,7 +576,9 @@ footer svg {
 }
 
 @media (max-width: 1100px) {
-  .split-section {
+  .split-hero,
+  .split-section,
+  .contact-layout {
     grid-template-columns: 1fr;
   }
 
@@ -550,8 +619,7 @@ footer svg {
   .hero,
   .section,
   .split-section,
-  .page-hero,
-  .about-video-section {
+  .page-hero {
     padding-left: 16px;
     padding-right: 16px;
   }
@@ -581,7 +649,6 @@ footer svg {
     grid-template-columns: 1fr;
   }
 
-  .about-video-header h2,
   .section-heading h2,
   .feature-panel h2,
   .contact-card h2 {
@@ -592,7 +659,8 @@ footer svg {
   .pricing-card,
   .feature-panel,
   .side-panel,
-  .contact-card {
+  .contact-card,
+  .contact-form {
     padding: 20px;
   }
 
