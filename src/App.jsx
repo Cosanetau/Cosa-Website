@@ -487,4 +487,12 @@ function getPage() {
   return <HomePage />;
 }
 
-export default function App;
+export default function App() {
+  return (
+    <main>
+      <Header />
+      {getPage()}
+      <Footer />
+    </main>
+  );
+}
