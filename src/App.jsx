@@ -226,8 +226,8 @@ function HomePage() {
           </div>
         </div>
 
-        <div className="hero-media">
-          <div className="video-shell">
+        <div className="hero-media vertical-media-wrap">
+          <div className="vertical-video-card">
             <video src="/about-video.mp4" controls playsInline />
           </div>
 
@@ -326,8 +326,10 @@ function CorePage() {
           </div>
         </div>
 
-        <div className="preview-card">
-          <img src="/cosa-core-preview.png" alt="COSA Core dashboard preview" />
+        <div className="core-video-wrap">
+          <div className="vertical-video-card">
+            <video src="/cosa-core-preview.mp4" controls playsInline />
+          </div>
         </div>
       </section>
 
