@@ -287,13 +287,21 @@ p {
   gap: 16px;
 }
 
-.video-shell,
-.preview-card {
+.video-shell {
   overflow: hidden;
   border: 1px solid var(--soft);
   border-radius: var(--radius-xl);
   background: var(--black);
   box-shadow: var(--shadow);
+}
+
+.preview-card {
+  overflow: hidden;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
 }
 
 .video-shell video,
@@ -303,6 +311,11 @@ p {
   width: 100%;
   aspect-ratio: 16 / 9;
   object-fit: cover;
+}
+
+.preview-card video,
+.preview-card img {
+  border-radius: 0;
 }
 
 .hero-stat-row {
