@@ -313,6 +313,19 @@ p {
   object-fit: cover;
 }
 
+.preview-card {
+  border-radius: 0;
+}
+
+.video-shell video,
+.preview-card video,
+.preview-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
 .preview-card video,
 .preview-card img {
   border-radius: 0;
