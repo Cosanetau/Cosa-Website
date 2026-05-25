@@ -434,11 +434,11 @@ function PricingPage() {
 
                   {isYearly ? (
                     <>
-                      <strong>${discountedMonthlyPrice}/month</strong>
+                      <strong>${yearlyPrice}/year</strong>
                       <p className="gst-note">All prices include GST.</p>
                       <p className="yearly-note">
-                        ${yearlyPrice}/year paid upfront to receive the yearly
-                        discount.
+                        Equivalent to ${discountedMonthlyPrice}/month. Paid
+                        yearly to receive the discount.
                       </p>
                     </>
                   ) : (
@@ -473,7 +473,7 @@ function PricingPage() {
             </p>
           </div>
 
-          <a className="primary-button" href="/contact">
+          <a className="primary-button custom-plan-button" href="/contact">
             Contact Us
             <ArrowRight size={18} />
           </a>
@@ -563,8 +563,8 @@ function FeatureGrid() {
             <h3>{feature.title}</h3>
             <p>{feature.text}</p>
 
-            <a href="/contact">
-              Contact Us
+            <a href="/pricing">
+              View Pricing
               <ChevronRight size={17} />
             </a>
           </article>
