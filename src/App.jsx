@@ -25,12 +25,6 @@ const navLinks = [
   { label: "Contact Us", href: "/contact" },
 ];
 
-const heroStats = [
-  { value: "100+", label: "features" },
-  { value: "Perth", label: "owned & operated" },
-  { value: "5%", label: "off when paying yearly" },
-];
-
 const aboutCards = [
   {
     icon: Wrench,
@@ -229,15 +223,6 @@ function HomePage() {
         <div className="hero-media vertical-media-wrap">
           <div className="vertical-video-card">
             <video src="/about-video.mp4" controls playsInline />
-          </div>
-
-          <div className="hero-stat-row">
-            {heroStats.map((stat) => (
-              <div key={stat.label} className="hero-stat">
-                <strong>{stat.value}</strong>
-                <span>{stat.label}</span>
-              </div>
-            ))}
           </div>
         </div>
       </section>
