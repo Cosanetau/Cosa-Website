@@ -703,6 +703,11 @@ p {
   color: rgba(255, 255, 255, 0.7);
 }
 
+.custom-plan-button {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
 .controller-panel {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(330px, 440px);
@@ -1132,6 +1137,10 @@ footer a:hover {
 
   .contact-form {
     padding: 22px;
+  }
+
+  .custom-plan-button {
+    width: auto;
   }
 
   footer {
