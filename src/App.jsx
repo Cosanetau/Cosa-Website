@@ -326,9 +326,10 @@ function CorePage() {
           </div>
         </div>
 
-  <div className="preview-card">
-  <img src="/cosa-core-preview.png" alt="COSA Core dashboard preview" />
-</div>
+        <div className="preview-card">
+          <img src="/cosa-core-preview.png" alt="COSA Core dashboard preview" />
+        </div>
+      </section>
 
       <AboutSection />
 
