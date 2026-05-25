@@ -326,10 +326,12 @@ function CorePage() {
           </div>
         </div>
 
-        <div className="preview-card">
-          <video src="/cosa-core-preview.mp4" controls playsInline />
-        </div>
-      </section>
+       <div className="preview-card">
+  <img
+    src="/cosa-core-preview.png"
+    alt="COSA Core dashboard preview"
+  />
+</div>
 
       <AboutSection />
 
