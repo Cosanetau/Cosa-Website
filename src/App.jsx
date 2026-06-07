@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ArrowRight,
   BarChart3,
@@ -18,6 +18,66 @@ import {
 import "./index.css";
 
 const CORE_APP_LOGIN_URL = "https://core.cosa.net.au/login";
+const CORE_APP_URL = "https://core.cosa.net.au";
+
+function getSubscribeUrl(planKey, billingCycle) {
+  return `${CORE_APP_URL}/subscribe?plan=${planKey}&billing=${billingCycle}`;
+}
+
+const pageMeta = {
+  "/": {
+    title: "COSA | Workshop software built in Perth",
+    description:
+      "COSA Core helps workshops manage bookings, job cards, customers, invoices and reporting in one practical system.",
+  },
+  "/core": {
+    title: "COSA Core | Workshop operating software",
+    description:
+      "Explore COSA Core — bookings, jobs, digital job cards, invoices, customers and workshop reporting.",
+  },
+  "/pricing": {
+    title: "COSA Core pricing | Workshop software plans",
+    description:
+      "Simple COSA Core pricing based on user limits. Pay monthly or yearly and get one month free on annual plans.",
+  },
+  "/integrations": {
+    title: "COSA Core integrations",
+    description: "COSA Core integrations are in progress with a first release target of 1 July 2026.",
+  },
+  "/contact": {
+    title: "Contact COSA",
+    description: "Contact COSA for workshop software, pricing and custom setup enquiries.",
+  },
+  "/privacy": {
+    title: "COSA privacy policy",
+    description: "How COSA handles workshop software account and enquiry information.",
+  },
+  "/terms": {
+    title: "COSA terms of service",
+    description: "Terms for using COSA Core workshop software and related services.",
+  },
+};
+
+function PageMeta() {
+  const path = window.location.pathname;
+  const meta = pageMeta[path] || pageMeta["/"];
+
+  useEffect(() => {
+    document.title = meta.title;
+
+    let descriptionTag = document.querySelector('meta[name="description"]');
+
+    if (!descriptionTag) {
+      descriptionTag = document.createElement("meta");
+      descriptionTag.setAttribute("name", "description");
+      document.head.appendChild(descriptionTag);
+    }
+
+    descriptionTag.setAttribute("content", meta.description);
+  }, [meta.description, meta.title]);
+
+  return null;
+}
 
 const navLinks = [
   { label: "About Us", href: "/" },
@@ -88,8 +148,8 @@ const coreFeatures = [
   },
   {
     icon: MessageSquareText,
-    title: "SMS reminders",
-    text: "Keep customers informed with reminders that support smoother workshop communication.",
+    title: "Service reminders",
+    text: "Keep follow-ups and service reminders visible in one place. SMS delivery is planned.",
   },
 ];
 
@@ -105,7 +165,7 @@ const featurePills = [
   "Payment terms",
   "Overdue tracking",
   "Reporting",
-  "SMS reminders",
+  "Service reminders",
   "Staff accounts",
   "Two main controllers",
   "Account customer tracking",
@@ -115,12 +175,14 @@ const featurePills = [
 const plans = [
   {
     name: "Starter",
+    planKey: "starter",
     users: "5 users",
     monthlyPrice: 99,
     subject: "COSA Core 5 User Plan",
   },
   {
     name: "Growth",
+    planKey: "growth",
     users: "10 users",
     monthlyPrice: 149,
     subject: "COSA Core 10 User Plan",
@@ -128,9 +190,38 @@ const plans = [
   },
   {
     name: "Scale",
+    planKey: "scale",
     users: "20 users",
     monthlyPrice: 249,
     subject: "COSA Core 20 User Plan",
+  },
+];
+
+const pricingFaq = [
+  {
+    question: "What counts as a user?",
+    answer:
+      "A user is any staff member or technician with their own COSA Core login for your workshop.",
+  },
+  {
+    question: "Can we upgrade later?",
+    answer:
+      "Yes. If your team grows, contact COSA and we can move you to a larger plan.",
+  },
+  {
+    question: "Is each workshop separate?",
+    answer:
+      "Yes. Every business gets its own isolated COSA Core workspace, login and data.",
+  },
+  {
+    question: "What happens after I choose a plan?",
+    answer:
+      "You create your workshop login, pay securely, and COSA Core sets up your account automatically.",
+  },
+  {
+    question: "Monthly or yearly?",
+    answer:
+      "Monthly billing is available on every plan. Pay a year up front and get one month free.",
   },
 ];
 
@@ -209,6 +300,63 @@ function Header() {
   );
 }
 
+function HowItWorksSection() {
+  const steps = [
+    {
+      title: "Choose your plan",
+      text: "Pick the user limit that fits your workshop and start checkout from the pricing page.",
+    },
+    {
+      title: "Create your login",
+      text: "Enter your business details and set the email and password you want to use in COSA Core.",
+    },
+    {
+      title: "Pay and get started",
+      text: "After secure payment, your workshop is created automatically and you can sign straight into COSA Core.",
+    },
+  ];
+
+  return (
+    <section className="section how-it-works-section">
+      <div className="section-heading centered">
+        <p className="section-kicker">How it works</p>
+        <h2>From plan to login in three steps.</h2>
+        <span>Simple setup for workshops that want to get moving quickly.</span>
+      </div>
+
+      <div className="how-it-works-grid">
+        {steps.map((step, index) => (
+          <article key={step.title} className="how-it-works-card">
+            <span className="how-it-works-step">{index + 1}</span>
+            <h3>{step.title}</h3>
+            <p>{step.text}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function FaqSection() {
+  return (
+    <section className="section faq-section">
+      <div className="section-heading centered">
+        <p className="section-kicker">FAQ</p>
+        <h2>Common pricing questions.</h2>
+      </div>
+
+      <div className="faq-grid">
+        {pricingFaq.map((item) => (
+          <article key={item.question} className="faq-card">
+            <h3>{item.question}</h3>
+            <p>{item.answer}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function HomePage() {
   return (
     <>
@@ -267,6 +415,8 @@ function HomePage() {
           </a>
         </div>
       </section>
+
+      <HowItWorksSection />
     </>
   );
 }
@@ -322,6 +472,10 @@ function CorePage() {
             <a className="primary-button" href="/pricing">
               Review Pricing
               <ArrowRight size={18} />
+            </a>
+
+            <a className="secondary-button" href={CORE_APP_LOGIN_URL}>
+              Sign In
             </a>
 
             <a className="secondary-button" href="/contact">
@@ -388,7 +542,8 @@ function PricingPage() {
 
         <p>
           All COSA Core plans include the same software features. You only pick
-          the amount of users your business needs.
+          the amount of users your business needs. Choose a plan, create your
+          login, pay securely, and your workshop is set up automatically.
         </p>
 
         <div className="billing-toggle-wrap">
@@ -453,7 +608,7 @@ function PricingPage() {
                   </p>
                 </div>
 
-                <a href={`mailto:caleb@cosa.net.au?subject=${plan.subject}`}>
+                <a href={getSubscribeUrl(plan.planKey, billingCycle)}>
                   Start {plan.users} plan
                   <ChevronRight size={18} />
                 </a>
@@ -478,6 +633,9 @@ function PricingPage() {
           </a>
         </div>
       </section>
+
+      <HowItWorksSection />
+      <FaqSection />
     </>
   );
 }
@@ -673,6 +831,59 @@ function ContactPage() {
   );
 }
 
+function PrivacyPage() {
+  return (
+    <section className="legal-page">
+      <p className="eyebrow">
+        <Shield size={17} />
+        Privacy
+      </p>
+      <h1>Privacy policy</h1>
+      <p>
+        COSA collects the information you provide when you enquire, subscribe or
+        use COSA Core — such as business name, contact details, account email and
+        workshop data entered into the software.
+      </p>
+      <p>
+        We use this information to provide the service, support your workshop,
+        process billing and respond to enquiries. We do not sell your personal
+        information.
+      </p>
+      <p>
+        For privacy questions, contact{" "}
+        <a href="mailto:caleb@cosa.net.au">caleb@cosa.net.au</a>.
+      </p>
+    </section>
+  );
+}
+
+function TermsPage() {
+  return (
+    <section className="legal-page">
+      <p className="eyebrow">
+        <FileText size={17} />
+        Terms
+      </p>
+      <h1>Terms of service</h1>
+      <p>
+        COSA Core is provided as workshop operating software on a subscription
+        basis. By starting a plan or using the service, you agree to pay the fees
+        for your selected plan and to use the software lawfully for your business.
+      </p>
+      <p>
+        Each workshop account is separate. You are responsible for managing staff
+        access, keeping login details secure and the accuracy of data entered into
+        your workspace.
+      </p>
+      <p>
+        Subscription changes, billing questions or account issues can be raised via{" "}
+        <a href="/contact">Contact Us</a> or{" "}
+        <a href="mailto:caleb@cosa.net.au">caleb@cosa.net.au</a>.
+      </p>
+    </section>
+  );
+}
+
 function Footer() {
   return (
     <footer>
@@ -687,6 +898,9 @@ function Footer() {
         <a href="/pricing">Pricing</a>
         <a href="/integrations">Integrations</a>
         <a href="/contact">Contact Us</a>
+        <a href={CORE_APP_LOGIN_URL}>Sign In</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
         <a href="mailto:caleb@cosa.net.au">caleb@cosa.net.au</a>
       </nav>
     </footer>
@@ -712,12 +926,21 @@ function getPage() {
     return <ContactPage />;
   }
 
+  if (path === "/privacy") {
+    return <PrivacyPage />;
+  }
+
+  if (path === "/terms") {
+    return <TermsPage />;
+  }
+
   return <HomePage />;
 }
 
 export default function App() {
   return (
     <main>
+      <PageMeta />
       <Header />
       {getPage()}
       <Footer />
