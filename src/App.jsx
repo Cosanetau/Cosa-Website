@@ -376,10 +376,6 @@ function PricingPage() {
     return monthlyPrice * 11;
   }
 
-  function getDiscountedMonthlyPrice(monthlyPrice) {
-    return ((monthlyPrice * 11) / 12).toFixed(2);
-  }
-
   return (
     <>
       <section className="pricing-hero">
@@ -425,9 +421,6 @@ function PricingPage() {
         <div className="pricing-grid">
           {plans.map((plan) => {
             const yearlyPrice = getYearlyPrice(plan.monthlyPrice);
-            const discountedMonthlyPrice = getDiscountedMonthlyPrice(
-              plan.monthlyPrice,
-            );
 
             return (
               <article
@@ -443,8 +436,8 @@ function PricingPage() {
                       <strong>${yearlyPrice}/year</strong>
                       <p className="gst-note">All prices include GST.</p>
                       <p className="yearly-note">
-                        Equivalent to ${discountedMonthlyPrice}/month. Pay a year
-                        up front and get 1 month free.
+                        Pay a year up front and get 1 month free. Value of $
+                        {plan.monthlyPrice}.
                       </p>
                     </>
                   ) : (
