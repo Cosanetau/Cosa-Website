@@ -137,6 +137,36 @@ video {
   transform: translateY(-1px);
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-button-secondary {
+  background: white;
+  color: var(--text);
+  border: 1px solid var(--soft);
+}
+
+.header-button-secondary:hover {
+  background: var(--orange-soft);
+  color: var(--orange-dark);
+  border-color: rgba(249, 115, 22, 0.35);
+}
+
+.mobile-cta-secondary {
+  background: white;
+  color: var(--text);
+  border: 1px solid var(--soft);
+}
+
+.mobile-cta-secondary:hover {
+  background: var(--orange-soft);
+  color: var(--orange-dark);
+  border-color: rgba(249, 115, 22, 0.35);
+}
+
 .menu-button {
   display: none;
   width: 46px;
@@ -1011,7 +1041,7 @@ footer a:hover {
 
 @media (max-width: 980px) {
   .desktop-nav,
-  .header-button {
+  .header-actions {
     display: none;
   }
 

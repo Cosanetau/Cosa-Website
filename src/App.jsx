@@ -17,6 +17,8 @@ import {
 } from "lucide-react";
 import "./index.css";
 
+const CORE_APP_LOGIN_URL = "https://core.cosa.net.au/login";
+
 const navLinks = [
   { label: "About Us", href: "/" },
   { label: "COSA Core", href: "/core" },
@@ -157,10 +159,19 @@ function Header() {
         ))}
       </nav>
 
-      <a className="header-button" href={headerCta.href}>
-        {headerCta.label}
-        <ArrowRight size={16} />
-      </a>
+      <div className="header-actions">
+        <a
+          className="header-button header-button-secondary"
+          href={CORE_APP_LOGIN_URL}
+        >
+          Sign In
+        </a>
+
+        <a className="header-button" href={headerCta.href}>
+          {headerCta.label}
+          <ArrowRight size={16} />
+        </a>
+      </div>
 
       <button
         className="menu-button"
@@ -179,6 +190,14 @@ function Header() {
               {link.label}
             </a>
           ))}
+
+          <a
+            className="mobile-cta mobile-cta-secondary"
+            href={CORE_APP_LOGIN_URL}
+            onClick={closeMenu}
+          >
+            Sign In
+          </a>
 
           <a className="mobile-cta" href={headerCta.href} onClick={closeMenu}>
             {headerCta.label}
@@ -354,11 +373,11 @@ function PricingPage() {
   const isYearly = billingCycle === "yearly";
 
   function getYearlyPrice(monthlyPrice) {
-    return Math.round(monthlyPrice * 12 * 0.95);
+    return monthlyPrice * 11;
   }
 
   function getDiscountedMonthlyPrice(monthlyPrice) {
-    return (monthlyPrice * 0.95).toFixed(2);
+    return ((monthlyPrice * 11) / 12).toFixed(2);
   }
 
   return (
@@ -396,8 +415,8 @@ function PricingPage() {
           </div>
 
           <p>
-            <strong>5%</strong>
-            <span>off when paying yearly</span>
+            <strong>1 month</strong>
+            <span>free when you pay a year up front</span>
           </p>
         </div>
       </section>
@@ -424,8 +443,8 @@ function PricingPage() {
                       <strong>${yearlyPrice}/year</strong>
                       <p className="gst-note">All prices include GST.</p>
                       <p className="yearly-note">
-                        Equivalent to ${discountedMonthlyPrice}/month. Paid
-                        yearly to receive the discount.
+                        Equivalent to ${discountedMonthlyPrice}/month. Pay a year
+                        up front and get 1 month free.
                       </p>
                     </>
                   ) : (
