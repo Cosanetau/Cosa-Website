@@ -15,7 +15,7 @@ import {
   Wrench,
   X,
 } from "lucide-react";
-import { getAllIntegrations, getIntegrationStats } from "./data/integrationsCatalog";
+import { getIntegrationStats, integrationCategories } from "./data/integrationsCatalog";
 import "./index.css";
 
 const CORE_APP_LOGIN_URL = "https://core.cosa.net.au/login";
@@ -44,7 +44,7 @@ const pageMeta = {
   "/integrations": {
     title: "COSA Core integrations | Accounting, parts, and marketing",
     description:
-      "Connect COSA Core with Xero today. MYOB, QuickBooks, parts suppliers, marketing tools, and the COSA mobile app are coming soon.",
+      "Connect COSA Core with Xero today. MYOB, QuickBooks, parts suppliers, marketing tools, and the COSA mobile app are currently being worked on.",
   },
   "/contact": {
     title: "Contact COSA",
@@ -698,7 +698,6 @@ function IntegrationCard({ app }) {
 
 function IntegrationsPage() {
   const stats = getIntegrationStats();
-  const allApps = getAllIntegrations();
 
   return (
     <>
@@ -712,7 +711,7 @@ function IntegrationsPage() {
 
         <p>
           Connect COSA Core with accounting, parts, marketing, and mobile tools.
-          Xero is available now — everything else is on the roadmap.
+          Xero is available now — more integrations are currently being worked on.
         </p>
       </section>
 
@@ -728,13 +727,26 @@ function IntegrationsPage() {
           </div>
           <p className="integrations-hub-summary-copy">
             Xero is live today. MYOB, QuickBooks, parts suppliers, marketing
-            platforms, and the COSA mobile app are planned next.
+            platforms, and the COSA mobile app are currently being worked on.
           </p>
         </div>
 
-        <div className="integrations-app-grid">
-          {allApps.map((app) => (
-            <IntegrationCard key={app.id} app={app} />
+        <div className="integrations-hub-stack">
+          {integrationCategories.map((category) => (
+            <div className="integrations-category" key={category.id}>
+              <header className="integrations-category-head">
+                <div>
+                  <h2>{category.title}</h2>
+                  <p>{category.description}</p>
+                </div>
+              </header>
+
+              <div className="integrations-app-grid">
+                {category.apps.map((app) => (
+                  <IntegrationCard key={app.id} app={app} />
+                ))}
+              </div>
+            </div>
           ))}
         </div>
 

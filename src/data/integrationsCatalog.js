@@ -122,6 +122,3 @@ export function getIntegrationStats() {
   };
 }
 
-export function getAllIntegrations() {
-  return integrationCategories.flatMap((category) => category.apps);
-}
