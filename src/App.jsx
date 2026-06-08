@@ -93,7 +93,7 @@ const aboutCards = [
   {
     icon: Wrench,
     title: "Built around real workshops",
-    text: "COSA Core is designed for the daily flow of bookings, jobs, customers, invoices and account customers.",
+    text: "COSA Core is designed for the daily flow of bookings, jobs, customers, and invoices.",
   },
   {
     icon: Users,
@@ -139,19 +139,14 @@ const coreFeatures = [
     text: "Create quotes and invoices with a workflow built around real workshop needs.",
   },
   {
-    icon: Shield,
-    title: "30-day account customers",
-    text: "Manage account customers, payment terms and overdue tracking with better visibility.",
-  },
-  {
     icon: BarChart3,
     title: "Reporting",
-    text: "See useful workshop information across jobs, invoices, reminders and account customers.",
+    text: "See useful workshop information across jobs, invoices, and reminders.",
   },
   {
     icon: MessageSquareText,
     title: "Service reminders",
-    text: "Keep follow-ups and service reminders visible in one place. SMS delivery is planned.",
+    text: "Keep follow-ups and service reminders visible in one place.",
   },
 ];
 
@@ -163,14 +158,10 @@ const featurePills = [
   "Customer details",
   "Customer and vehicle history",
   "Quotes and invoices",
-  "30-day account customers",
-  "Payment terms",
-  "Overdue tracking",
   "Reporting",
   "Service reminders",
   "Staff accounts",
   "Two main controllers",
-  "Account customer tracking",
   "Workshop reporting tools",
 ];
 
@@ -201,14 +192,14 @@ const plans = [
 
 const pricingFaq = [
   {
-    question: "What counts as a user?",
+    question: "What counts as a paid user?",
     answer:
-      "A user is any staff member or technician with their own COSA Core login for your workshop.",
+      "Admin and staff accounts with their own COSA Core login count toward your plan limit. Technician accounts are unlimited and do not count as paid users.",
   },
   {
     question: "Can we upgrade later?",
     answer:
-      "Yes. If your team grows, contact COSA and we can move you to a larger plan.",
+      "Yes. Main controllers can upgrade from Staff settings or Manage billing in Settings. Stripe updates your plan automatically and prorates the change for the rest of your billing period.",
   },
   {
     question: "Is each workshop separate?",
@@ -225,13 +216,18 @@ const pricingFaq = [
     answer:
       "Monthly billing is available on every plan. Pay a year up front and get one month free.",
   },
+  {
+    question: "Do all plans include the same features?",
+    answer:
+      "Yes. Every COSA Core plan includes the same software. You only choose how many admin and staff users your workshop needs.",
+  },
 ];
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const isCorePage = window.location.pathname === "/core";
   const headerCta = isCorePage
-    ? { label: "Contact Us", href: "/contact" }
+    ? { label: "Pricing", href: "/pricing" }
     : { label: "COSA Core", href: "/core" };
 
   function closeMenu() {
@@ -373,8 +369,8 @@ function HomePage() {
 
           <p className="hero-text">
             COSA Core helps workshops manage bookings, jobs, customers,
-            invoices, account customers, reporting and reminders in one clean
-            system that staff can actually use.
+            invoices, reporting and reminders in one clean system that staff can
+            actually use.
           </p>
 
           <div className="hero-actions">
@@ -467,7 +463,7 @@ function CorePage() {
 
           <p>
             COSA Core gives workshops a clean way to manage daily operations,
-            customer history, account customers, reminders and reporting.
+            customer history, reminders and reporting.
           </p>
 
           <div className="hero-actions">
@@ -751,8 +747,8 @@ function IntegrationsPage() {
         </div>
 
         <div className="section-cta">
-          <a className="primary-button" href={`${CORE_APP_URL}/integrations/xero`}>
-            Set up Xero in COSA Core
+          <a className="primary-button" href="/contact">
+            Need a specific integration? Contact us today
             <ArrowRight size={18} />
           </a>
         </div>
