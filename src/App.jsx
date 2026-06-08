@@ -15,6 +15,11 @@ import {
   Wrench,
   X,
 } from "lucide-react";
+import {
+  getAvailableIntegrations,
+  getComingSoonCategories,
+  getIntegrationStats,
+} from "./data/integrationsCatalog";
 import "./index.css";
 
 const CORE_APP_LOGIN_URL = "https://core.cosa.net.au/login";
@@ -41,8 +46,9 @@ const pageMeta = {
       "Simple COSA Core pricing based on user limits. Pay monthly or yearly and get one month free on annual plans.",
   },
   "/integrations": {
-    title: "COSA Core integrations",
-    description: "COSA Core integrations are in progress with a first release target of 1 July 2026.",
+    title: "COSA Core integrations | Accounting, parts, and marketing",
+    description:
+      "Connect COSA Core with Xero today. MYOB, QuickBooks, parts suppliers, marketing tools, and the COSA mobile app are coming soon.",
   },
   "/contact": {
     title: "Contact COSA",
@@ -640,35 +646,190 @@ function PricingPage() {
   );
 }
 
-function IntegrationsPage() {
+function IntegrationLogo({ app }) {
+  const [failed, setFailed] = useState(false);
+
+  if (failed) {
+    return <span className="integration-logo-fallback">{app.name.slice(0, 2)}</span>;
+  }
+
   return (
-    <section className="integrations-page">
-      <div className="integrations-panel">
-        <p className="eyebrow">
-          <PlugZap size={17} />
-          Integrations
-        </p>
+    <img
+      src={app.logoSrc}
+      alt=""
+      className="integration-app-card-logo-image"
+      onError={() => setFailed(true)}
+    />
+  );
+}
 
-        <h1>Integrations are in progress.</h1>
+function IntegrationCard({ app, statusLabel = "", categoryLabel = "" }) {
+  const statusClass =
+    statusLabel === "Connected"
+      ? "is-connected"
+      : statusLabel === "Available"
+        ? "is-available"
+        : "";
 
-        <p>
-          COSA Core integrations are currently being planned and built. The
-          first integration release target is 1 July 2026.
-        </p>
-
-        <div className="integration-center">
-          <div className="integration-status">
-            <span>Work in progress</span>
-            <strong>Target: 1 July 2026</strong>
+  if (!app.available) {
+    return (
+      <div className="integration-app-card is-disabled" aria-disabled="true">
+        <div className="integration-app-card-logo" aria-hidden="true">
+          <IntegrationLogo app={app} />
+        </div>
+        <div className="integration-app-card-main">
+          <div className="integration-app-card-copy">
+            {categoryLabel ? (
+              <span className="integration-app-card-category">{categoryLabel}</span>
+            ) : null}
+            <strong>{app.name}</strong>
+            <span>{app.summary}</span>
           </div>
+          <span className="integration-app-card-badge is-soon">Coming soon</span>
+        </div>
+      </div>
+    );
+  }
 
-          <a className="primary-button" href="/contact">
-            Ask about integrations
+  return (
+    <a
+      className={`integration-app-card ${statusClass}`}
+      href={`${CORE_APP_URL}/integrations/xero`}
+    >
+      <div className="integration-app-card-logo" aria-hidden="true">
+        <IntegrationLogo app={app} />
+      </div>
+      <div className="integration-app-card-main">
+        <div className="integration-app-card-copy">
+          {categoryLabel ? (
+            <span className="integration-app-card-category">{categoryLabel}</span>
+          ) : null}
+          <strong>{app.name}</strong>
+          <span>{app.summary}</span>
+        </div>
+        {statusLabel ? (
+          <span className={`integration-app-card-badge ${statusClass}`}>{statusLabel}</span>
+        ) : (
+          <span className="integration-app-card-chevron" aria-hidden="true">
+            →
+          </span>
+        )}
+      </div>
+    </a>
+  );
+}
+
+function IntegrationsPage() {
+  const stats = getIntegrationStats();
+  const availableApps = getAvailableIntegrations();
+  const comingSoonCategories = getComingSoonCategories();
+
+  return (
+    <>
+      <section className="page-intro integrations-intro">
+        <div>
+          <p className="eyebrow">
+            <PlugZap size={17} />
+            Integrations
+          </p>
+
+          <h1>Connect COSA Core with the tools your workshop already uses.</h1>
+
+          <p>
+            Accounting, parts catalogs, marketing platforms, and mobile apps — all
+            from one workshop system. Xero is available now; more integrations are
+            on the roadmap.
+          </p>
+
+          <div className="hero-actions">
+            <a className="primary-button" href={`${CORE_APP_URL}/integrations/xero`}>
+              Set up Xero
+              <ArrowRight size={18} />
+            </a>
+
+            <a className="secondary-button" href="/contact">
+              Ask about integrations
+            </a>
+          </div>
+        </div>
+
+        <div className="preview-card integrations-preview-card">
+          <div className="integrations-hub-summary">
+            <div className="integrations-hub-summary-stat is-live">
+              <strong>{stats.availableCount}</strong>
+              <span>Available now</span>
+            </div>
+            <div className="integrations-hub-summary-stat is-soon">
+              <strong>{stats.comingSoonCount}</strong>
+              <span>Coming soon</span>
+            </div>
+            <p className="integrations-hub-summary-copy">
+              Xero is live today. MYOB, QuickBooks, parts suppliers, marketing
+              platforms, and the COSA mobile app are planned next.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="section integrations-catalog">
+        {availableApps.length > 0 ? (
+          <div className="integrations-category">
+            <header className="integrations-category-head">
+              <div>
+                <h2>Available now</h2>
+                <p>These integrations are ready to connect and configure in COSA Core.</p>
+              </div>
+            </header>
+
+            <div className="integrations-app-grid">
+              {availableApps.map((app) => (
+                <IntegrationCard
+                  key={app.id}
+                  app={app}
+                  statusLabel="Available"
+                  categoryLabel={app.categoryTitle}
+                />
+              ))}
+            </div>
+          </div>
+        ) : null}
+
+        <div className="integrations-category integrations-category-roadmap">
+          <header className="integrations-category-head">
+            <div>
+              <h2>Coming soon</h2>
+              <p>These integrations are planned and will appear here as they launch.</p>
+            </div>
+          </header>
+        </div>
+
+        <div className="integrations-hub-stack">
+          {comingSoonCategories.map((category) => (
+            <div className="integrations-category" key={category.id}>
+              <header className="integrations-category-head">
+                <div>
+                  <h2>{category.title}</h2>
+                  <p>{category.description}</p>
+                </div>
+              </header>
+
+              <div className="integrations-app-grid">
+                {category.apps.map((app) => (
+                  <IntegrationCard key={app.id} app={app} />
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="section-cta">
+          <a className="primary-button" href={CORE_APP_LOGIN_URL}>
+            Sign in to COSA Core
             <ArrowRight size={18} />
           </a>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
 
