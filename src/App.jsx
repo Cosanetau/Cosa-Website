@@ -9,6 +9,7 @@ import {
   Mail,
   Menu,
   MessageSquareText,
+  Package,
   PlugZap,
   Shield,
   Users,
@@ -139,6 +140,11 @@ const coreFeatures = [
     text: "Create quotes and invoices with a workflow built around real workshop needs.",
   },
   {
+    icon: Package,
+    title: "Parts and inventory",
+    text: "Track parts, suppliers, stock levels and waiting parts without leaving your job workflow.",
+  },
+  {
     icon: BarChart3,
     title: "Reporting",
     text: "See useful workshop information across jobs, invoices, and reminders.",
@@ -158,6 +164,7 @@ const featurePills = [
   "Customer details",
   "Customer and vehicle history",
   "Quotes and invoices",
+  "Parts and inventory",
   "Reporting",
   "Service reminders",
   "Staff accounts",
