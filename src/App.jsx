@@ -169,7 +169,6 @@ const featurePills = [
   "Service reminders",
   "Staff accounts",
   "Two main controllers",
-  "Workshop reporting tools",
 ];
 
 const plans = [
