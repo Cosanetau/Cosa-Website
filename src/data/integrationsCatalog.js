@@ -122,22 +122,6 @@ export function getIntegrationStats() {
   };
 }
 
-export function getAvailableIntegrations() {
-  return integrationCategories.flatMap((category) =>
-    category.apps
-      .filter((app) => app.available)
-      .map((app) => ({
-        ...app,
-        categoryTitle: category.title,
-      })),
-  );
-}
-
-export function getComingSoonCategories() {
-  return integrationCategories
-    .map((category) => ({
-      ...category,
-      apps: category.apps.filter((app) => !app.available),
-    }))
-    .filter((category) => category.apps.length > 0);
+export function getAllIntegrations() {
+  return integrationCategories.flatMap((category) => category.apps);
 }

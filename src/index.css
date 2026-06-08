@@ -796,8 +796,12 @@ p {
   margin-top: 2px;
 }
 
-.integrations-preview-card {
-  align-self: stretch;
+.integrations-hero {
+  padding-bottom: clamp(24px, 4vw, 40px);
+}
+
+.integrations-catalog .integrations-hub-summary {
+  margin-bottom: 28px;
 }
 
 .integrations-hub-summary {
@@ -853,35 +857,6 @@ p {
 
 .integrations-catalog {
   padding-top: 0;
-}
-
-.integrations-hub-stack {
-  display: grid;
-  gap: 32px;
-  width: 100%;
-}
-
-.integrations-category {
-  width: 100%;
-}
-
-.integrations-category-roadmap {
-  margin-bottom: 8px;
-}
-
-.integrations-category-head h2 {
-  margin: 0 0 6px;
-  font-size: clamp(28px, 4vw, 38px);
-  line-height: 1.05;
-  letter-spacing: -0.04em;
-}
-
-.integrations-category-head p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 16px;
-  line-height: 1.55;
-  font-weight: 620;
 }
 
 .integrations-app-grid {
@@ -978,14 +953,6 @@ p {
   width: 100%;
 }
 
-.integration-app-card-category {
-  color: var(--muted);
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
 .integration-app-card-copy strong {
   font-size: 1.28rem;
   font-weight: 900;
@@ -1021,14 +988,6 @@ p {
 .integration-app-card-badge.is-soon {
   background: var(--orange-soft);
   color: var(--orange-dark);
-}
-
-.integration-app-card-chevron {
-  flex-shrink: 0;
-  align-self: center;
-  color: rgba(21, 21, 21, 0.34);
-  font-size: 1.5rem;
-  font-weight: 900;
 }
 
 .contact-page {
