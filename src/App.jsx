@@ -240,6 +240,14 @@ function Header() {
     setMenuOpen(false);
   }
 
+  useEffect(() => {
+    document.body.classList.toggle("mobile-menu-open", menuOpen);
+
+    return () => {
+      document.body.classList.remove("mobile-menu-open");
+    };
+  }, [menuOpen]);
+
   return (
     <header className="site-header">
       <a className="brand" href="/" aria-label="COSA home">
@@ -278,7 +286,7 @@ function Header() {
         {menuOpen ? <X size={23} /> : <Menu size={23} />}
       </button>
 
-      {menuOpen && (
+      {menuOpen ? (
         <nav className="mobile-nav" aria-label="Mobile navigation">
           {navLinks.map((link) => (
             <a key={link.href} href={link.href} onClick={closeMenu}>
@@ -299,7 +307,7 @@ function Header() {
             <ArrowRight size={16} />
           </a>
         </nav>
-      )}
+      ) : null}
     </header>
   );
 }
