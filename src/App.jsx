@@ -249,42 +249,44 @@ function Header() {
   }, [menuOpen]);
 
   return (
-    <header className="site-header">
-      <a className="brand" href="/" aria-label="COSA home">
-        <img src="/cosawordlogo.png" alt="COSA logo" />
-      </a>
+    <>
+      <header className="site-header">
+        <a className="brand" href="/" aria-label="COSA home">
+          <img src="/cosawordlogo.png" alt="COSA logo" />
+        </a>
 
-      <nav className="desktop-nav" aria-label="Main navigation">
-        {navLinks.map((link) => (
-          <a key={link.href} href={link.href}>
-            {link.label}
+        <nav className="desktop-nav" aria-label="Main navigation">
+          {navLinks.map((link) => (
+            <a key={link.href} href={link.href}>
+              {link.label}
+            </a>
+          ))}
+        </nav>
+
+        <div className="header-actions">
+          <a
+            className="header-button header-button-secondary"
+            href={CORE_APP_LOGIN_URL}
+          >
+            Sign In
           </a>
-        ))}
-      </nav>
 
-      <div className="header-actions">
-        <a
-          className="header-button header-button-secondary"
-          href={CORE_APP_LOGIN_URL}
+          <a className="header-button" href={headerCta.href}>
+            {headerCta.label}
+            <ArrowRight size={16} />
+          </a>
+        </div>
+
+        <button
+          className={`menu-button ${menuOpen ? "is-open" : ""}`}
+          type="button"
+          onClick={() => setMenuOpen((current) => !current)}
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={menuOpen}
         >
-          Sign In
-        </a>
-
-        <a className="header-button" href={headerCta.href}>
-          {headerCta.label}
-          <ArrowRight size={16} />
-        </a>
-      </div>
-
-      <button
-        className="menu-button"
-        type="button"
-        onClick={() => setMenuOpen((current) => !current)}
-        aria-label="Toggle menu"
-        aria-expanded={menuOpen}
-      >
-        {menuOpen ? <X size={23} /> : <Menu size={23} />}
-      </button>
+          {menuOpen ? <X size={23} /> : <Menu size={23} />}
+        </button>
+      </header>
 
       {menuOpen ? (
         <nav className="mobile-nav" aria-label="Mobile navigation">
@@ -308,7 +310,7 @@ function Header() {
           </a>
         </nav>
       ) : null}
-    </header>
+    </>
   );
 }
 
@@ -401,7 +403,12 @@ function HomePage() {
 
         <div className="hero-media vertical-media-wrap">
           <div className="vertical-video-card">
-            <video src="/about-video.mp4" controls playsInline />
+            <video
+              src="/about-video.mp4"
+              controls
+              playsInline
+              poster="/about-video-cover.png"
+            />
           </div>
         </div>
       </section>

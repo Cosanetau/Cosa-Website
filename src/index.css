@@ -169,19 +169,24 @@ video {
 
 .menu-button {
   display: none;
+  position: relative;
+  z-index: 120;
   width: 46px;
   height: 46px;
   border: 1px solid var(--soft);
   border-radius: 999px;
   background: white;
   color: var(--text);
+  cursor: pointer;
+}
+
+.menu-button.is-open {
+  background: var(--black);
+  color: white;
+  border-color: var(--black);
 }
 
 .mobile-nav {
-  position: absolute;
-  top: calc(100% + 10px);
-  left: 16px;
-  right: 16px;
   display: none;
   padding: 14px;
   border: 1px solid var(--soft);
@@ -335,6 +340,7 @@ p {
   width: 100%;
   aspect-ratio: 9 / 16;
   object-fit: cover;
+  background: #101010;
 }
 
 .video-shell,
@@ -1217,6 +1223,14 @@ footer a:hover {
 }
 
 @media (max-width: 980px) {
+  body.mobile-menu-open .site-header {
+    z-index: 120;
+  }
+
+  body.mobile-menu-open .menu-button {
+    z-index: 121;
+  }
+
   .desktop-nav,
   .header-actions {
     display: none;
@@ -1231,7 +1245,7 @@ footer a:hover {
   .mobile-nav {
     position: fixed;
     inset: 0;
-    z-index: 45;
+    z-index: 110;
     display: grid;
     align-content: start;
     gap: 4px;
