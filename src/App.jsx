@@ -505,7 +505,12 @@ function CorePage() {
 
         <div className="core-video-wrap">
           <div className="vertical-video-card">
-            <video src="/cosa-core-preview.mp4" controls playsInline />
+            <video
+              src="/cosa-core-preview.mp4"
+              controls
+              playsInline
+              poster="/cosa-core-video-cover.png"
+            />
           </div>
         </div>
       </section>
