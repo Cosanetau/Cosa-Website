@@ -37,10 +37,9 @@ export const integrationCategories = [
       {
         id: "podium",
         name: "Podium",
-        available: true,
-        coreRoute: "/integrations/podium",
+        available: false,
         logoSrc: "/integrations/podium.svg",
-        summary: "Two-way SMS and marketing from job management.",
+        summary: "Service reminder SMS from follow ups.",
       },
       {
         id: "gohighlevel",
