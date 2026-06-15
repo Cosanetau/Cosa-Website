@@ -76,9 +76,9 @@ video {
 
 .brand img {
   display: block;
-  width: 104px;
-  height: auto;
-  max-height: 28px;
+  height: 20px;
+  width: auto;
+  max-width: 88px;
   object-fit: contain;
 }
 
@@ -1166,7 +1166,9 @@ footer {
 }
 
 footer img {
-  width: 108px;
+  height: 22px;
+  width: auto;
+  max-width: 96px;
   margin-bottom: 12px;
 }
 
@@ -1300,8 +1302,8 @@ footer a:hover {
   }
 
   .brand img {
-    width: 92px;
-    max-height: 24px;
+    height: 18px;
+    max-width: 76px;
   }
 
   .hero,
