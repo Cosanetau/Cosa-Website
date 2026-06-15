@@ -77,6 +77,8 @@ video {
 .brand img {
   display: block;
   width: 138px;
+  height: auto;
+  object-fit: contain;
 }
 
 .desktop-nav {
