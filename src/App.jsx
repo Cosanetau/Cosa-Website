@@ -252,7 +252,7 @@ function Header() {
     <>
       <header className="site-header">
         <a className="brand" href="/" aria-label="COSA home">
-          <img src="/cosa-logo.png" alt="COSA logo" />
+          <img src="/cosa-wordmark.png" alt="COSA" />
         </a>
 
         <nav className="desktop-nav" aria-label="Main navigation">
@@ -981,7 +981,7 @@ function Footer() {
   return (
     <footer>
       <div>
-        <img src="/cosa-logo.png" alt="COSA logo" />
+        <img src="/cosa-wordmark.png" alt="COSA" />
         <p>© 2026 COSA. Proudly Perth Built & Operated.</p>
       </div>
 
