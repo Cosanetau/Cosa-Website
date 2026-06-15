@@ -16,7 +16,7 @@ import {
   Wrench,
   X,
 } from "lucide-react";
-import { getIntegrationStats, integrationCategories } from "./data/integrationsCatalog";
+import { integrationCategories } from "./data/integrationsCatalog";
 import "./index.css";
 
 const CORE_APP_LOGIN_URL = "https://core.cosa.net.au/login";
@@ -252,7 +252,7 @@ function Header() {
     <>
       <header className="site-header">
         <a className="brand" href="/" aria-label="COSA home">
-          <img src="/cosawordlogo.png" alt="COSA logo" />
+          <img src="/cosa-logo.png" alt="COSA logo" />
         </a>
 
         <nav className="desktop-nav" aria-label="Main navigation">
@@ -719,8 +719,6 @@ function IntegrationCard({ app }) {
 }
 
 function IntegrationsPage() {
-  const stats = getIntegrationStats();
-
   return (
     <>
       <section className="pricing-hero integrations-hero">
@@ -733,26 +731,10 @@ function IntegrationsPage() {
 
         <p>
           Connect COSA Core with accounting, parts, marketing, and mobile tools.
-          Xero and QuickBooks are available now — more integrations are on the way.
         </p>
       </section>
 
       <section className="section integrations-catalog">
-        <div className="integrations-hub-summary">
-          <div className="integrations-hub-summary-stat is-live">
-            <strong>{stats.availableCount}</strong>
-            <span>Available now</span>
-          </div>
-          <div className="integrations-hub-summary-stat is-soon">
-            <strong>{stats.comingSoonCount}</strong>
-            <span>Coming soon</span>
-          </div>
-          <p className="integrations-hub-summary-copy">
-            Xero and QuickBooks are live today. MYOB, parts suppliers, marketing
-            platforms, and the COSA mobile app are planned next.
-          </p>
-        </div>
-
         <div className="integrations-hub-stack">
           {integrationCategories.map((category) => (
             <div className="integrations-category" key={category.id}>
@@ -999,7 +981,7 @@ function Footer() {
   return (
     <footer>
       <div>
-        <img src="/cosawordlogo.png" alt="COSA logo" />
+        <img src="/cosa-logo.png" alt="COSA logo" />
         <p>© 2026 COSA. Proudly Perth Built & Operated.</p>
       </div>
 
