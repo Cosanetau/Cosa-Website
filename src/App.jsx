@@ -45,7 +45,7 @@ const pageMeta = {
   "/integrations": {
     title: "COSA Core integrations | Accounting, parts, and marketing",
     description:
-      "Connect COSA Core with Xero and QuickBooks today. MYOB, parts suppliers, marketing tools, and the COSA mobile app are on the way.",
+      "Connect COSA Core with Xero, QuickBooks, and Podium today. Parts suppliers, GoHighLevel, and the COSA mobile app are on the way.",
   },
   "/contact": {
     title: "Contact COSA",

@@ -30,6 +30,28 @@ export const integrationCategories = [
     ],
   },
   {
+    id: "marketing",
+    title: "Marketing",
+    description: "Reach customers with SMS, reviews, and campaigns from your workshop system.",
+    apps: [
+      {
+        id: "podium",
+        name: "Podium",
+        available: true,
+        coreRoute: "/integrations/podium",
+        logoSrc: "/integrations/podium.svg",
+        summary: "Two-way SMS and marketing from job management.",
+      },
+      {
+        id: "gohighlevel",
+        name: "GoHighLevel",
+        available: false,
+        logoSrc: "/integrations/gohighlevel.png",
+        summary: "Sync customers and trigger SMS and email workflows from job events.",
+      },
+    ],
+  },
+  {
     id: "automotive",
     title: "Automotive",
     description: "Connect parts catalogs, technical data, and customer explanation tools.",
@@ -75,27 +97,6 @@ export const integrationCategories = [
         available: false,
         logoSrc: "/integrations/vehicle-visuals.svg",
         summary: "Service and repair explanation videos for customers.",
-      },
-    ],
-  },
-  {
-    id: "marketing",
-    title: "Marketing",
-    description: "Reach customers with SMS, reviews, and campaigns from your workshop system.",
-    apps: [
-      {
-        id: "podium",
-        name: "Podium",
-        available: false,
-        logoSrc: "/integrations/podium.svg",
-        summary: "Two-way SMS and marketing from job management.",
-      },
-      {
-        id: "gohighlevel",
-        name: "GoHighLevel",
-        available: false,
-        logoSrc: "/integrations/gohighlevel.png",
-        summary: "Sync customers and trigger SMS and email workflows from job events.",
       },
     ],
   },
