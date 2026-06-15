@@ -45,7 +45,7 @@ const pageMeta = {
   "/integrations": {
     title: "COSA Core integrations | Accounting, parts, and marketing",
     description:
-      "Connect COSA Core with Xero today. MYOB, QuickBooks, parts suppliers, marketing tools, and the COSA mobile app are currently being worked on.",
+      "Connect COSA Core with Xero and QuickBooks today. MYOB, parts suppliers, marketing tools, and the COSA mobile app are on the way.",
   },
   "/contact": {
     title: "Contact COSA",
@@ -702,7 +702,7 @@ function IntegrationCard({ app }) {
   return (
     <a
       className="integration-app-card is-available"
-      href={`${CORE_APP_URL}/integrations/xero`}
+      href={`${CORE_APP_URL}${app.coreRoute || `/integrations/${app.id}`}`}
     >
       <div className="integration-app-card-logo" aria-hidden="true">
         <IntegrationLogo app={app} />
@@ -733,7 +733,7 @@ function IntegrationsPage() {
 
         <p>
           Connect COSA Core with accounting, parts, marketing, and mobile tools.
-          Xero is available now — more integrations are currently being worked on.
+          Xero and QuickBooks are available now — more integrations are on the way.
         </p>
       </section>
 
@@ -748,8 +748,8 @@ function IntegrationsPage() {
             <span>Coming soon</span>
           </div>
           <p className="integrations-hub-summary-copy">
-            Xero is live today. MYOB, QuickBooks, parts suppliers, marketing
-            platforms, and the COSA mobile app are currently being worked on.
+            Xero and QuickBooks are live today. MYOB, parts suppliers, marketing
+            platforms, and the COSA mobile app are planned next.
           </p>
         </div>
 

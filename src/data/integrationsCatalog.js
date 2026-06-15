@@ -8,6 +8,7 @@ export const integrationCategories = [
         id: "xero",
         name: "Xero",
         available: true,
+        coreRoute: "/integrations/xero",
         logoSrc: "/integrations/xero.svg",
         summary: "Quotes, invoices, contacts, and payment sync.",
       },
@@ -21,7 +22,8 @@ export const integrationCategories = [
       {
         id: "quickbooks",
         name: "QuickBooks",
-        available: false,
+        available: true,
+        coreRoute: "/integrations/quickbooks",
         logoSrc: "/integrations/quickbooks.svg",
         summary: "Quotes, invoices, and payment sync.",
       },
@@ -45,6 +47,13 @@ export const integrationCategories = [
         available: false,
         logoSrc: "/integrations/repco-navigator.svg",
         summary: "Online parts catalog and trade ordering.",
+      },
+      {
+        id: "napa",
+        name: "NAPA",
+        available: false,
+        logoSrc: "/integrations/napa.svg",
+        summary: "Parts catalog lookup and trade ordering.",
       },
       {
         id: "workshopdata",
