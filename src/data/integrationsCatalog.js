@@ -45,8 +45,7 @@ export const integrationCategories = [
       {
         id: "gohighlevel",
         name: "GoHighLevel",
-        available: true,
-        coreRoute: "/integrations/gohighlevel",
+        available: false,
         logoSrc: "/integrations/gohighlevel.png",
         summary: "Sync customers and trigger SMS and email workflows from job events.",
       },
