@@ -37,7 +37,8 @@ export const integrationCategories = [
       {
         id: "podium",
         name: "Podium",
-        available: false,
+        available: true,
+        coreRoute: "/integrations/podium",
         logoSrc: "/integrations/podium.svg",
         summary: "Service reminder SMS from follow ups.",
       },
