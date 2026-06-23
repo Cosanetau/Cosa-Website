@@ -1655,12 +1655,26 @@ footer a:hover {
   letter-spacing: -0.055em;
 }
 
+.legal-page h2 {
+  margin: 28px 0 10px;
+  color: var(--text);
+  font-size: 1.15rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
 .legal-page p {
   margin: 0 0 16px;
   color: var(--muted);
   font-size: 17px;
   font-weight: 700;
   line-height: 1.65;
+}
+
+.legal-page p.legal-updated {
+  margin-top: 28px;
+  font-size: 15px;
+  font-weight: 650;
 }
 
 .legal-page a {

@@ -933,19 +933,76 @@ function PrivacyPage() {
       </p>
       <h1>Privacy policy</h1>
       <p>
-        COSA collects the information you provide when you enquire, subscribe or
-        use COSA Core — such as business name, contact details, account email and
-        workshop data entered into the software.
+        This policy explains how COSA (&quot;we&quot;, &quot;us&quot;) handles personal
+        information when you visit cosa.net.au, enquire about our services, subscribe
+        to COSA Core, or use the workshop software at core.cosa.net.au.
+      </p>
+
+      <h2>What we collect</h2>
+      <p>
+        We collect information you give us directly — such as your name, business name,
+        email, phone number, billing details, and messages sent through our contact
+        form or support channels.
       </p>
       <p>
-        We use this information to provide the service, support your workshop,
-        process billing and respond to enquiries. We do not sell your personal
-        information.
+        When you use COSA Core, we also store workshop data you enter into your account,
+        including customer and vehicle details, bookings, job cards, invoices, parts,
+        staff accounts, uploaded photos or files, and support tickets.
       </p>
+      <p>
+        We collect basic technical information such as browser type, device information,
+        and usage needed to run and secure the service.
+      </p>
+
+      <h2>How we use it</h2>
+      <p>
+        We use this information to provide and improve COSA Core, process subscriptions
+        and payments, send service-related emails, respond to enquiries, provide support,
+        and keep accounts secure.
+      </p>
+      <p>We do not sell your personal information.</p>
+
+      <h2>Who we share it with</h2>
+      <p>
+        We use trusted service providers to run COSA Core, including hosting, database,
+        authentication, email, and payment providers. Where a workshop connects an
+        integration such as Xero, QuickBooks, Podium, or Go High Level, relevant data may
+        be shared with that provider according to the workshop&apos;s settings.
+      </p>
+      <p>
+        We may also disclose information where required by law or to protect the rights,
+        safety, and security of COSA, our customers, and others.
+      </p>
+
+      <h2>Storage and security</h2>
+      <p>
+        Data is stored using reputable cloud infrastructure. We take reasonable steps to
+        protect information from misuse, loss, and unauthorised access, but no online
+        service can guarantee absolute security.
+      </p>
+
+      <h2>How long we keep it</h2>
+      <p>
+        We keep information for as long as your account is active or as needed to provide
+        the service, meet legal obligations, resolve disputes, and enforce our agreements.
+        Workshops can contact us about account closure or data requests.
+      </p>
+
+      <h2>Your choices</h2>
+      <p>
+        You may request access to, correction of, or deletion of personal information we
+        hold about you, subject to applicable law and our need to retain certain records.
+        Workshops are responsible for the customer data they enter into COSA Core.
+      </p>
+
+      <h2>Contact</h2>
       <p>
         For privacy questions, contact{" "}
+        <a href="mailto:support@cosa.net.au">support@cosa.net.au</a> or{" "}
         <a href="mailto:caleb@cosa.net.au">caleb@cosa.net.au</a>.
       </p>
+
+      <p className="legal-updated">Last updated: 21 June 2026</p>
     </section>
   );
 }
@@ -959,20 +1016,92 @@ function TermsPage() {
       </p>
       <h1>Terms of service</h1>
       <p>
-        COSA Core is provided as workshop operating software on a subscription
-        basis. By starting a plan or using the service, you agree to pay the fees
-        for your selected plan and to use the software lawfully for your business.
+        These terms apply to your use of COSA Core and related services provided by COSA.
+        By starting a subscription, creating an account, or using the software, you agree
+        to these terms.
+      </p>
+
+      <h2>The service</h2>
+      <p>
+        COSA Core is cloud-based workshop software for managing bookings, jobs, customers,
+        invoices, parts, staff access, reporting, and connected integrations. Features may
+        change or improve over time.
+      </p>
+
+      <h2>Accounts and access</h2>
+      <p>
+        Each workshop account is separate. The main controller is responsible for inviting
+        staff, setting access levels, keeping login details secure, and all activity under
+        the account.
       </p>
       <p>
-        Each workshop account is separate. You are responsible for managing staff
-        access, keeping login details secure and the accuracy of data entered into
-        your workspace.
+        You must provide accurate account information and not share logins in a way that
+        breaches your plan limits or these terms.
+      </p>
+
+      <h2>Subscriptions and billing</h2>
+      <p>
+        Paid plans are billed according to the pricing shown at signup unless otherwise
+        agreed in writing. Fees are generally charged in advance through our payment
+        provider. Failed payments may result in restricted access until billing is
+        resolved.
       </p>
       <p>
-        Subscription changes, billing questions or account issues can be raised via{" "}
-        <a href="/contact">Contact Us</a> or{" "}
+        Plan changes, cancellations, and billing questions can be raised through support or
+        your billing portal where available.
+      </p>
+
+      <h2>Your data</h2>
+      <p>
+        You retain ownership of the business data you enter into COSA Core. You are
+        responsible for ensuring you have the right to store and use that data, including
+        customer and staff information, and for complying with applicable privacy laws in
+        your business.
+      </p>
+      <p>
+        You grant COSA permission to host, process, back up, and display your data only as
+        needed to provide and support the service.
+      </p>
+
+      <h2>Acceptable use</h2>
+      <p>
+        You must not misuse the service, attempt to access other workshops&apos; data,
+        interfere with system security, upload unlawful content, or use COSA Core in a way
+        that harms COSA, other users, or third parties.
+      </p>
+
+      <h2>Integrations and third parties</h2>
+      <p>
+        Optional integrations are provided by third-party services with their own terms and
+        privacy policies. COSA is not responsible for third-party outages, data handling,
+        or changes to those services.
+      </p>
+
+      <h2>Availability and changes</h2>
+      <p>
+        We aim to keep COSA Core reliable, but occasional maintenance, outages, or updates
+        may occur. We may modify features, pricing, or these terms with reasonable notice
+        where practical.
+      </p>
+
+      <h2>Liability</h2>
+      <p>
+        To the extent permitted by law, COSA is not liable for indirect or consequential
+        loss arising from use of the service. Our total liability for any claim relating
+        to the service is limited to the fees paid by your workshop in the 3 months before
+        the event giving rise to the claim, except where liability cannot be excluded by
+        law.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        Questions about these terms can be sent to{" "}
+        <a href="mailto:support@cosa.net.au">support@cosa.net.au</a>,{" "}
+        <a href="/contact">Contact Us</a>, or{" "}
         <a href="mailto:caleb@cosa.net.au">caleb@cosa.net.au</a>.
       </p>
+
+      <p className="legal-updated">Last updated: 21 June 2026</p>
     </section>
   );
 }
