@@ -7,14 +7,12 @@ import {
   ChevronDown,
   ChevronRight,
   FileText,
-  Leaf,
   Mail,
   Menu,
   MessageSquareText,
   Package,
   PlugZap,
   Shield,
-  Target,
   Users,
   Wrench,
   X,
@@ -52,6 +50,10 @@ const pageMeta = {
     title: "COSA Core integrations | Accounting, parts, and marketing",
     description:
       "Connect COSA Core with Xero, QuickBooks, and Podium. GoHighLevel, parts suppliers, and the COSA mobile app are on the way.",
+  },
+  "/scrollspring": {
+    title: "Scrollspring | Coming soon",
+    description: "Scrollspring is a COSA product currently in development. Coming soon.",
   },
   "/contact": {
     title: "Contact COSA",
@@ -99,28 +101,25 @@ const navLinks = [
       { label: "Integrations", href: "/integrations" },
     ],
   },
+  { label: "Scrollspring", href: "/scrollspring" },
   { label: "Contact Us", href: "/contact" },
 ];
 
-const aboutPillars = [
+const aboutFacts = [
   {
-    icon: Target,
-    title: "Held to a higher standard",
-    text: "We build like a mainstream software company: clear systems, sharp delivery, and no excuses for half finished work.",
-  },
-  {
-    icon: Shield,
-    title: "Proudly Perth operated",
+    title: "Perth built and operated",
     text: "Designed, built and supported in Australia. When you deal with COSA, you deal with the people who make the software.",
   },
   {
-    icon: Users,
     title: "Built for real people",
     text: "Every screen has to earn its place. If it is not clear, useful and used, it does not ship.",
   },
   {
-    icon: Leaf,
-    title: "Environment in the work",
+    title: "Higher standard",
+    text: "Clear systems, sharp delivery, and no excuses for half finished work.",
+  },
+  {
+    title: "Environment",
     text: "We strive every day to reduce waste, run lean digital operations, and make choices that respect the environment we share.",
   },
 ];
@@ -438,100 +437,89 @@ function FaqSection() {
 
 function HomePage() {
   return (
-    <div className="about-shell">
-      <section className="about-stage">
-        <div className="about-stage-copy">
-          <img className="about-stage-logo" src="/cosa-wordmark.png" alt="COSA" />
-          <p className="eyebrow about-stage-eyebrow">
-            <Shield size={17} />
-            Proudly Perth Built & Operated
+    <section className="about-page">
+      <div className="about-intro">
+        <img className="about-intro-logo" src="/cosa-wordmark.png" alt="COSA" />
+        <p className="eyebrow">
+          <Shield size={17} />
+          Proudly Perth Built & Operated
+        </p>
+        <h1>Custom Operating Software Australia.</h1>
+        <p className="hero-text">
+          COSA is a Perth software company building practical products for real
+          people. Our range covers workshop operating software to language
+          apps, with the same focus on clean systems that get used every day.
+        </p>
+      </div>
+
+      <div className="about-main">
+        <div className="about-copy-block">
+          <h2>Who we are</h2>
+          <p>
+            COSA is not a feature factory. We are a Perth software company
+            building products that have to stand up in the real world, under
+            pressure, with real people, every day.
           </p>
-          <h1>Built in Perth. Held to a higher standard.</h1>
-          <p className="about-stage-text">
-            COSA is a Perth software company building practical products for
-            real people. Our range covers workshop operating software to
-            language apps, with the same focus on clean systems that get used
-            every day.
+          <p>
+            We hold ourselves to a higher bar than most: sharper craft, cleaner
+            systems, and support that actually answers. When someone uses COSA,
+            they should feel they chose the better team.
           </p>
-          <div className="hero-actions">
-            <a className="primary-button" href="/contact">
-              Talk to COSA
-              <ArrowRight size={18} />
-            </a>
-            <a className="secondary-button about-stage-secondary" href="/core">
-              What is COSA Core
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <section className="about-panel">
-        <div className="about-panel-grid">
-          <div>
-            <p className="section-kicker">The company</p>
-            <h2>We expect more of ourselves.</h2>
-          </div>
-          <div className="about-panel-copy">
-            <p>
-              COSA is not a feature factory. We are a Perth software company
-              building products that have to stand up in the real world, under
-              pressure, with real people, every day.
-            </p>
-            <p>
-              We hold ourselves to a higher bar than most: sharper craft,
-              cleaner systems, and support that actually answers. When someone
-              uses COSA, they should feel they chose the better team.
-            </p>
-          </div>
         </div>
 
-        <div className="about-values">
-          {aboutPillars.map((pillar, index) => {
-            const Icon = pillar.icon;
-
-            return (
-              <article key={pillar.title} className="about-value">
-                <div className="about-value-top">
-                  <span>{String(index + 1).padStart(2, "0")}</span>
-                  <Icon size={22} />
-                </div>
-                <h3>{pillar.title}</h3>
-                <p>{pillar.text}</p>
-              </article>
-            );
-          })}
+        <div className="about-copy-block">
+          <h2>How we work</h2>
+          <dl className="about-fact-list">
+            {aboutFacts.map((fact) => (
+              <div key={fact.title} className="about-fact">
+                <dt>{fact.title}</dt>
+                <dd>{fact.text}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
-      </section>
 
-      <section className="about-earth">
-        <div className="about-earth-copy">
-          <p className="section-kicker">Environment</p>
-          <h2>We strive to do all we can, every day.</h2>
+        <div className="about-copy-block">
+          <h2>Environment</h2>
           <p>
             Digital products still leave a footprint. COSA works to keep ours
             light: lean systems, less waste, smarter operations, and daily
-            choices that respect the environment we all share.
+            choices that respect the environment we all share. We strive to do
+            all we can, every day.
           </p>
         </div>
-      </section>
+      </div>
 
-      <section className="about-end">
-        <h2>Ready when you are.</h2>
-        <p>
-          Talk to the team in Perth, or explore COSA Core when you want the
-          product detail.
-        </p>
-        <div className="hero-actions">
-          <a className="primary-button" href="/contact">
-            Contact Us
-            <ArrowRight size={18} />
-          </a>
-          <a className="secondary-button" href="/core">
-            What is COSA Core
-          </a>
-        </div>
-      </section>
-    </div>
+      <div className="about-actions">
+        <a className="primary-button" href="/contact">
+          Contact Us
+          <ArrowRight size={18} />
+        </a>
+        <a className="secondary-button" href="/core">
+          What is COSA Core
+        </a>
+      </div>
+    </section>
+  );
+}
+
+function ScrollspringPage() {
+  return (
+    <section className="coming-soon-page">
+      <p className="eyebrow">Scrollspring</p>
+      <h1>Scrollspring.</h1>
+      <p>
+        A new COSA product is on the way. We are still building it, so there is
+        not much to show yet.
+      </p>
+      <button className="coming-soon-button" type="button" disabled>
+        Coming soon
+      </button>
+      <a className="text-link coming-soon-link" href="/contact">
+        Ask us about Scrollspring
+        <ChevronRight size={16} />
+      </a>
+    </section>
   );
 }
 
@@ -1303,6 +1291,7 @@ function Footer() {
         <a href="/core">What is COSA Core</a>
         <a href="/pricing">Pricing</a>
         <a href="/integrations">Integrations</a>
+        <a href="/scrollspring">Scrollspring</a>
         <a href="/contact">Contact Us</a>
         <a href={CORE_APP_LOGIN_URL}>Sign In</a>
         <a href="/privacy">Privacy</a>
@@ -1326,6 +1315,10 @@ function getPage() {
 
   if (path === "/integrations") {
     return <IntegrationsPage />;
+  }
+
+  if (path === "/scrollspring") {
+    return <ScrollspringPage />;
   }
 
   if (path === "/contact") {
