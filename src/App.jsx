@@ -262,7 +262,7 @@ function Header() {
     <>
       <header className="site-header">
         <a className="brand" href="/" aria-label="COSA home">
-          <img className="brand-logo" src="/cosa-logo.png" alt="COSA" />
+          <img className="brand-logo" src="/cosa-wordmark.png" alt="COSA" />
         </a>
 
         <nav className="desktop-nav" aria-label="Main navigation">
@@ -384,42 +384,39 @@ function FaqSection() {
 function HomePage() {
   return (
     <>
-      <section className="hero about-hero">
-        <div className="hero-copy">
+      <section className="about-page">
+        <header className="about-hero-block">
+          <img
+            className="about-hero-logo"
+            src="/cosa-wordmark.png"
+            alt="COSA"
+          />
           <p className="eyebrow">
             <Shield size={17} />
             Proudly Perth Built & Operated
           </p>
-
-          <h1>Custom Operating Software Australia.</h1>
-
+          <h1>A software company built for higher standards.</h1>
           <p className="hero-text">
             COSA is a Perth software company building practical products for
             real people. Our range covers workshop operating software to
             language apps, with the same focus on clean systems that get used
             every day.
           </p>
-
           <div className="hero-actions">
             <a className="primary-button" href="/contact">
               Talk to COSA
               <ArrowRight size={18} />
             </a>
-
             <a className="secondary-button" href="/core">
               View COSA Core
             </a>
           </div>
-        </div>
-      </section>
+        </header>
 
-      <section className="section about-story">
-        <div className="about-story-grid">
-          <div>
+        <div className="about-body">
+          <section className="about-prose">
             <p className="section-kicker">The company</p>
-            <h2>A software company that expects more of itself.</h2>
-          </div>
-          <div className="about-story-copy">
+            <h2>We expect more of ourselves.</h2>
             <p>
               COSA is not a feature factory. We are a Perth software company
               building products that have to stand up in the real world —
@@ -427,71 +424,58 @@ function HomePage() {
             </p>
             <p>
               We hold ourselves to a higher bar than most: sharper craft,
-              cleaner systems, and support that actually answers. The goal is
-              simple. When someone uses COSA, they should feel they chose the
-              better team.
+              cleaner systems, and support that actually answers. When someone
+              uses COSA, they should feel they chose the better team.
             </p>
-          </div>
+          </section>
+
+          <section className="about-standards">
+            <p className="section-kicker">How we operate</p>
+            <h2>Standards we refuse to lower.</h2>
+            <div className="about-standard-list">
+              {aboutPillars.map((pillar) => {
+                const Icon = pillar.icon;
+
+                return (
+                  <article key={pillar.title} className="about-standard">
+                    <Icon size={22} />
+                    <div>
+                      <h3>{pillar.title}</h3>
+                      <p>{pillar.text}</p>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          </section>
+
+          <section className="about-environment">
+            <p className="section-kicker">Environment</p>
+            <h2>We strive to do all we can, every day.</h2>
+            <p>
+              Digital products still leave a footprint. COSA works to keep
+              ours light: lean systems, less waste, smarter operations, and
+              daily choices that respect the environment we all share.
+            </p>
+          </section>
         </div>
-      </section>
 
-      <section className="section about-pillars-section">
-        <div className="section-heading centered">
-          <p className="section-kicker">How we operate</p>
-          <h2>Standards we refuse to lower.</h2>
-          <span>
-            Company first. Products second. The work has to be worthy of the
-            name.
-          </span>
-        </div>
-
-        <div className="about-pillar-grid">
-          {aboutPillars.map((pillar) => {
-            const Icon = pillar.icon;
-
-            return (
-              <article key={pillar.title} className="about-pillar">
-                <Icon size={26} />
-                <h3>{pillar.title}</h3>
-                <p>{pillar.text}</p>
-              </article>
-            );
-          })}
-        </div>
-      </section>
-
-      <section className="about-environment">
-        <div className="about-environment-inner">
-          <p className="section-kicker">Environment</p>
-          <h2>We strive to do all we can, every day.</h2>
-          <p>
-            Digital products still leave a footprint. COSA works to keep ours
-            light: lean systems, less waste, smarter operations, and daily
-            choices that respect the environment we all share. It is not a
-            slogan. It is part of how we try to show up as a company.
-          </p>
-        </div>
-      </section>
-
-      <section className="section about-close">
-        <div className="section-heading centered">
-          <p className="section-kicker">Work with us</p>
+        <footer className="about-page-cta">
           <h2>Ready when you are.</h2>
-          <span>
+          <p>
             Talk to the team in Perth, or explore COSA Core when you want the
             product detail.
-          </span>
-        </div>
-
-        <div className="section-cta">
-          <a className="primary-button" href="/contact">
-            Contact Us
-            <ArrowRight size={18} />
-          </a>
-          <a className="secondary-button" href="/core">
-            Explore COSA Core
-          </a>
-        </div>
+          </p>
+          <div className="hero-actions">
+            <a className="primary-button" href="/contact">
+              Contact Us
+              <ArrowRight size={18} />
+            </a>
+            <a className="secondary-button" href="/core">
+              Explore COSA Core
+            </a>
+          </div>
+        </footer>
       </section>
     </>
   );
@@ -1256,7 +1240,7 @@ function Footer() {
   return (
     <footer>
       <div>
-        <img src="/cosa-logo.png" alt="COSA" />
+        <img src="/cosa-wordmark.png" alt="COSA" />
         <p>© 2026 {LEGAL_ENTITY_NAME} trading as COSA. ABN {LEGAL_ABN}.</p>
       </div>
 
