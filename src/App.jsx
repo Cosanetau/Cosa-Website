@@ -443,20 +443,16 @@ function FaqSection() {
 
 function HomePage() {
   return (
-    <>
-      <section className="about-page">
-        <header className="about-hero-block">
-          <img
-            className="about-hero-logo"
-            src="/cosa-wordmark.png"
-            alt="COSA"
-          />
-          <p className="eyebrow">
+    <div className="about-shell">
+      <section className="about-stage">
+        <div className="about-stage-copy">
+          <img className="about-stage-logo" src="/cosa-wordmark.png" alt="COSA" />
+          <p className="eyebrow about-stage-eyebrow">
             <Shield size={17} />
             Proudly Perth Built & Operated
           </p>
-          <h1>A software company built for higher standards.</h1>
-          <p className="hero-text">
+          <h1>Built in Perth. Held to a higher standard.</h1>
+          <p className="about-stage-text">
             COSA is a Perth software company building practical products for
             real people. Our range covers workshop operating software to
             language apps, with the same focus on clean systems that get used
@@ -467,16 +463,20 @@ function HomePage() {
               Talk to COSA
               <ArrowRight size={18} />
             </a>
-            <a className="secondary-button" href="/core">
-              View COSA Core
+            <a className="secondary-button about-stage-secondary" href="/core">
+              What is COSA Core
             </a>
           </div>
-        </header>
+        </div>
+      </section>
 
-        <div className="about-body">
-          <section className="about-prose">
+      <section className="about-panel">
+        <div className="about-panel-grid">
+          <div>
             <p className="section-kicker">The company</p>
             <h2>We expect more of ourselves.</h2>
+          </div>
+          <div className="about-panel-copy">
             <p>
               COSA is not a feature factory. We are a Perth software company
               building products that have to stand up in the real world, under
@@ -487,57 +487,56 @@ function HomePage() {
               cleaner systems, and support that actually answers. When someone
               uses COSA, they should feel they chose the better team.
             </p>
-          </section>
-
-          <section className="about-standards">
-            <p className="section-kicker">How we operate</p>
-            <h2>Standards we refuse to lower.</h2>
-            <div className="about-standard-list">
-              {aboutPillars.map((pillar) => {
-                const Icon = pillar.icon;
-
-                return (
-                  <article key={pillar.title} className="about-standard">
-                    <Icon size={22} />
-                    <div>
-                      <h3>{pillar.title}</h3>
-                      <p>{pillar.text}</p>
-                    </div>
-                  </article>
-                );
-              })}
-            </div>
-          </section>
-
-          <section className="about-environment">
-            <p className="section-kicker">Environment</p>
-            <h2>We strive to do all we can, every day.</h2>
-            <p>
-              Digital products still leave a footprint. COSA works to keep
-              ours light: lean systems, less waste, smarter operations, and
-              daily choices that respect the environment we all share.
-            </p>
-          </section>
+          </div>
         </div>
 
-        <footer className="about-page-cta">
-          <h2>Ready when you are.</h2>
-          <p>
-            Talk to the team in Perth, or explore COSA Core when you want the
-            product detail.
-          </p>
-          <div className="hero-actions">
-            <a className="primary-button" href="/contact">
-              Contact Us
-              <ArrowRight size={18} />
-            </a>
-            <a className="secondary-button" href="/core">
-              Explore COSA Core
-            </a>
-          </div>
-        </footer>
+        <div className="about-values">
+          {aboutPillars.map((pillar, index) => {
+            const Icon = pillar.icon;
+
+            return (
+              <article key={pillar.title} className="about-value">
+                <div className="about-value-top">
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <Icon size={22} />
+                </div>
+                <h3>{pillar.title}</h3>
+                <p>{pillar.text}</p>
+              </article>
+            );
+          })}
+        </div>
       </section>
-    </>
+
+      <section className="about-earth">
+        <div className="about-earth-copy">
+          <p className="section-kicker">Environment</p>
+          <h2>We strive to do all we can, every day.</h2>
+          <p>
+            Digital products still leave a footprint. COSA works to keep ours
+            light: lean systems, less waste, smarter operations, and daily
+            choices that respect the environment we all share.
+          </p>
+        </div>
+      </section>
+
+      <section className="about-end">
+        <h2>Ready when you are.</h2>
+        <p>
+          Talk to the team in Perth, or explore COSA Core when you want the
+          product detail.
+        </p>
+        <div className="hero-actions">
+          <a className="primary-button" href="/contact">
+            Contact Us
+            <ArrowRight size={18} />
+          </a>
+          <a className="secondary-button" href="/core">
+            What is COSA Core
+          </a>
+        </div>
+      </section>
+    </div>
   );
 }
 
