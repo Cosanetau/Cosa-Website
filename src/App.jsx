@@ -248,7 +248,6 @@ const pricingFaq = [
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [coreMenuOpen, setCoreMenuOpen] = useState(false);
   const path = window.location.pathname;
   const isCoreSection = ["/core", "/pricing", "/integrations"].includes(path);
   const headerCta = isCoreSection
@@ -257,7 +256,6 @@ function Header() {
 
   function closeMenu() {
     setMenuOpen(false);
-    setCoreMenuOpen(false);
   }
 
   useEffect(() => {
@@ -281,22 +279,19 @@ function Header() {
               <div
                 key={link.label}
                 className={`nav-dropdown ${isCoreSection ? "is-active" : ""}`}
-                onMouseEnter={() => setCoreMenuOpen(true)}
-                onMouseLeave={() => setCoreMenuOpen(false)}
               >
                 <button
                   type="button"
-                  className={`nav-dropdown-trigger ${coreMenuOpen || isCoreSection ? "is-open" : ""}`}
-                  aria-expanded={coreMenuOpen}
+                  className="nav-dropdown-trigger"
                   aria-haspopup="true"
-                  onClick={() => setCoreMenuOpen((current) => !current)}
+                  aria-expanded={isCoreSection}
                 >
                   {link.label}
                   <ChevronDown size={15} />
                 </button>
 
-                {coreMenuOpen ? (
-                  <div className="nav-dropdown-menu" role="menu">
+                <div className="nav-dropdown-menu" role="menu">
+                  <div className="nav-dropdown-panel">
                     {link.children.map((child) => (
                       <a
                         key={child.href}
@@ -308,7 +303,7 @@ function Header() {
                       </a>
                     ))}
                   </div>
-                ) : null}
+                </div>
               </div>
             ) : (
               <a
