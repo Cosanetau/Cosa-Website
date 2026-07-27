@@ -539,7 +539,7 @@ p {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 28px;
+  gap: 22px;
   min-height: 100%;
   height: 100%;
   padding: 28px;
@@ -566,12 +566,57 @@ p {
   font-weight: 750;
 }
 
+.about-intro-brand-body {
+  display: grid;
+  gap: 16px;
+  flex: 1;
+}
+
+.about-intro-brand-body > p {
+  margin: 0;
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.55;
+  font-weight: 650;
+}
+
+.about-intro-brand-body ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+
+.about-intro-brand-body li {
+  position: relative;
+  padding-left: 18px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.45;
+  font-weight: 700;
+}
+
+.about-intro-brand-body li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--orange);
+}
+
 .about-intro-pledge {
   padding-top: 22px;
   border-top: 1px solid var(--soft);
 }
 
 .about-intro-pledge-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
   margin: 0 0 8px;
   color: var(--orange-dark);
   font-size: 12px;

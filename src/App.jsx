@@ -7,6 +7,7 @@ import {
   ChevronDown,
   ChevronRight,
   FileText,
+  Leaf,
   Mail,
   Menu,
   MessageSquareText,
@@ -459,11 +460,26 @@ function HomePage() {
             <img src="/cosa-wordmark.png" alt="COSA" />
             <p>Proudly Perth Built & Operated</p>
           </div>
-          <div className="about-intro-pledge">
-            <p className="about-intro-pledge-label">Our pledge</p>
+          <div className="about-intro-brand-body">
             <p>
-              Build useful software, support it properly, and leave as light a
-              footprint as we can.
+              We build software that lasts, so teams spend less time fighting
+              tools and more time doing good work. Local people, clear systems,
+              and products that earn their place every day.
+            </p>
+            <ul>
+              <li>Designed and supported in Australia</li>
+              <li>Lean systems that cut digital waste</li>
+              <li>Built to last, not to be replaced</li>
+            </ul>
+          </div>
+          <div className="about-intro-pledge">
+            <p className="about-intro-pledge-label">
+              <Leaf size={14} aria-hidden="true" />
+              Our pledge
+            </p>
+            <p>
+              Protect the places we live and work. Run lean digital systems, cut
+              waste wherever we can, and leave a lighter footprint than we found.
             </p>
           </div>
         </div>
@@ -500,10 +516,13 @@ function HomePage() {
           <article className="about-info-box">
             <h2>Environment</h2>
             <p>
-              Digital products still leave a footprint. COSA works to keep ours
-              light: lean systems, less waste, smarter operations, and daily
-              choices that respect the environment we all share. We strive to do
-              all we can, every day.
+              That pledge shows up in how we work: lean hosting, fewer throwaway
+              rebuilds, less paper and packaging, and smarter day to day
+              choices that respect the environment we all share.
+            </p>
+            <p>
+              We strive to do all we can, every day, and keep improving as we
+              grow.
             </p>
           </article>
         </div>
