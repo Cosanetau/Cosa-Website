@@ -123,22 +123,103 @@ video {
   background: rgba(255, 255, 255, 0.74);
 }
 
-.desktop-nav a {
+.desktop-nav a,
+.nav-dropdown-trigger {
   padding: 10px 15px;
+  border: 0;
   border-radius: 999px;
+  background: transparent;
   color: var(--muted);
+  font: inherit;
   font-size: 14px;
   font-weight: 850;
+  cursor: pointer;
   transition:
     background 0.18s ease,
     color 0.18s ease,
     transform 0.18s ease;
 }
 
-.desktop-nav a:hover {
+.desktop-nav a:hover,
+.nav-dropdown-trigger:hover,
+.desktop-nav a.is-active,
+.nav-dropdown.is-active .nav-dropdown-trigger,
+.nav-dropdown-trigger.is-open {
   background: var(--orange-soft);
   color: var(--orange-dark);
+}
+
+.desktop-nav a:hover,
+.nav-dropdown-trigger:hover {
   transform: translateY(-1px);
+}
+
+.nav-dropdown {
+  position: relative;
+}
+
+.nav-dropdown-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.nav-dropdown-trigger svg {
+  transition: transform 0.18s ease;
+}
+
+.nav-dropdown-trigger.is-open svg {
+  transform: rotate(180deg);
+}
+
+.nav-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  z-index: 40;
+  min-width: 210px;
+  padding: 8px;
+  border: 1px solid var(--soft);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: var(--shadow);
+  display: grid;
+  gap: 2px;
+}
+
+.nav-dropdown-menu a {
+  display: block;
+  padding: 11px 14px;
+  border-radius: 12px;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.nav-dropdown-menu a:hover,
+.nav-dropdown-menu a.is-active {
+  background: var(--orange-soft);
+  color: var(--orange-dark);
+  transform: none;
+}
+
+.mobile-nav-group {
+  display: grid;
+  gap: 4px;
+  padding: 8px 0 4px;
+  border-top: 1px solid var(--soft);
+  border-bottom: 1px solid var(--soft);
+}
+
+.mobile-nav-group-label {
+  margin: 0;
+  padding: 8px 12px 2px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .header-button,

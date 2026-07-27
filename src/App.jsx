@@ -4,6 +4,7 @@ import {
   BarChart3,
   CalendarDays,
   Check,
+  ChevronDown,
   ChevronRight,
   FileText,
   Leaf,
@@ -38,9 +39,9 @@ const pageMeta = {
       "COSA is a Perth software company building practical products for real people. Our range covers workshop operating software to language apps.",
   },
   "/core": {
-    title: "COSA Core | Workshop operating software",
+    title: "What is COSA Core | Workshop operating software",
     description:
-      "Explore COSA Core — bookings, jobs, digital job cards, invoices, customers and workshop reporting.",
+      "Explore COSA Core: bookings, jobs, digital job cards, invoices, customers and workshop reporting.",
   },
   "/pricing": {
     title: "COSA Core pricing | Workshop software plans",
@@ -89,9 +90,15 @@ function PageMeta() {
 
 const navLinks = [
   { label: "About Us", href: "/" },
-  { label: "COSA Core", href: "/core" },
-  { label: "Pricing", href: "/pricing" },
-  { label: "Integrations", href: "/integrations" },
+  {
+    label: "COSA Core",
+    href: "/core",
+    children: [
+      { label: "What is COSA Core", href: "/core" },
+      { label: "Pricing", href: "/pricing" },
+      { label: "Integrations", href: "/integrations" },
+    ],
+  },
   { label: "Contact Us", href: "/contact" },
 ];
 
@@ -99,7 +106,7 @@ const aboutPillars = [
   {
     icon: Target,
     title: "Held to a higher standard",
-    text: "We build like a mainstream software company: clear systems, sharp delivery, and no excuses for half-finished work.",
+    text: "We build like a mainstream software company: clear systems, sharp delivery, and no excuses for half finished work.",
   },
   {
     icon: Shield,
@@ -241,13 +248,16 @@ const pricingFaq = [
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const isCorePage = window.location.pathname === "/core";
-  const headerCta = isCorePage
+  const [coreMenuOpen, setCoreMenuOpen] = useState(false);
+  const path = window.location.pathname;
+  const isCoreSection = ["/core", "/pricing", "/integrations"].includes(path);
+  const headerCta = isCoreSection
     ? { label: "Pricing", href: "/pricing" }
     : { label: "COSA Core", href: "/core" };
 
   function closeMenu() {
     setMenuOpen(false);
+    setCoreMenuOpen(false);
   }
 
   useEffect(() => {
@@ -266,11 +276,50 @@ function Header() {
         </a>
 
         <nav className="desktop-nav" aria-label="Main navigation">
-          {navLinks.map((link) => (
-            <a key={link.href} href={link.href}>
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link) =>
+            link.children ? (
+              <div
+                key={link.label}
+                className={`nav-dropdown ${isCoreSection ? "is-active" : ""}`}
+                onMouseEnter={() => setCoreMenuOpen(true)}
+                onMouseLeave={() => setCoreMenuOpen(false)}
+              >
+                <button
+                  type="button"
+                  className={`nav-dropdown-trigger ${coreMenuOpen || isCoreSection ? "is-open" : ""}`}
+                  aria-expanded={coreMenuOpen}
+                  aria-haspopup="true"
+                  onClick={() => setCoreMenuOpen((current) => !current)}
+                >
+                  {link.label}
+                  <ChevronDown size={15} />
+                </button>
+
+                {coreMenuOpen ? (
+                  <div className="nav-dropdown-menu" role="menu">
+                    {link.children.map((child) => (
+                      <a
+                        key={child.href}
+                        href={child.href}
+                        role="menuitem"
+                        className={path === child.href ? "is-active" : ""}
+                      >
+                        {child.label}
+                      </a>
+                    ))}
+                  </div>
+                ) : null}
+              </div>
+            ) : (
+              <a
+                key={link.href}
+                href={link.href}
+                className={path === link.href ? "is-active" : ""}
+              >
+                {link.label}
+              </a>
+            ),
+          )}
         </nav>
 
         <div className="header-actions">
@@ -300,11 +349,22 @@ function Header() {
 
       {menuOpen ? (
         <nav className="mobile-nav" aria-label="Mobile navigation">
-          {navLinks.map((link) => (
-            <a key={link.href} href={link.href} onClick={closeMenu}>
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link) =>
+            link.children ? (
+              <div key={link.label} className="mobile-nav-group">
+                <p className="mobile-nav-group-label">{link.label}</p>
+                {link.children.map((child) => (
+                  <a key={child.href} href={child.href} onClick={closeMenu}>
+                    {child.label}
+                  </a>
+                ))}
+              </div>
+            ) : (
+              <a key={link.href} href={link.href} onClick={closeMenu}>
+                {link.label}
+              </a>
+            ),
+          )}
 
           <a
             className="mobile-cta mobile-cta-secondary"
@@ -419,8 +479,8 @@ function HomePage() {
             <h2>We expect more of ourselves.</h2>
             <p>
               COSA is not a feature factory. We are a Perth software company
-              building products that have to stand up in the real world —
-              under pressure, with real people, every day.
+              building products that have to stand up in the real world, under
+              pressure, with real people, every day.
             </p>
             <p>
               We hold ourselves to a higher bar than most: sharper craft,
@@ -488,7 +548,7 @@ function CorePage() {
         <div>
           <p className="eyebrow">
             <Wrench size={17} />
-            COSA Core
+            What is COSA Core
           </p>
 
           <h1>Workshop software for bookings, jobs, invoices and customers.</h1>
@@ -1246,7 +1306,7 @@ function Footer() {
 
       <nav>
         <a href="/">About Us</a>
-        <a href="/core">COSA Core</a>
+        <a href="/core">What is COSA Core</a>
         <a href="/pricing">Pricing</a>
         <a href="/integrations">Integrations</a>
         <a href="/contact">Contact Us</a>
