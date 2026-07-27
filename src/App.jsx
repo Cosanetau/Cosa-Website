@@ -6,12 +6,14 @@ import {
   Check,
   ChevronRight,
   FileText,
+  Leaf,
   Mail,
   Menu,
   MessageSquareText,
   Package,
   PlugZap,
   Shield,
+  Target,
   Users,
   Wrench,
   X,
@@ -31,9 +33,9 @@ function getSubscribeUrl(planKey, billingCycle) {
 
 const pageMeta = {
   "/": {
-    title: "COSA | Software company in Perth",
+    title: "About COSA | Software company in Perth",
     description:
-      "Custom Operating Software Australia builds practical software products from Perth, including COSA Core and language apps.",
+      "COSA is a Perth software company building practical products for real people. Our range covers workshop operating software to language apps.",
   },
   "/core": {
     title: "COSA Core | Workshop operating software",
@@ -93,36 +95,26 @@ const navLinks = [
   { label: "Contact Us", href: "/contact" },
 ];
 
-const aboutCards = [
+const aboutPillars = [
   {
-    icon: Wrench,
-    title: "Practical product builders",
-    text: "COSA designs and ships software people actually use — clear screens, simple flows, and tools that earn their place every day.",
-  },
-  {
-    icon: Users,
-    title: "Made for everyday users",
-    text: "Clean interfaces and straightforward workflows so teams can get going without a software expert on hand.",
+    icon: Target,
+    title: "Held to a higher standard",
+    text: "We build like a mainstream software company: clear systems, sharp delivery, and no excuses for half-finished work.",
   },
   {
     icon: Shield,
     title: "Proudly Perth operated",
-    text: "Built and supported locally in Australia with direct access to the people who make the software.",
-  },
-];
-
-const companyProducts = [
-  {
-    title: "COSA Core",
-    text: "Operating software for bookings, jobs, customers, invoices, parts and reporting — built for busy Australian businesses.",
-    href: "/core",
-    cta: "Explore COSA Core",
+    text: "Designed, built and supported in Australia. When you deal with COSA, you deal with the people who make the software.",
   },
   {
-    title: "Language apps",
-    text: "Consumer language products from the same team, focused on useful practice and a clear learning flow.",
-    href: "/contact",
-    cta: "Ask about language apps",
+    icon: Users,
+    title: "Built for real people",
+    text: "Every screen has to earn its place. If it is not clear, useful and used, it does not ship.",
+  },
+  {
+    icon: Leaf,
+    title: "Environment in the work",
+    text: "We strive every day to reduce waste, run lean digital operations, and make choices that respect the environment we share.",
   },
 ];
 
@@ -392,7 +384,7 @@ function FaqSection() {
 function HomePage() {
   return (
     <>
-      <section className="hero">
+      <section className="hero about-hero">
         <div className="hero-copy">
           <p className="eyebrow">
             <Shield size={17} />
@@ -409,96 +401,99 @@ function HomePage() {
           </p>
 
           <div className="hero-actions">
-            <a className="primary-button" href="/core">
-              View COSA Core
+            <a className="primary-button" href="/contact">
+              Talk to COSA
               <ArrowRight size={18} />
             </a>
 
-            <a className="secondary-button" href="/contact">
-              Contact Us
+            <a className="secondary-button" href="/core">
+              View COSA Core
             </a>
           </div>
         </div>
       </section>
 
-      <AboutSection />
-
-      <section className="section">
-        <div className="section-heading centered">
-          <p className="section-kicker">What we build</p>
-          <h2>A growing range of practical software.</h2>
-          <span>
-            Start with COSA Core, or talk to us about language products from the
-            same team.
-          </span>
-        </div>
-
-        <div className="product-card-grid">
-          {companyProducts.map((product) => (
-            <article key={product.title} className="product-card">
-              <h3>{product.title}</h3>
-              <p>{product.text}</p>
-              <a className="text-link" href={product.href}>
-                {product.cta}
-                <ChevronRight size={16} />
-              </a>
-            </article>
-          ))}
+      <section className="section about-story">
+        <div className="about-story-grid">
+          <div>
+            <p className="section-kicker">The company</p>
+            <h2>A software company that expects more of itself.</h2>
+          </div>
+          <div className="about-story-copy">
+            <p>
+              COSA is not a feature factory. We are a Perth software company
+              building products that have to stand up in the real world —
+              under pressure, with real people, every day.
+            </p>
+            <p>
+              We hold ourselves to a higher bar than most: sharper craft,
+              cleaner systems, and support that actually answers. The goal is
+              simple. When someone uses COSA, they should feel they chose the
+              better team.
+            </p>
+          </div>
         </div>
       </section>
 
-      <section className="section">
+      <section className="section about-pillars-section">
         <div className="section-heading centered">
-          <p className="section-kicker">COSA Core</p>
-          <h2>One system for bookings, jobs and invoices.</h2>
+          <p className="section-kicker">How we operate</p>
+          <h2>Standards we refuse to lower.</h2>
           <span>
-            Bookings, jobs, invoices, customers, reminders and reporting in one
-            practical operating system.
+            Company first. Products second. The work has to be worthy of the
+            name.
           </span>
         </div>
 
-        <FeatureGrid />
+        <div className="about-pillar-grid">
+          {aboutPillars.map((pillar) => {
+            const Icon = pillar.icon;
+
+            return (
+              <article key={pillar.title} className="about-pillar">
+                <Icon size={26} />
+                <h3>{pillar.title}</h3>
+                <p>{pillar.text}</p>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="about-environment">
+        <div className="about-environment-inner">
+          <p className="section-kicker">Environment</p>
+          <h2>We strive to do all we can, every day.</h2>
+          <p>
+            Digital products still leave a footprint. COSA works to keep ours
+            light: lean systems, less waste, smarter operations, and daily
+            choices that respect the environment we all share. It is not a
+            slogan. It is part of how we try to show up as a company.
+          </p>
+        </div>
+      </section>
+
+      <section className="section about-close">
+        <div className="section-heading centered">
+          <p className="section-kicker">Work with us</p>
+          <h2>Ready when you are.</h2>
+          <span>
+            Talk to the team in Perth, or explore COSA Core when you want the
+            product detail.
+          </span>
+        </div>
 
         <div className="section-cta">
-          <a className="primary-button" href="/core">
-            Explore COSA Core
+          <a className="primary-button" href="/contact">
+            Contact Us
             <ArrowRight size={18} />
+          </a>
+          <a className="secondary-button" href="/core">
+            Explore COSA Core
           </a>
         </div>
       </section>
-
-      <HowItWorksSection />
     </>
-  );
-}
-
-function AboutSection() {
-  return (
-    <section className="about-section" id="about">
-      <div className="about-copy">
-        <p className="section-kicker">About Us</p>
-        <h2>A software company building useful products.</h2>
-        <p>
-          COSA builds and operates software from business systems to language
-          apps. The goal is the same across every product: clean tools that cut
-          messy admin and work the way people actually work.
-        </p>
-      </div>
-
-      <div className="about-card-grid">
-        {aboutCards.map((card) => {
-          const Icon = card.icon;
-
-          return (
-            <article key={card.title} className="about-card">
-              <Icon size={28} />
-              <h3>{card.title}</h3>
-              <p>{card.text}</p>
-            </article>
-          );
-        })}
-      </div>
-    </section>
   );
 }
 
@@ -546,8 +541,6 @@ function CorePage() {
           </div>
         </div>
       </section>
-
-      <AboutSection />
 
       <section className="section">
         <div className="section-heading centered">
