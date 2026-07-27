@@ -455,8 +455,17 @@ function HomePage() {
         </div>
 
         <div className="about-intro-brand">
-          <img src="/cosa-wordmark.png" alt="COSA" />
-          <p>Proudly Perth Built & Operated</p>
+          <div className="about-intro-brand-top">
+            <img src="/cosa-wordmark.png" alt="COSA" />
+            <p>Proudly Perth Built & Operated</p>
+          </div>
+          <div className="about-intro-pledge">
+            <p className="about-intro-pledge-label">Our pledge</p>
+            <p>
+              Build useful software, support it properly, and leave as light a
+              footprint as we can.
+            </p>
+          </div>
         </div>
       </section>
 
