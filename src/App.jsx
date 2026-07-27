@@ -33,7 +33,7 @@ const pageMeta = {
   "/": {
     title: "COSA | Software company in Perth",
     description:
-      "Custom Operating Software Australia builds practical products from workshop software to language apps.",
+      "Custom Operating Software Australia builds practical software products from Perth, including COSA Core and language apps.",
   },
   "/core": {
     title: "COSA Core | Workshop operating software",
@@ -52,15 +52,15 @@ const pageMeta = {
   },
   "/contact": {
     title: "Contact COSA",
-    description: "Contact COSA for workshop software, pricing and custom setup enquiries.",
+    description: "Contact COSA for software, pricing and custom setup enquiries.",
   },
   "/privacy": {
     title: "COSA privacy policy",
-    description: "How COSA handles workshop software account and enquiry information.",
+    description: "How COSA handles account and enquiry information.",
   },
   "/terms": {
     title: "COSA terms of service",
-    description: "Terms for using COSA Core workshop software and related services.",
+    description: "Terms for using COSA Core and related services.",
   },
 };
 
@@ -97,12 +97,12 @@ const aboutCards = [
   {
     icon: Wrench,
     title: "Practical product builders",
-    text: "COSA builds software for real work, from workshop operations to language learning apps.",
+    text: "COSA designs and ships software people actually use — clear screens, simple flows, and tools that earn their place every day.",
   },
   {
     icon: Users,
     title: "Made for everyday users",
-    text: "Clean screens and simple workflows so staff and customers can use the product without a software expert.",
+    text: "Clean interfaces and straightforward workflows so teams can get going without a software expert on hand.",
   },
   {
     icon: Shield,
@@ -114,13 +114,13 @@ const aboutCards = [
 const companyProducts = [
   {
     title: "COSA Core",
-    text: "Workshop operating software for bookings, job cards, customers, invoices, parts and reporting.",
+    text: "Operating software for bookings, jobs, customers, invoices, parts and reporting — built for busy Australian businesses.",
     href: "/core",
     cta: "Explore COSA Core",
   },
   {
     title: "Language apps",
-    text: "Consumer language products built by the same team, focused on useful practice and clear learning flow.",
+    text: "Consumer language products from the same team, focused on useful practice and a clear learning flow.",
     href: "/contact",
     cta: "Ask about language apps",
   },
@@ -270,7 +270,8 @@ function Header() {
     <>
       <header className="site-header">
         <a className="brand" href="/" aria-label="COSA home">
-          <img src="/cosa-wordmark.png" alt="COSA" />
+          <img className="brand-mark" src="/favicon.svg" alt="" aria-hidden="true" />
+          <img className="brand-wordmark" src="/cosa-wordmark.png" alt="COSA" />
         </a>
 
         <nav className="desktop-nav" aria-label="Main navigation">
@@ -403,7 +404,7 @@ function HomePage() {
 
           <p className="hero-text">
             COSA is a Perth software company building practical products for
-            real people. Our range covers workshop operating software and
+            real people. Our range covers workshop operating software to
             language apps, with the same focus on clean systems that get used
             every day.
           </p>
@@ -419,17 +420,6 @@ function HomePage() {
             </a>
           </div>
         </div>
-
-        <div className="hero-media vertical-media-wrap">
-          <div className="vertical-video-card">
-            <video
-              src="/about-video.mp4"
-              controls
-              playsInline
-              poster="/about-video-cover.png"
-            />
-          </div>
-        </div>
       </section>
 
       <AboutSection />
@@ -439,14 +429,14 @@ function HomePage() {
           <p className="section-kicker">What we build</p>
           <h2>A growing range of practical software.</h2>
           <span>
-            Start with COSA Core for workshops, or talk to us about language
-            products from the same team.
+            Start with COSA Core, or talk to us about language products from the
+            same team.
           </span>
         </div>
 
-        <div className="about-card-grid">
+        <div className="product-card-grid">
           {companyProducts.map((product) => (
-            <article key={product.title} className="about-card">
+            <article key={product.title} className="product-card">
               <h3>{product.title}</h3>
               <p>{product.text}</p>
               <a className="text-link" href={product.href}>
@@ -461,7 +451,7 @@ function HomePage() {
       <section className="section">
         <div className="section-heading centered">
           <p className="section-kicker">COSA Core</p>
-          <h2>Made for workshops that want less chaos.</h2>
+          <h2>One system for bookings, jobs and invoices.</h2>
           <span>
             Bookings, jobs, invoices, customers, reminders and reporting in one
             practical operating system.
@@ -490,9 +480,9 @@ function AboutSection() {
         <p className="section-kicker">About Us</p>
         <h2>A software company building useful products.</h2>
         <p>
-          COSA builds and operates software from workshop systems to language
-          apps. The goal is the same across every product: clean tools that
-          remove messy admin and work the way people actually work.
+          COSA builds and operates software from business systems to language
+          apps. The goal is the same across every product: clean tools that cut
+          messy admin and work the way people actually work.
         </p>
       </div>
 
@@ -903,7 +893,7 @@ function ContactPage() {
         <h1>Software built in Perth for real people and real work.</h1>
 
         <p>
-          Talk to COSA about workshop software, language apps, or anything else
+          Talk to COSA about COSA Core, language apps, or anything else
           in our product range. We build practical systems and support them
           directly.
         </p>
