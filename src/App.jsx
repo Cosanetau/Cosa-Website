@@ -31,9 +31,9 @@ function getSubscribeUrl(planKey, billingCycle) {
 
 const pageMeta = {
   "/": {
-    title: "COSA | Workshop software built in Perth",
+    title: "COSA | Software company in Perth",
     description:
-      "COSA Core helps workshops manage bookings, job cards, customers, invoices and reporting in one practical system.",
+      "Custom Operating Software Australia builds practical products from workshop software to language apps.",
   },
   "/core": {
     title: "COSA Core | Workshop operating software",
@@ -96,18 +96,33 @@ const navLinks = [
 const aboutCards = [
   {
     icon: Wrench,
-    title: "Built around real workshops",
-    text: "COSA Core is designed for the daily flow of bookings, jobs, customers, and invoices.",
+    title: "Practical product builders",
+    text: "COSA builds software for real work, from workshop operations to language learning apps.",
   },
   {
     icon: Users,
-    title: "Easy for staff to use",
-    text: "Clean screens, simple actions and practical tools that do not need a software expert to understand.",
+    title: "Made for everyday users",
+    text: "Clean screens and simple workflows so staff and customers can use the product without a software expert.",
   },
   {
     icon: Shield,
     title: "Proudly Perth operated",
-    text: "Built and operated locally for workshops that want better systems without corporate bloat.",
+    text: "Built and supported locally in Australia with direct access to the people who make the software.",
+  },
+];
+
+const companyProducts = [
+  {
+    title: "COSA Core",
+    text: "Workshop operating software for bookings, job cards, customers, invoices, parts and reporting.",
+    href: "/core",
+    cta: "Explore COSA Core",
+  },
+  {
+    title: "Language apps",
+    text: "Consumer language products built by the same team, focused on useful practice and clear learning flow.",
+    href: "/contact",
+    cta: "Ask about language apps",
   },
 ];
 
@@ -384,12 +399,13 @@ function HomePage() {
             Proudly Perth Built & Operated
           </p>
 
-          <h1>Modern workshop operating software built for real businesses.</h1>
+          <h1>Custom Operating Software Australia.</h1>
 
           <p className="hero-text">
-            COSA Core helps workshops manage bookings, jobs, customers,
-            invoices, reporting and reminders in one clean system that staff can
-            actually use.
+            COSA is a Perth software company building practical products for
+            real people. Our range covers workshop operating software and
+            language apps, with the same focus on clean systems that get used
+            every day.
           </p>
 
           <div className="hero-actions">
@@ -417,6 +433,30 @@ function HomePage() {
       </section>
 
       <AboutSection />
+
+      <section className="section">
+        <div className="section-heading centered">
+          <p className="section-kicker">What we build</p>
+          <h2>A growing range of practical software.</h2>
+          <span>
+            Start with COSA Core for workshops, or talk to us about language
+            products from the same team.
+          </span>
+        </div>
+
+        <div className="about-card-grid">
+          {companyProducts.map((product) => (
+            <article key={product.title} className="about-card">
+              <h3>{product.title}</h3>
+              <p>{product.text}</p>
+              <a className="text-link" href={product.href}>
+                {product.cta}
+                <ChevronRight size={16} />
+              </a>
+            </article>
+          ))}
+        </div>
+      </section>
 
       <section className="section">
         <div className="section-heading centered">
@@ -448,11 +488,11 @@ function AboutSection() {
     <section className="about-section" id="about">
       <div className="about-copy">
         <p className="section-kicker">About Us</p>
-        <h2>Software built for the way workshops actually work.</h2>
+        <h2>A software company building useful products.</h2>
         <p>
-          COSA is focused on clean, modern workshop operating software that
-          removes messy admin and gives staff a system they can actually use
-          every day.
+          COSA builds and operates software from workshop systems to language
+          apps. The goal is the same across every product: clean tools that
+          remove messy admin and work the way people actually work.
         </p>
       </div>
 
@@ -860,11 +900,12 @@ function ContactPage() {
           Contact Us
         </p>
 
-        <h1>Modern workshop software proudly built and operated in Perth.</h1>
+        <h1>Software built in Perth for real people and real work.</h1>
 
         <p>
-          COSA Core is designed around real workshop workflows, modern systems
-          and simple software that staff can actually use.
+          Talk to COSA about workshop software, language apps, or anything else
+          in our product range. We build practical systems and support them
+          directly.
         </p>
 
         <div className="contact-mini-grid">
@@ -1025,15 +1066,14 @@ function PrivacyPage() {
       <h2>Security</h2>
       <p>
         We take reasonable steps to protect personal information from misuse,
-        interference, loss, unauthorised access, modification, or disclosure. No online
-        service can guarantee absolute security.
+        interference, loss, unauthorised access, modification, or disclosure.
       </p>
 
       <h2>How long we keep it</h2>
       <p>
         We retain personal information for as long as needed to provide the service,
         comply with law, resolve disputes, and enforce our agreements. When information is
-        no longer required, we take reasonable steps to delete or de-identify it.
+        no longer required, we take reasonable steps to destroy it.
       </p>
 
       <h2>Your rights</h2>

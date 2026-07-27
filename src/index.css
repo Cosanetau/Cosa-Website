@@ -1688,3 +1688,6 @@ footer a:hover {
     grid-template-columns: 1fr;
   }
 }
+
+.text-link { display:inline-flex; align-items:center; gap:6px; margin-top:12px; color:#ff8a00; font-weight:800; text-decoration:none; }
+
