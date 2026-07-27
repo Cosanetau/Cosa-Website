@@ -101,27 +101,15 @@ const navLinks = [
       { label: "Integrations", href: "/integrations" },
     ],
   },
-  { label: "Scrollspring", href: "/scrollspring" },
+  {
+    label: "Scrollspring",
+    href: "/scrollspring",
+    children: [
+      { label: "What is Scrollspring", href: "/scrollspring" },
+      { label: "Coming soon", href: "/scrollspring" },
+    ],
+  },
   { label: "Contact Us", href: "/contact" },
-];
-
-const aboutFacts = [
-  {
-    title: "Perth built and operated",
-    text: "Designed, built and supported in Australia. When you deal with COSA, you deal with the people who make the software.",
-  },
-  {
-    title: "Built for real people",
-    text: "Every screen has to earn its place. If it is not clear, useful and used, it does not ship.",
-  },
-  {
-    title: "Higher standard",
-    text: "Clear systems, sharp delivery, and no excuses for half finished work.",
-  },
-  {
-    title: "Environment",
-    text: "We strive every day to reduce waste, run lean digital operations, and make choices that respect the environment we share.",
-  },
 ];
 
 const coreFeatures = [
@@ -257,6 +245,10 @@ function Header() {
     setMenuOpen(false);
   }
 
+  function isDropdownActive(link) {
+    return Boolean(link.children?.some((child) => child.href === path));
+  }
+
   useEffect(() => {
     document.body.classList.toggle("mobile-menu-open", menuOpen);
 
@@ -277,23 +269,23 @@ function Header() {
             link.children ? (
               <div
                 key={link.label}
-                className={`nav-dropdown ${isCoreSection ? "is-active" : ""}`}
+                className={`nav-dropdown ${isDropdownActive(link) ? "is-active" : ""}`}
               >
                 <button
                   type="button"
                   className="nav-dropdown-trigger"
                   aria-haspopup="true"
-                  aria-expanded={isCoreSection}
+                  aria-expanded={isDropdownActive(link)}
                 >
-                  {link.label}
-                  <ChevronDown size={15} />
+                  <span>{link.label}</span>
+                  <ChevronDown size={14} />
                 </button>
 
                 <div className="nav-dropdown-menu" role="menu">
                   <div className="nav-dropdown-panel">
                     {link.children.map((child) => (
                       <a
-                        key={child.href}
+                        key={`${child.label}-${child.href}`}
                         href={child.href}
                         role="menuitem"
                         className={path === child.href ? "is-active" : ""}
@@ -437,88 +429,99 @@ function FaqSection() {
 
 function HomePage() {
   return (
-    <section className="about-page">
-      <div className="about-intro">
-        <img className="about-intro-logo" src="/cosa-wordmark.png" alt="COSA" />
-        <p className="eyebrow">
-          <Shield size={17} />
-          Proudly Perth Built & Operated
-        </p>
-        <h1>Custom Operating Software Australia.</h1>
-        <p className="hero-text">
-          COSA is a Perth software company building practical products for real
-          people. Our range covers workshop operating software to language
-          apps, with the same focus on clean systems that get used every day.
-        </p>
-      </div>
-
-      <div className="about-main">
-        <div className="about-copy-block">
-          <h2>Who we are</h2>
-          <p>
-            COSA is not a feature factory. We are a Perth software company
-            building products that have to stand up in the real world, under
-            pressure, with real people, every day.
+    <>
+      <section className="page-intro about-intro-row">
+        <div>
+          <p className="eyebrow">
+            <Shield size={17} />
+            About Us
           </p>
+          <h1>Custom Operating Software Australia.</h1>
           <p>
-            We hold ourselves to a higher bar than most: sharper craft, cleaner
-            systems, and support that actually answers. When someone uses COSA,
-            they should feel they chose the better team.
+            COSA is a Perth software company building practical products for
+            real people. Our range covers workshop operating software to
+            language apps, with the same focus on clean systems that get used
+            every day.
           </p>
+          <div className="hero-actions">
+            <a className="primary-button" href="/contact">
+              Contact Us
+              <ArrowRight size={18} />
+            </a>
+            <a className="secondary-button" href="/core">
+              What is COSA Core
+            </a>
+          </div>
         </div>
 
-        <div className="about-copy-block">
-          <h2>How we work</h2>
-          <dl className="about-fact-list">
-            {aboutFacts.map((fact) => (
-              <div key={fact.title} className="about-fact">
-                <dt>{fact.title}</dt>
-                <dd>{fact.text}</dd>
-              </div>
-            ))}
-          </dl>
+        <div className="about-intro-brand">
+          <img src="/cosa-wordmark.png" alt="COSA" />
+          <p>Proudly Perth Built & Operated</p>
         </div>
+      </section>
 
-        <div className="about-copy-block">
-          <h2>Environment</h2>
-          <p>
-            Digital products still leave a footprint. COSA works to keep ours
-            light: lean systems, less waste, smarter operations, and daily
-            choices that respect the environment we all share. We strive to do
-            all we can, every day.
-          </p>
+      <section className="section about-plain">
+        <div className="about-plain-grid">
+          <article>
+            <h2>Who we are</h2>
+            <p>
+              COSA is not a feature factory. We are a Perth software company
+              building products that have to stand up in the real world, under
+              pressure, with real people, every day.
+            </p>
+            <p>
+              We hold ourselves to a higher bar than most: sharper craft,
+              cleaner systems, and support that actually answers. When someone
+              uses COSA, they should feel they chose the better team.
+            </p>
+          </article>
+
+          <article>
+            <h2>How we work</h2>
+            <p>
+              Designed, built and supported in Australia. When you deal with
+              COSA, you deal with the people who make the software.
+            </p>
+            <p>
+              Every screen has to earn its place. If it is not clear, useful and
+              used, it does not ship.
+            </p>
+          </article>
+
+          <article>
+            <h2>Environment</h2>
+            <p>
+              Digital products still leave a footprint. COSA works to keep ours
+              light: lean systems, less waste, smarter operations, and daily
+              choices that respect the environment we all share. We strive to do
+              all we can, every day.
+            </p>
+          </article>
         </div>
-      </div>
-
-      <div className="about-actions">
-        <a className="primary-button" href="/contact">
-          Contact Us
-          <ArrowRight size={18} />
-        </a>
-        <a className="secondary-button" href="/core">
-          What is COSA Core
-        </a>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
 
 function ScrollspringPage() {
   return (
-    <section className="coming-soon-page">
-      <p className="eyebrow">Scrollspring</p>
-      <h1>Scrollspring.</h1>
-      <p>
-        A new COSA product is on the way. We are still building it, so there is
-        not much to show yet.
-      </p>
-      <button className="coming-soon-button" type="button" disabled>
-        Coming soon
-      </button>
-      <a className="text-link coming-soon-link" href="/contact">
-        Ask us about Scrollspring
-        <ChevronRight size={16} />
-      </a>
+    <section className="page-intro coming-soon-intro">
+      <div>
+        <p className="eyebrow">Scrollspring</p>
+        <h1>Scrollspring.</h1>
+        <p>
+          A new COSA product is on the way. We are still building it, so there
+          is not much to show yet.
+        </p>
+        <div className="hero-actions">
+          <button className="coming-soon-button" type="button" disabled>
+            Coming soon
+          </button>
+          <a className="secondary-button" href="/contact">
+            Ask about Scrollspring
+          </a>
+        </div>
+      </div>
     </section>
   );
 }
