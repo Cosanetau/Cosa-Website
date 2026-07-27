@@ -270,8 +270,7 @@ function Header() {
     <>
       <header className="site-header">
         <a className="brand" href="/" aria-label="COSA home">
-          <img className="brand-mark" src="/favicon.svg" alt="" aria-hidden="true" />
-          <img className="brand-wordmark" src="/cosa-wordmark.png" alt="COSA" />
+          <img className="brand-logo" src="/cosa-logo.png" alt="COSA" />
         </a>
 
         <nav className="desktop-nav" aria-label="Main navigation">
@@ -1264,7 +1263,7 @@ function Footer() {
   return (
     <footer>
       <div>
-        <img src="/cosa-wordmark.png" alt="COSA" />
+        <img src="/cosa-logo.png" alt="COSA" />
         <p>© 2026 {LEGAL_ENTITY_NAME} trading as COSA. ABN {LEGAL_ABN}.</p>
       </div>
 
