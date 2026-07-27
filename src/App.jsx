@@ -471,7 +471,7 @@ function HomePage() {
 
       <section className="section about-plain">
         <div className="about-plain-grid">
-          <article className="about-info-box about-info-box-orange">
+          <article className="about-info-box">
             <h2>Who we are</h2>
             <p>
               COSA is not a feature factory. We are a Perth software company
@@ -485,7 +485,7 @@ function HomePage() {
             </p>
           </article>
 
-          <article className="about-info-box about-info-box-white">
+          <article className="about-info-box">
             <h2>How we work</h2>
             <p>
               Designed, built and supported in Australia. When you deal with
@@ -497,7 +497,7 @@ function HomePage() {
             </p>
           </article>
 
-          <article className="about-info-box about-info-box-orange">
+          <article className="about-info-box">
             <h2>Environment</h2>
             <p>
               Digital products still leave a footprint. COSA works to keep ours
