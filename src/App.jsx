@@ -38,19 +38,19 @@ const pageMeta = {
       "COSA is a Perth software company building practical products for real people. Our range covers workshop operating software to language apps.",
   },
   "/core": {
-    title: "What is COSA Core | Workshop operating software",
+    title: "COSA Core | Workshop operating software",
     description:
-      "Explore COSA Core: bookings, jobs, digital job cards, invoices, customers and workshop reporting.",
+      "COSA Core workshop software: bookings, jobs, invoices, pricing plans, and integrations with Xero, QuickBooks, Podium and more.",
   },
   "/pricing": {
-    title: "COSA Core pricing | Workshop software plans",
+    title: "COSA Core | Workshop operating software",
     description:
-      "Simple COSA Core pricing based on user limits. Pay monthly or yearly and get one month free on annual plans.",
+      "COSA Core workshop software: bookings, jobs, invoices, pricing plans, and integrations with Xero, QuickBooks, Podium and more.",
   },
   "/integrations": {
-    title: "COSA Core integrations | Accounting, parts, and marketing",
+    title: "COSA Core | Workshop operating software",
     description:
-      "Connect COSA Core with Xero, QuickBooks, and Podium. GoHighLevel, parts suppliers, and the COSA mobile app are on the way.",
+      "COSA Core workshop software: bookings, jobs, invoices, pricing plans, and integrations with Xero, QuickBooks, Podium and more.",
   },
   "/scrollspring": {
     title: "Scrollspring | Coming soon",
@@ -93,15 +93,7 @@ function PageMeta() {
 
 const navLinks = [
   { label: "About Us", href: "/" },
-  {
-    label: "COSA Core",
-    href: "/core",
-    children: [
-      { label: "What is COSA Core", href: "/core" },
-      { label: "Pricing", href: "/pricing" },
-      { label: "Integrations", href: "/integrations" },
-    ],
-  },
+  { label: "COSA Core", href: "/core" },
   {
     label: "Scrollspring",
     href: "/scrollspring",
@@ -239,7 +231,7 @@ function Header() {
   const path = window.location.pathname;
   const isCoreSection = ["/core", "/pricing", "/integrations"].includes(path);
   const headerCta = isCoreSection
-    ? { label: "Pricing", href: "/pricing" }
+    ? { label: "Pricing", href: "/core#pricing" }
     : { label: "COSA Core", href: "/core" };
 
   function closeMenu() {
@@ -431,7 +423,7 @@ function FaqSection() {
 function HomePage() {
   return (
     <>
-      <section className="page-intro about-intro-row">
+      <section className="page-intro about-intro-row" id="about-story">
         <div>
           <p className="eyebrow">
             <Shield size={17} />
@@ -554,14 +546,40 @@ function ScrollspringPage() {
   );
 }
 
-function CorePage() {
+function CorePage({ focusSection = "" }) {
+  const [billingCycle, setBillingCycle] = useState("yearly");
+  const isYearly = billingCycle === "yearly";
+
+  function getYearlyPrice(monthlyPrice) {
+    return monthlyPrice * 11;
+  }
+
+  useEffect(() => {
+    const targetId =
+      focusSection ||
+      (window.location.hash ? window.location.hash.replace(/^#/, "") : "");
+
+    if (!targetId) {
+      return undefined;
+    }
+
+    const timer = window.setTimeout(() => {
+      document.getElementById(targetId)?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 80);
+
+    return () => window.clearTimeout(timer);
+  }, [focusSection]);
+
   return (
     <>
-      <section className="page-intro core-intro">
+      <section className="page-intro core-intro" id="overview">
         <div>
           <p className="eyebrow">
             <Wrench size={17} />
-            What is COSA Core
+            COSA Core
           </p>
 
           <h1>Workshop software for bookings, jobs, invoices and customers.</h1>
@@ -572,7 +590,7 @@ function CorePage() {
           </p>
 
           <div className="hero-actions">
-            <a className="primary-button" href="/pricing">
+            <a className="primary-button" href="#pricing">
               Review Pricing
               <ArrowRight size={18} />
             </a>
@@ -599,7 +617,13 @@ function CorePage() {
         </div>
       </section>
 
-      <section className="section">
+      <nav className="core-page-jump" aria-label="COSA Core sections">
+        <a href="#overview">Overview</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#integrations">Integrations</a>
+      </nav>
+
+      <section className="section" id="features">
         <div className="section-heading centered">
           <p className="section-kicker">Features</p>
           <h2>Everything needed to run the day cleaner.</h2>
@@ -624,21 +648,8 @@ function CorePage() {
       </section>
 
       <ControllerSection />
-    </>
-  );
-}
 
-function PricingPage() {
-  const [billingCycle, setBillingCycle] = useState("yearly");
-  const isYearly = billingCycle === "yearly";
-
-  function getYearlyPrice(monthlyPrice) {
-    return monthlyPrice * 11;
-  }
-
-  return (
-    <>
-      <section className="pricing-hero">
+      <section className="pricing-hero" id="pricing">
         <p className="eyebrow">
           <FileText size={17} />
           Pricing
@@ -742,6 +753,47 @@ function PricingPage() {
 
       <HowItWorksSection />
       <FaqSection />
+
+      <section className="pricing-hero integrations-hero" id="integrations">
+        <p className="eyebrow">
+          <PlugZap size={17} />
+          Integrations
+        </p>
+
+        <h1>Workshop integrations</h1>
+
+        <p>
+          Connect COSA Core with accounting, parts, marketing, and mobile tools.
+        </p>
+      </section>
+
+      <section className="section integrations-catalog">
+        <div className="integrations-hub-stack">
+          {integrationCategories.map((category) => (
+            <div className="integrations-category" key={category.id}>
+              <header className="integrations-category-head">
+                <div>
+                  <h2>{category.title}</h2>
+                  <p>{category.description}</p>
+                </div>
+              </header>
+
+              <div className="integrations-app-grid">
+                {category.apps.map((app) => (
+                  <IntegrationCard key={app.id} app={app} />
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="section-cta">
+          <a className="primary-button" href="/contact">
+            Need a specific integration? Contact us today
+            <ArrowRight size={18} />
+          </a>
+        </div>
+      </section>
     </>
   );
 }
@@ -800,53 +852,6 @@ function IntegrationCard({ app }) {
   );
 }
 
-function IntegrationsPage() {
-  return (
-    <>
-      <section className="pricing-hero integrations-hero">
-        <p className="eyebrow">
-          <PlugZap size={17} />
-          Integrations
-        </p>
-
-        <h1>Workshop integrations</h1>
-
-        <p>
-          Connect COSA Core with accounting, parts, marketing, and mobile tools.
-        </p>
-      </section>
-
-      <section className="section integrations-catalog">
-        <div className="integrations-hub-stack">
-          {integrationCategories.map((category) => (
-            <div className="integrations-category" key={category.id}>
-              <header className="integrations-category-head">
-                <div>
-                  <h2>{category.title}</h2>
-                  <p>{category.description}</p>
-                </div>
-              </header>
-
-              <div className="integrations-app-grid">
-                {category.apps.map((app) => (
-                  <IntegrationCard key={app.id} app={app} />
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="section-cta">
-          <a className="primary-button" href="/contact">
-            Need a specific integration? Contact us today
-            <ArrowRight size={18} />
-          </a>
-        </div>
-      </section>
-    </>
-  );
-}
-
 function ControllerSection() {
   return (
     <section className="section">
@@ -895,7 +900,7 @@ function FeatureGrid() {
             <h3>{feature.title}</h3>
             <p>{feature.text}</p>
 
-            <a href="/pricing">
+            <a href="#pricing">
               View Pricing
               <ChevronRight size={17} />
             </a>
@@ -1319,9 +1324,9 @@ function Footer() {
 
       <nav>
         <a href="/">About Us</a>
-        <a href="/core">What is COSA Core</a>
-        <a href="/pricing">Pricing</a>
-        <a href="/integrations">Integrations</a>
+        <a href="/core">COSA Core</a>
+        <a href="/core#pricing">Pricing</a>
+        <a href="/core#integrations">Integrations</a>
         <a href="/scrollspring">Scrollspring</a>
         <a href="/contact">Contact Us</a>
         <a href={CORE_APP_LOGIN_URL}>Sign In</a>
@@ -1341,11 +1346,17 @@ function getPage() {
   }
 
   if (path === "/pricing") {
-    return <PricingPage />;
+    if (typeof window !== "undefined") {
+      window.history.replaceState({}, "", "/core#pricing");
+    }
+    return <CorePage focusSection="pricing" />;
   }
 
   if (path === "/integrations") {
-    return <IntegrationsPage />;
+    if (typeof window !== "undefined") {
+      window.history.replaceState({}, "", "/core#integrations");
+    }
+    return <CorePage focusSection="integrations" />;
   }
 
   if (path === "/scrollspring") {
