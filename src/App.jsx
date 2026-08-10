@@ -4,7 +4,6 @@ import {
   BarChart3,
   CalendarDays,
   Check,
-  ChevronDown,
   ChevronRight,
   FileText,
   Leaf,
@@ -94,14 +93,7 @@ function PageMeta() {
 const navLinks = [
   { label: "About Us", href: "/" },
   { label: "COSA Core", href: "/core" },
-  {
-    label: "Scrollspring",
-    href: "/scrollspring",
-    children: [
-      { label: "What is Scrollspring", href: "/scrollspring" },
-      { label: "Coming soon", href: "/scrollspring" },
-    ],
-  },
+  { label: "Scrollspring", href: "/scrollspring" },
   { label: "Contact Us", href: "/contact" },
 ];
 
@@ -238,8 +230,12 @@ function Header() {
     setMenuOpen(false);
   }
 
-  function isDropdownActive(link) {
-    return Boolean(link.children?.some((child) => child.href === path));
+  function isNavActive(href) {
+    if (href === "/core") {
+      return isCoreSection;
+    }
+
+    return path === href;
   }
 
   useEffect(() => {
@@ -258,47 +254,15 @@ function Header() {
         </a>
 
         <nav className="desktop-nav" aria-label="Main navigation">
-          {navLinks.map((link) =>
-            link.children ? (
-              <div
-                key={link.label}
-                className={`nav-dropdown ${isDropdownActive(link) ? "is-active" : ""}`}
-              >
-                <button
-                  type="button"
-                  className="nav-dropdown-trigger"
-                  aria-haspopup="true"
-                  aria-expanded={isDropdownActive(link)}
-                >
-                  <span>{link.label}</span>
-                  <ChevronDown size={14} />
-                </button>
-
-                <div className="nav-dropdown-menu" role="menu">
-                  <div className="nav-dropdown-panel">
-                    {link.children.map((child) => (
-                      <a
-                        key={`${child.label}-${child.href}`}
-                        href={child.href}
-                        role="menuitem"
-                        className={path === child.href ? "is-active" : ""}
-                      >
-                        {child.label}
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ) : (
-              <a
-                key={link.href}
-                href={link.href}
-                className={path === link.href ? "is-active" : ""}
-              >
-                {link.label}
-              </a>
-            ),
-          )}
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className={isNavActive(link.href) ? "is-active" : ""}
+            >
+              {link.label}
+            </a>
+          ))}
         </nav>
 
         <div className="header-actions">
@@ -328,22 +292,16 @@ function Header() {
 
       {menuOpen ? (
         <nav className="mobile-nav" aria-label="Mobile navigation">
-          {navLinks.map((link) =>
-            link.children ? (
-              <div key={link.label} className="mobile-nav-group">
-                <p className="mobile-nav-group-label">{link.label}</p>
-                {link.children.map((child) => (
-                  <a key={child.href} href={child.href} onClick={closeMenu}>
-                    {child.label}
-                  </a>
-                ))}
-              </div>
-            ) : (
-              <a key={link.href} href={link.href} onClick={closeMenu}>
-                {link.label}
-              </a>
-            ),
-          )}
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className={isNavActive(link.href) ? "is-active" : ""}
+              onClick={closeMenu}
+            >
+              {link.label}
+            </a>
+          ))}
 
           <a
             className="mobile-cta mobile-cta-secondary"
@@ -618,7 +576,7 @@ function CorePage({ focusSection = "" }) {
       </section>
 
       <nav className="core-page-jump" aria-label="COSA Core sections">
-        <a href="#overview">Overview</a>
+        <a href="#features">Features</a>
         <a href="#pricing">Pricing</a>
         <a href="#integrations">Integrations</a>
       </nav>

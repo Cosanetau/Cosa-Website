@@ -367,15 +367,23 @@ footer {
 
 .core-page-jump {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 10px;
   margin-top: 8px;
   margin-bottom: 8px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.core-page-jump::-webkit-scrollbar {
+  display: none;
 }
 
 .core-page-jump a {
   display: inline-flex;
   align-items: center;
+  flex: 0 0 auto;
   padding: 10px 16px;
   border: 1px solid var(--soft-strong);
   border-radius: 999px;
@@ -1642,8 +1650,33 @@ footer a:hover {
   .contact-page,
   .pricing-hero,
   .integrations-catalog,
+  .core-page-jump,
   footer {
     width: min(100% - 28px, var(--max-width));
+  }
+
+  .core-page-jump {
+    position: sticky;
+    top: 68px;
+    z-index: 30;
+    margin-left: -14px;
+    margin-right: -14px;
+    width: calc(100% + 28px);
+    max-width: none;
+    padding: 10px 14px;
+    background: rgba(244, 244, 241, 0.92);
+    backdrop-filter: blur(12px);
+  }
+
+  .core-page-jump a {
+    min-height: 40px;
+    padding: 0 14px;
+    font-size: 0.88rem;
+  }
+
+  .mobile-nav a.is-active {
+    background: var(--orange-soft);
+    color: var(--orange-dark);
   }
 
   .hero,
