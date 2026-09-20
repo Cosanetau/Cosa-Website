@@ -729,26 +729,6 @@ p {
   margin-bottom: 0;
 }
 
-.coming-soon-intro {
-  grid-template-columns: 1fr;
-  max-width: 760px;
-}
-
-.coming-soon-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 54px;
-  padding: 0 28px;
-  border: 1px solid var(--soft);
-  border-radius: 999px;
-  background: #f3f4f6;
-  color: #6b7280;
-  font-size: 16px;
-  font-weight: 900;
-  cursor: not-allowed;
-}
-
 @media (max-width: 860px) {
   .about-plain-grid {
     grid-template-columns: 1fr;
@@ -1064,21 +1044,95 @@ p {
   font-weight: 800 !important;
 }
 
-.pricing-card a {
+.pricing-card a,
+.pricing-card button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 5px;
+  width: 100%;
   min-height: 50px;
   margin-top: 28px;
+  border: 0;
   border-radius: 999px;
   background: var(--black);
   color: white;
+  font: inherit;
   font-weight: 950;
+  cursor: pointer;
 }
 
-.pricing-card a:hover {
+.pricing-card a:hover,
+.pricing-card button:hover {
   background: var(--orange);
+}
+
+.capacity-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(17, 24, 39, 0.55);
+  backdrop-filter: blur(4px);
+}
+
+.capacity-modal {
+  position: relative;
+  width: min(100%, 520px);
+  padding: clamp(28px, 4vw, 40px);
+  border-radius: var(--radius-lg);
+  background: white;
+  box-shadow: var(--shadow);
+}
+
+.capacity-modal .eyebrow {
+  margin-bottom: 10px;
+}
+
+.capacity-modal h2 {
+  margin: 0 0 14px;
+  font-size: clamp(1.6rem, 3vw, 2rem);
+  line-height: 1.15;
+}
+
+.capacity-modal p {
+  margin: 0 0 12px;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.capacity-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--soft);
+  border-radius: 999px;
+  background: white;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.capacity-modal-close:hover {
+  background: var(--orange-soft);
+  border-color: rgba(249, 115, 22, 0.35);
+  color: var(--orange-dark);
+}
+
+.capacity-modal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+body.modal-open {
+  overflow: hidden;
 }
 
 .custom-plan-card {

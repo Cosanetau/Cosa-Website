@@ -25,6 +25,7 @@ const CORE_APP_URL = "https://core.cosa.net.au";
 const LEGAL_ENTITY_NAME = "CUSTOM OPERATING SOFTWARE AUSTRALIA";
 const LEGAL_ABN = "66 778 317 026";
 const LEGAL_CONTACT_EMAIL = "caleb@cosa.net.au";
+const NEW_CLIENT_SIGNUPS_PAUSED = true;
 
 function getSubscribeUrl(planKey, billingCycle) {
   return `${CORE_APP_URL}/subscribe?plan=${planKey}&billing=${billingCycle}`;
@@ -34,7 +35,7 @@ const pageMeta = {
   "/": {
     title: "About COSA | Software company in Perth",
     description:
-      "COSA is a Perth software company building practical products for real people. Our range covers workshop operating software to language apps.",
+      "COSA is a Perth software company building practical workshop operating software — clean systems that get used every day.",
   },
   "/core": {
     title: "COSA Core | Workshop operating software",
@@ -50,10 +51,6 @@ const pageMeta = {
     title: "COSA Core | Workshop operating software",
     description:
       "COSA Core workshop software: bookings, jobs, invoices, pricing plans, and integrations with Xero, QuickBooks, Podium and more.",
-  },
-  "/scrollspring": {
-    title: "Scrollspring | Coming soon",
-    description: "Scrollspring is a COSA product currently in development. Coming soon.",
   },
   "/contact": {
     title: "Contact COSA",
@@ -93,7 +90,6 @@ function PageMeta() {
 const navLinks = [
   { label: "About Us", href: "/" },
   { label: "COSA Core", href: "/core" },
-  { label: "Scrollspring", href: "/scrollspring" },
   { label: "Contact Us", href: "/contact" },
 ];
 
@@ -202,9 +198,9 @@ const pricingFaq = [
       "Yes. Every business gets its own isolated COSA Core workspace, login and data.",
   },
   {
-    question: "What happens after I choose a plan?",
+    question: "Can I sign up for a plan right now?",
     answer:
-      "You create your workshop login, pay securely, and COSA Core sets up your account automatically.",
+      "New client signups are paused while we are at capacity. Contact us and we will help when space opens up.",
   },
   {
     question: "Monthly or yearly?",
@@ -324,16 +320,16 @@ function Header() {
 function HowItWorksSection() {
   const steps = [
     {
-      title: "Choose your plan",
-      text: "Pick the user limit that fits your workshop and start checkout from the pricing page.",
+      title: "Review the plans",
+      text: "See the user limits and pricing that fit your workshop.",
     },
     {
-      title: "Create your login",
-      text: "Enter your business details and set the email and password you want to use in COSA Core.",
+      title: "Get in touch",
+      text: "New client signups are paused while we are at capacity. Contact COSA and we will take your details.",
     },
     {
-      title: "Pay and get started",
-      text: "After secure payment, your workshop is created automatically and you can sign straight into COSA Core.",
+      title: "We will set you up",
+      text: "When space opens up, we will help you get into COSA Core and get your workshop running.",
     },
   ];
 
@@ -341,8 +337,11 @@ function HowItWorksSection() {
     <section className="section how-it-works-section">
       <div className="section-heading centered">
         <p className="section-kicker">How it works</p>
-        <h2>From plan to login in three steps.</h2>
-        <span>Simple setup for workshops that want to get moving quickly.</span>
+        <h2>Ready when capacity opens up.</h2>
+        <span>
+          We are pausing new client signups for now while we expand how many
+          businesses we can support well.
+        </span>
       </div>
 
       <div className="how-it-works-grid">
@@ -389,9 +388,8 @@ function HomePage() {
           </p>
           <h1>Custom Operating Software Australia.</h1>
           <p>
-            COSA is a Perth software company building practical products for
-            real people. Our range covers workshop operating software to
-            language apps, with the same focus on clean systems that get used
+            COSA is a Perth software company building practical workshop
+            operating software for real people — clean systems that get used
             every day.
           </p>
           <div className="hero-actions">
@@ -481,35 +479,95 @@ function HomePage() {
   );
 }
 
-function ScrollspringPage() {
+function CapacityPausedModal({ open, onClose }) {
+  useEffect(() => {
+    if (!open) {
+      return undefined;
+    }
+
+    function onKeyDown(event) {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    }
+
+    document.body.classList.add("modal-open");
+    window.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      document.body.classList.remove("modal-open");
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [open, onClose]);
+
+  if (!open) {
+    return null;
+  }
+
   return (
-    <section className="page-intro coming-soon-intro">
-      <div>
-        <p className="eyebrow">Scrollspring</p>
-        <h1>Scrollspring.</h1>
+    <div
+      className="capacity-modal-overlay"
+      role="presentation"
+      onClick={onClose}
+    >
+      <div
+        className="capacity-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="capacity-modal-title"
+        onClick={(event) => event.stopPropagation()}
+      >
+        <button
+          className="capacity-modal-close"
+          type="button"
+          aria-label="Close"
+          onClick={onClose}
+        >
+          <X size={20} />
+        </button>
+
+        <p className="eyebrow">COSA Core</p>
+        <h2 id="capacity-modal-title">Sorry — we are at capacity</h2>
         <p>
-          A new COSA product is on the way. We are still building it, so there
-          is not much to show yet.
+          We are currently at our capacity for new clients. We are working hard
+          to expand the number of businesses we can help, and we appreciate your
+          patience.
         </p>
-        <div className="hero-actions">
-          <button className="coming-soon-button" type="button" disabled>
-            Coming soon
-          </button>
-          <a className="secondary-button" href="/contact">
-            Ask about Scrollspring
+        <p>
+          If you would like to be contacted when space opens up, reach out and
+          we will take your details.
+        </p>
+
+        <div className="capacity-modal-actions">
+          <a className="primary-button" href="/contact">
+            Contact Us
+            <ArrowRight size={18} />
           </a>
+          <button className="secondary-button" type="button" onClick={onClose}>
+            Close
+          </button>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
 
 function CorePage({ focusSection = "" }) {
   const [billingCycle, setBillingCycle] = useState("yearly");
+  const [capacityModalOpen, setCapacityModalOpen] = useState(false);
   const isYearly = billingCycle === "yearly";
 
   function getYearlyPrice(monthlyPrice) {
     return monthlyPrice * 11;
+  }
+
+  function handlePlanSelect(planKey) {
+    if (NEW_CLIENT_SIGNUPS_PAUSED) {
+      setCapacityModalOpen(true);
+      return;
+    }
+
+    window.location.href = getSubscribeUrl(planKey, billingCycle);
   }
 
   useEffect(() => {
@@ -617,8 +675,9 @@ function CorePage({ focusSection = "" }) {
 
         <p>
           All COSA Core plans include the same software features. You only pick
-          the amount of users your business needs. Choose a plan, create your
-          login, pay securely, and your workshop is set up automatically.
+          the amount of users your business needs. New client signups are
+          paused while we are at capacity — contact us if you would like to
+          join the waitlist.
         </p>
 
         <div className="billing-toggle-wrap">
@@ -683,10 +742,10 @@ function CorePage({ focusSection = "" }) {
                   </p>
                 </div>
 
-                <a href={getSubscribeUrl(plan.planKey, billingCycle)}>
+                <button type="button" onClick={() => handlePlanSelect(plan.planKey)}>
                   Start {plan.users} plan
                   <ChevronRight size={18} />
-                </a>
+                </button>
               </article>
             );
           })}
@@ -711,6 +770,11 @@ function CorePage({ focusSection = "" }) {
 
       <HowItWorksSection />
       <FaqSection />
+
+      <CapacityPausedModal
+        open={capacityModalOpen}
+        onClose={() => setCapacityModalOpen(false)}
+      />
 
       <section className="pricing-hero integrations-hero" id="integrations">
         <p className="eyebrow">
@@ -905,9 +969,8 @@ function ContactPage() {
         <h1>Software built in Perth for real people and real work.</h1>
 
         <p>
-          Talk to COSA about COSA Core, language apps, or anything else
-          in our product range. We build practical systems and support them
-          directly.
+          Talk to COSA about COSA Core workshop software, pricing, or custom
+          setup. We build practical systems and support them directly.
         </p>
 
         <div className="contact-mini-grid">
@@ -1285,7 +1348,6 @@ function Footer() {
         <a href="/core">COSA Core</a>
         <a href="/core#pricing">Pricing</a>
         <a href="/core#integrations">Integrations</a>
-        <a href="/scrollspring">Scrollspring</a>
         <a href="/contact">Contact Us</a>
         <a href={CORE_APP_LOGIN_URL}>Sign In</a>
         <a href="/privacy">Privacy</a>
@@ -1315,10 +1377,6 @@ function getPage() {
       window.history.replaceState({}, "", "/core#integrations");
     }
     return <CorePage focusSection="integrations" />;
-  }
-
-  if (path === "/scrollspring") {
-    return <ScrollspringPage />;
   }
 
   if (path === "/contact") {
