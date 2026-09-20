@@ -15,7 +15,7 @@ export const integrationCategories = [
       {
         id: "myob",
         name: "MYOB",
-        available: false,
+        available: true,
         logoSrc: "/integrations/myob.svg",
         summary: "Accounting sync for Australian workshops.",
       },
@@ -45,7 +45,7 @@ export const integrationCategories = [
       {
         id: "gohighlevel",
         name: "GoHighLevel",
-        available: false,
+        available: true,
         logoSrc: "/integrations/gohighlevel.png",
         summary: "Sync customers and trigger SMS and email workflows from job events.",
       },
@@ -59,42 +59,42 @@ export const integrationCategories = [
       {
         id: "burson-ezyparts",
         name: "Burson EzyParts",
-        available: false,
+        available: true,
         logoSrc: "/integrations/burson-ezyparts.png",
         summary: "Parts catalog, repair times, and one-click ordering.",
       },
       {
         id: "repco-navigator",
         name: "Repco Navigator Pro",
-        available: false,
+        available: true,
         logoSrc: "/integrations/repco-navigator.svg",
         summary: "Online parts catalog and trade ordering.",
       },
       {
         id: "napa",
         name: "NAPA",
-        available: false,
+        available: true,
         logoSrc: "/integrations/napa.svg",
         summary: "Parts catalog lookup and trade ordering.",
       },
       {
         id: "workshopdata",
         name: "WorkshopData",
-        available: false,
+        available: true,
         logoSrc: "/integrations/workshopdata.svg",
         summary: "Automotive technical data and repair information.",
       },
       {
         id: "hsy",
         name: "HSY",
-        available: false,
+        available: true,
         logoSrc: "/integrations/hsy.svg",
         summary: "Online catalog and ordering for parts and inventory.",
       },
       {
         id: "vehicle-visuals",
         name: "Vehicle Visuals",
-        available: false,
+        available: true,
         logoSrc: "/integrations/vehicle-visuals.svg",
         summary: "Service and repair explanation videos for customers.",
       },
@@ -131,4 +131,3 @@ export function getIntegrationStats() {
     comingSoonCount: apps.filter((app) => !app.available).length,
   };
 }
-
