@@ -214,6 +214,14 @@ const pricingFaq = [
   },
 ];
 
+function CustomerThanksBanner() {
+  return (
+    <div className="customer-thanks-banner" role="status">
+      <p>Thank you to our 150+ monthly customers.</p>
+    </div>
+  );
+}
+
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const path = window.location.pathname;
@@ -1398,6 +1406,7 @@ export default function App() {
   return (
     <main>
       <PageMeta />
+      <CustomerThanksBanner />
       <Header />
       {getPage()}
       <Footer />

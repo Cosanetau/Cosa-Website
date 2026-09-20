@@ -69,6 +69,24 @@ video {
   backdrop-filter: blur(18px);
 }
 
+.customer-thanks-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px clamp(18px, 4vw, 56px);
+  background: var(--black);
+  color: white;
+  text-align: center;
+}
+
+.customer-thanks-banner p {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  line-height: 1.35;
+}
+
 .brand {
   display: inline-flex;
   align-items: center;
