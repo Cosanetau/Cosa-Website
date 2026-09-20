@@ -214,14 +214,6 @@ const pricingFaq = [
   },
 ];
 
-function CustomerThanksBanner() {
-  return (
-    <div className="customer-thanks-banner" role="status">
-      <p>Thank you to our 150+ monthly customers.</p>
-    </div>
-  );
-}
-
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const path = window.location.pathname;
@@ -253,45 +245,51 @@ function Header() {
   return (
     <>
       <header className="site-header">
-        <a className="brand" href="/" aria-label="COSA home">
-          <img className="brand-logo" src="/cosa-wordmark.png" alt="COSA" />
-        </a>
+        <div className="site-header-bar">
+          <a className="brand" href="/" aria-label="COSA home">
+            <img className="brand-logo" src="/cosa-wordmark.png" alt="COSA" />
+          </a>
 
-        <nav className="desktop-nav" aria-label="Main navigation">
-          {navLinks.map((link) => (
+          <nav className="desktop-nav" aria-label="Main navigation">
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className={isNavActive(link.href) ? "is-active" : ""}
+              >
+                {link.label}
+              </a>
+            ))}
+          </nav>
+
+          <div className="header-actions">
             <a
-              key={link.href}
-              href={link.href}
-              className={isNavActive(link.href) ? "is-active" : ""}
+              className="header-button header-button-secondary"
+              href={CORE_APP_LOGIN_URL}
             >
-              {link.label}
+              Sign In
             </a>
-          ))}
-        </nav>
 
-        <div className="header-actions">
-          <a
-            className="header-button header-button-secondary"
-            href={CORE_APP_LOGIN_URL}
+            <a className="header-button" href={headerCta.href}>
+              {headerCta.label}
+              <ArrowRight size={16} />
+            </a>
+          </div>
+
+          <button
+            className={`menu-button ${menuOpen ? "is-open" : ""}`}
+            type="button"
+            onClick={() => setMenuOpen((current) => !current)}
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
           >
-            Sign In
-          </a>
-
-          <a className="header-button" href={headerCta.href}>
-            {headerCta.label}
-            <ArrowRight size={16} />
-          </a>
+            {menuOpen ? <X size={23} /> : <Menu size={23} />}
+          </button>
         </div>
 
-        <button
-          className={`menu-button ${menuOpen ? "is-open" : ""}`}
-          type="button"
-          onClick={() => setMenuOpen((current) => !current)}
-          aria-label={menuOpen ? "Close menu" : "Open menu"}
-          aria-expanded={menuOpen}
-        >
-          {menuOpen ? <X size={23} /> : <Menu size={23} />}
-        </button>
+        <p className="customer-thanks-banner" role="status">
+          Thank you to our 150+ monthly customers
+        </p>
       </header>
 
       {menuOpen ? (
@@ -1406,7 +1404,6 @@ export default function App() {
   return (
     <main>
       <PageMeta />
-      <CustomerThanksBanner />
       <Header />
       {getPage()}
       <Footer />
