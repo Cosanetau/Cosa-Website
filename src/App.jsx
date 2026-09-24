@@ -288,7 +288,7 @@ function Header() {
         </div>
 
         <p className="customer-thanks-banner" role="status">
-          Thank you to our 150+ monthly customers
+          Thank you to our 390+ monthly customers
         </p>
       </header>
 
